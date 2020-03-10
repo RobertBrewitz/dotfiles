@@ -83,6 +83,8 @@ call plug#begin('~/.vim/plugged')
 
   " Language Servers
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  au BufNewFile,BufRead *.ts setlocal filetype=typescript
+  au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 call plug#end()
 
 " Theme
