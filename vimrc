@@ -61,25 +61,23 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " Plugins
 call plug#begin('~/.vim/plugged')
   " Formatting
-  Plug 'RobertBrewitz/editorconfig-vim'
-  Plug 'RobertBrewitz/vim-prettier', {
-    \ 'do': 'npx yarn install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'prettier/vim-prettier', { 'do': 'npx yarn install' }
 
   " Utilities
-  Plug 'RobertBrewitz/vim-surround'
+  Plug 'tpope/vim-surround'
 
   " Fuzzy finding
-  Plug 'RobertBrewitz/fzf'
+  Plug 'junegunn/fzf'
   Plug 'RobertBrewitz/fzf.vim'
 
   " Syntax Highlighting
-  Plug 'RobertBrewitz/vim-javascript'
-  Plug 'RobertBrewitz/vim-jsx-pretty'
-  Plug 'RobertBrewitz/typescript-vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'MaxMEllon/vim-jsx-pretty'
+  Plug 'leafgarland/typescript-vim'
 
   " Theme
-  Plug 'RobertBrewitz/jellybeans.vim'
+  Plug 'nanotech/jellybeans.vim'
 
   " Language Servers
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
