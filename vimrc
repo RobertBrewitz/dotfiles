@@ -86,6 +86,16 @@ call plug#begin('~/.vim/plugged')
 
   " Theme
   Plug 'nanotech/jellybeans.vim'
+  let g:jellybeans_overrides = {
+ \  'background': { 'guibg': '000000' },
+ \  'SignColumn': { 'guibg': '000000' },
+ \}
+"\  'TabLine': { 'guibg': '000000', 'guifg': 'dad085' },
+"\  'TabLineSel': { 'guibg': 'dad085', 'guifg': '151515' },
+"\  'StatusLine': { 'guibg': '000000', 'guifg': 'dad085' },
+"\  'LineNr': { 'guibg': '000000', 'guifg': '555555' },
+"\  'CursorLineNr': { 'guibg': '000000', 'guifg': 'dad085' },
+"\}
 
   " Language Servers
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
