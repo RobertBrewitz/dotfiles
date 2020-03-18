@@ -46,6 +46,13 @@ nnoremap <C-j> <C-w><C-]><C-w>T
 " Folding
 set nofoldenable
 
+" Misc
+set nostartofline
+set scrolloff=5
+set history=1000
+set shortmess=atITA
+set cmdheight=1
+
 " Remaps
 nnoremap <S-k> :tabn<cr>
 nnoremap <S-j> :tabp<cr>
