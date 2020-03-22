@@ -1,6 +1,7 @@
 [user]
   name = Robert Brewitz
   email = hello@robertbrewitz.com
+  signingkey = DBAF5F8E7B1F1075C7D3F3375711E05EE0D0B9A9
 [github]
   user = RobertBrewitz
 [color]
@@ -23,7 +24,11 @@
   cp = cherry-pick
   pom = push origin HEAD
   dom = pull origin master
-[branch]  
+[branch]
   autosetuprebase = always
 [push]
   default = simple
+[commit]
+  gpgsign = true
+[gpg]
+  program = gpg
