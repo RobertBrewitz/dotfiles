@@ -75,7 +75,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
 
   " Fuzzy finding
-  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'RobertBrewitz/fzf.vim'
 
   " Syntax Highlighting
