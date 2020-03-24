@@ -47,11 +47,14 @@ nnoremap <C-j> <C-w><C-]><C-w>T
 set nofoldenable
 
 " Misc
+set nobackup
+set nowritebackup
 set nostartofline
 set scrolloff=5
 set history=1000
-set shortmess=atITA
-set cmdheight=1
+set cmdheight=2
+set shortmess+=c
+set updatetime=300
 
 " Remaps
 nnoremap <S-k> :tabn<cr>
@@ -90,17 +93,18 @@ call plug#begin('~/.vim/plugged')
  \  'background': { 'guibg': '000000' },
  \  'SignColumn': { 'guibg': '000000' },
  \}
-"\  'TabLine': { 'guibg': '000000', 'guifg': 'dad085' },
-"\  'TabLineSel': { 'guibg': 'dad085', 'guifg': '151515' },
-"\  'StatusLine': { 'guibg': '000000', 'guifg': 'dad085' },
-"\  'LineNr': { 'guibg': '000000', 'guifg': '555555' },
-"\  'CursorLineNr': { 'guibg': '000000', 'guifg': 'dad085' },
-"\}
 
   " Language Servers
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   au BufNewFile,BufRead *.ts setlocal filetype=typescript
   au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+
+  " GoTo code navigation.
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+
 call plug#end()
 
 " Theme
