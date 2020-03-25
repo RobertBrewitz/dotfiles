@@ -1,3 +1,15 @@
 {
-  "coc.preferences.jumpCommand": "tabedit"
+  "coc.preferences.jumpCommand": "tabedit",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "markdown",
+    "sass",
+    "scss",
+    "typescript",
+    "typescriptreact"
+  ]
 }
