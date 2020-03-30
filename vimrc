@@ -85,7 +85,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript'
   Plug 'MaxMEllon/vim-jsx-pretty'
   Plug 'leafgarland/typescript-vim'
-  Plug 'ianks/vim-tsx'
 
   " Theme
   Plug 'nanotech/jellybeans.vim'
