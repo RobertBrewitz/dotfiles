@@ -52,8 +52,8 @@ echo ". ~/.profile" >> ~/.bashrc
 echo "Installing tmux"
 sudo apt install tmux -y
 
-echo "Installing vim-gnome"
-sudo apt install vim-gnome -y
+echo "Installing vim-gtk3"
+sudo apt install vim-gtk3 -y
 
 echo "Installing editorconfig core"
 sudo apt install editorconfig
@@ -71,6 +71,6 @@ echo "##########################################"
 echo "#             Setup completed            #"
 echo "##########################################"
 echo ""
-echo "1) source ~/.bashrc"
+echo "1) Close and open a new Terminal"
 echo "2) vi"
 echo "3) :PlugInstall"
