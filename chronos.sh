@@ -14,6 +14,7 @@ ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/npmrc $HOME/.npmrc
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/ctags $HOME/.ctags
+cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
 echo "Adds exec permissions to chronos home directory"
 echo "sudo mount -i -o remount,exec /home/chronos/user" >> ~/.bashrc
@@ -63,5 +64,5 @@ echo "#             Setup completed            #"
 echo "##########################################"
 echo ""
 echo "1) source ~/.bashrc"
-echo "2) vi"
+echo "2) vi ~/.gitconfig-user"
 echo "3) :PlugInstall"

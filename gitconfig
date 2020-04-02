@@ -1,9 +1,3 @@
-[user]
-  name = Robert Brewitz
-  email = hello@robertbrewitz.com
-  signingkey = DBAF5F8E7B1F1075C7D3F3375711E05EE0D0B9A9
-[github]
-  user = RobertBrewitz
 [color]
   branch = auto
   diff = auto
@@ -17,13 +11,10 @@
 [merge]
   tool = opendiff
 [alias]
-  s = status
-  st = status
-  f = fetch --all
+  b = branch
+  m = merge
   co = checkout
   cp = cherry-pick
-  pom = push origin HEAD
-  dom = pull origin master
 [branch]
   autosetuprebase = always
 [push]
@@ -32,3 +23,5 @@
   gpgsign = true
 [gpg]
   program = gpg
+[includeIf "gitdir:~/"]
+  path = ~/.gitconfig-user

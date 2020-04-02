@@ -14,6 +14,7 @@ ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/npmrc $HOME/.npmrc
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/ctags $HOME/.ctags
+cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
 echo "Upgrading and updating apt"
 sudo apt-get update -y
@@ -71,6 +72,6 @@ echo "##########################################"
 echo "#             Setup completed            #"
 echo "##########################################"
 echo ""
-echo "1) Close and open a new Terminal"
-echo "2) vi"
+echo "1) source ~/.bashrc"
+echo "2) vi ~/.gitconfig-user"
 echo "3) :PlugInstall"
