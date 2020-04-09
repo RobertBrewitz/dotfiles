@@ -15,6 +15,8 @@
   m = merge
   co = checkout
   cp = cherry-pick
+  dom = pull origin master
+  pom = push origin master
 [branch]
   autosetuprebase = always
 [push]
