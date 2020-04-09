@@ -55,7 +55,6 @@ set history=1000
 set cmdheight=2
 set shortmess+=c
 set updatetime=300
-set formatoptions-=cro
 
 " Remaps
 nnoremap <S-k> :tabn<cr>
