@@ -1,2 +1,1 @@
-set formatoptions-=o
-setlocal formatoptions-=o
+set formatoptions-=cro
