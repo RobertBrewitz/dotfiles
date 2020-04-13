@@ -66,6 +66,7 @@ gsettings set org.gnome.desktop.peripherals.keyboard delay 201
 
 echo "Setting max_user_waches for hot reloading to work properly"
 echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
+echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 
 echo "##########################################"
