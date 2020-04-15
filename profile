@@ -16,6 +16,12 @@ alias gss="git submodule sync --recursive && git submodule update --init --recur
 alias gs="git status"
 alias gl="git log"
 alias l="ls -al"
+alias nodetrace="node --trace-event-categories v8,node,node.async_hooks"
+
+# apt
+alias aptup="sudo apt update && sudo apt upgrade"
+alias aptclean="sudo apt autoremove --purge && dpkg -l | grep '^rc' | awk '{print $2}' | sudo xargs dpkg --purge"
+alias aptlist="sudo apt list --installed"
 
 # Fuzzy finder FZF
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
