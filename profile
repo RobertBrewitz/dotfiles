@@ -69,6 +69,3 @@ fi
 alias ll="l"
 
 export GPG_TTY=$(tty)
-
-# Disable Software Flow Control
-stty -ixon
