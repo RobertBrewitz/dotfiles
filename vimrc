@@ -52,7 +52,7 @@ set nowritebackup
 set nostartofline
 set scrolloff=5
 set history=1000
-set cmdheight=2
+set cmdheight=1
 set shortmess+=c
 set updatetime=300
 
@@ -76,6 +76,7 @@ call plug#begin('~/.vim/plugged')
 
   " Utilities
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
 
   " Fuzzy finding
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
