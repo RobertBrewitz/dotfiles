@@ -66,6 +66,6 @@ To have developer servers such as react and preact, filewatch limit has to be in
 echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
 ```
 
-## .gitconfig
+## .gitconfig-user
 
-Update .gitconfig email, user, and username.
+Update .gitconfig-user email, user, username, and signingkey if applicable.
