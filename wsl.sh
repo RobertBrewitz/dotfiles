@@ -53,10 +53,15 @@ echo "Installing tmux"
 sudo apt install tmux -y
 
 echo "Installing vim-gtk"
-sudo apt install vim-gtk -y
+sudo apt install vim-gtk3 -y
 
 echo "Installing editorconfig core"
 sudo apt install editorconfig
+
+echo "Setting max_user_waches for hot reloading to work properly"
+echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
+echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
 
 echo "##########################################"
 echo "#             Setup completed            #"
