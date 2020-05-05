@@ -69,3 +69,9 @@ echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
 ## .gitconfig-user
 
 Update .gitconfig-user email, user, username, and signingkey if applicable.
+
+### Coc-nvim extensions
+
+```bash
+:CocInstall coc-css coc-cssmodules coc-git coc-html coc-json coc-svg coc-tsserver coc-xml coc-yaml coc-markdownlint coc-highlight
+```
