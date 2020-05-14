@@ -1,6 +1,6 @@
 export LC_ALL=en_US.UTF-8
 
-PS1="\w :. "
+PS1="\W :. "
 #PS1='$(printf "%$((COLUMNS-1))s\r")'$PS1
 
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
