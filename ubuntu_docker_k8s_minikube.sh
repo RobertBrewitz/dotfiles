@@ -42,10 +42,9 @@ sudo mv ./minikube /usr/local/bin/minikube
 
 echo "Installing kubectx & kubens"
 git clone git@github.com:ahmetb/kubectx.git
-cd kubectx
-chmod +x kubectx
-sudo mv ./kubectx /usr/local/bin/
-chmod +x kubens
-sudo mv ./kubens /usr/local/bin/
+chmod +x kubectx/kubectx
+sudo mv ./kubectx/kubectx /usr/local/bin/
+chmod +x kubectx/kubens
+sudo mv ./kubectx/kubens /usr/local/bin/
 
 echo "REBOOT REQUIRED"
