@@ -12,11 +12,22 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
+# https://docs.docker.com/compose/install/
+echo "Installing docker-compose"
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
 echo "Installing kubectl"
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
+
+# https://github.com/kubernetes/kompose/blob/master/docs/installation.md#github-release
+echo "Installing kompose"
+curl -L https://github.com/kubernetes/kompose/releases/download/v1.21.0/kompose-linux-amd64 -o kompose
+chmod +x kompose
+sudo mv ./kompose /usr/local/bin/kompose
 
 # https://help.ubuntu.com/community/KVM/Installation#Installation_of_KVM
 echo "Installing kvm for minikube"
@@ -29,6 +40,7 @@ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/miniku
 chmod +x ./minikube
 sudo mv ./minikube /usr/local/bin/minikube
 
+echo "Installing kubectx & kubens"
 git clone git@github.com:ahmetb/kubectx.git
 cd kubectx
 chmod +x kubectx
