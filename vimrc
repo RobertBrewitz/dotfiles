@@ -91,6 +91,7 @@ call plug#begin('~/.vim/plugged')
 
   " Language Servers
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  let g:coc_disable_startup_warning = 1
   au BufNewFile,BufRead *.ts setlocal filetype=typescript
   au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
   nmap <silent> gd <Plug>(coc-definition)
