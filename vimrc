@@ -66,7 +66,6 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 call plug#begin('~/.vim/plugged')
   " Formatting
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'prettier/vim-prettier', { 'do': 'npx yarn install' }
 
   " Utilities
   Plug 'tpope/vim-surround'
