@@ -41,7 +41,7 @@ chmod +x ./minikube
 sudo mv ./minikube /usr/local/bin/minikube
 
 echo "Installing kubectx & kubens"
-git clone git@github.com:ahmetb/kubectx.git
+git clone https://github.com/ahmetb/kubectx.git
 chmod +x kubectx/kubectx
 sudo mv ./kubectx/kubectx /usr/local/bin/
 chmod +x kubectx/kubens
