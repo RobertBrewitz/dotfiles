@@ -22,6 +22,9 @@ sudo apt-get upgrade -y
 echo "Installing dependencies"
 sudo apt-get install curl -y
 
+echo "Installing fzf"
+sudo apt-get install fzf -y
+
 echo "Installing nvm and node"
 if [! -d "$HOME/.nvm"]; then
   mkdir $HOME/.nvm
@@ -56,7 +59,7 @@ echo "Installing vim-gtk3"
 sudo apt install vim-gtk3 -y
 
 echo "Installing editorconfig core"
-sudo apt install editorconfig
+sudo apt install editorconfig -y
 
 echo "Setting up 33ms key-repeat with 201ms delay"
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
