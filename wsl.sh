@@ -18,19 +18,16 @@ echo "Upgrading and updating apt"
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
+echo "Installing dependencies"
+sudo apt-get install curl build-essential -y
+
 echo "Installing nvm and node"
-if [! -d "$HOME/.nvm"]; then
-  mkdir $HOME/.nvm
-fi
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-nvm install --lts
-npm config set registry http://registry.npmjs.org/ --global
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | NODE_VERSION=--lts bash
 
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
 
 echo "Installing lolcat-c into /usr/local/bin/lolcat"
-sudo apt install make gcc -y
 git clone https://github.com/dosentmatter/lolcat.git
 cd lolcat
 make

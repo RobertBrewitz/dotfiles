@@ -25,11 +25,7 @@ echo "Installing fzf"
 sudo apt-get install fzf -y
 
 echo "Installing nvm and node"
-if [! -d "$HOME/.nvm"]; then
-  mkdir $HOME/.nvm
-fi
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-nvm install --lts
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | NODE_VERSION=--lts bash
 
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
