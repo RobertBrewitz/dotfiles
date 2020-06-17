@@ -19,7 +19,7 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 echo "Installing dependencies"
-sudo apt-get install curl -y
+sudo apt-get install curl build-essential -y
 
 echo "Installing fzf"
 sudo apt-get install fzf -y
