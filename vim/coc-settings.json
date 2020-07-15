@@ -1,5 +1,4 @@
 {
-  "eslint.run": "onSave",
   "coc.preferences.jumpCommand": "tabedit",
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
