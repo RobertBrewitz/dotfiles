@@ -81,6 +81,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'leafgarland/typescript-vim'
   Plug 'hashivim/vim-terraform'
   Plug 'jparise/vim-graphql'
+  Plug 'lepture/vim-velocity'
+  au BufNewFile,BufRead *.vtl set ft=velocity
 
   " Theme
   Plug 'nanotech/jellybeans.vim'
