@@ -1,5 +1,13 @@
 # Dotfiles
 
+## NPM Security
+
+The install scripts set `ignore-scripts` to true to ignore any pre- and post-install hooks from npm packages.
+
+```bash
+npm config set ignore-scripts true
+```
+
 ## Setup OS X
 
 ```bash
@@ -64,6 +72,8 @@ To have developer servers such as react and preact, filewatch limit has to be in
 
 ```bash
 echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
+echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
 ```
 
 ## .gitconfig-user

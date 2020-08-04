@@ -33,6 +33,7 @@ rm -rf lolcat
 
 echo "Installing nvm and node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | NODE_VERSION=--lts bash
+npm config set ignore-scripts true
 
 echo "Installing figlet"
 brew install figlet

@@ -22,6 +22,7 @@ curl -Ls git.io/vddgY | bash
 
 echo "Installing nvm and node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | NODE_VERSION=--lts bash
+npm config set ignore-scripts true
 
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
