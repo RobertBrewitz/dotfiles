@@ -85,3 +85,19 @@ Update .gitconfig-user email, user, username, and signingkey if applicable.
 ```bash
 :CocInstall coc-prettier coc-css coc-cssmodules coc-git coc-html coc-json coc-svg coc-tsserver coc-xml coc-yaml coc-markdownlint coc-highlight coc-eslint
 ```
+
+### Ubuntu on NUC Audio & Mic combojack fix
+
+#### Get codec info
+
+```bash
+cat /proc/asound/card*/codec* | grep Codec
+```
+
+[Lookup model on kernel.org](https://www.kernel.org/doc/html/latest/sound/hd-audio/models.html)
+
+#### Add setting to end of /etc/modprobe.d/alsa-base.conf file
+
+```bash
+options snd-hda-intel model=dell-headset-multi
+```
