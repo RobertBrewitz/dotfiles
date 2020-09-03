@@ -1,6 +1,6 @@
 {
-  "eslint.run": "onSave",
-  "eslint.filetypes": ["javascript", "javascriptreact"],
+  "tsserver.enableJavascript": true,
+  "tsserver.enable": true,
   "coc.preferences.jumpCommand": "tabedit",
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
