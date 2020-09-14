@@ -96,6 +96,12 @@ cat /proc/asound/card*/codec* | grep Codec
 
 [Lookup model on kernel.org](https://www.kernel.org/doc/html/latest/sound/hd-audio/models.html)
 
+#### Add setting to end of /etc/modprobe.d/alsa-base.conf file
+
+```bash
+options snd-hda-intel model=dell-headset-multi
+```
+
 ### Ubuntu 20.04 VPN IPSec LT2P workarounds
 
 [Known issues and workarounds](https://github.com/nm-l2tp/NetworkManager-l2tp/wiki/Known-Issues)
@@ -110,8 +116,3 @@ sudo systemctl stop systemd-resolved
 sudo systemctl restart NetworkManager
 ```
 
-#### Add setting to end of /etc/modprobe.d/alsa-base.conf file
-
-```bash
-options snd-hda-intel model=dell-headset-multi
-```
