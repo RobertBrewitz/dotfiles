@@ -89,6 +89,10 @@ call plug#begin('~/.vim/plugged')
   let g:jellybeans_overrides = {
  \  'background': { 'guibg': '000000' },
  \  'SignColumn': { 'guibg': '000000' },
+ \  'Pmenu': { 'guibg': '111111' },
+ \  'PmenuSel': { 'guibg': 'eeeeee' },
+ \  'PmenuSbar': { 'guibg': '111111' },
+ \  'PmenuThumb': { 'guibg': '111111' },
  \}
 
   " Language Servers
