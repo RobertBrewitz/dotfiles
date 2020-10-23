@@ -1,7 +1,4 @@
 {
-  "tsserver.enableJavascript": true,
-  "tsserver.enable": true,
-  "coc.preferences.jumpCommand": "tabedit",
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "html",
@@ -13,5 +10,14 @@
     "scss",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "coc.preferences.jumpCommand": "tabe",
+  "coc.preferences.previewMaxHeight": 20,
+  "diagnostic.maxWindowHeight": 20,
+  "diagnostic.separateRelatedInformationAsDiagnostics": true,
+  "javascript.suggest.autoImports": true,
+  "signature.maxWindowHeight": 20,
+  "tsserver.enable": true,
+  "tsserver.enableJavascript": true,
+  "typescript.suggest.autoImports": true
 }

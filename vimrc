@@ -8,6 +8,10 @@ set nocompatible
 set secure
 set ff=unix
 
+" Completion
+set completeopt=longest,menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " Allow backspace
 set backspace=indent,eol,start
 
