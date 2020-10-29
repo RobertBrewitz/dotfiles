@@ -14,7 +14,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
 # https://docs.docker.com/compose/install/
 echo "Installing docker-compose"
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
 sudo chmod +x /usr/local/bin/docker-compose
 
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -22,12 +23,6 @@ echo "Installing kubectl"
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
-
-# https://github.com/kubernetes/kompose/blob/master/docs/installation.md#github-release
-echo "Installing kompose"
-curl -L https://github.com/kubernetes/kompose/releases/download/v1.21.0/kompose-linux-amd64 -o kompose
-chmod +x kompose
-sudo mv ./kompose /usr/local/bin/kompose
 
 # https://help.ubuntu.com/community/KVM/Installation#Installation_of_KVM
 echo "Installing kvm for minikube"
@@ -46,5 +41,18 @@ chmod +x kubectx/kubectx
 sudo mv ./kubectx/kubectx /usr/local/bin/
 chmod +x kubectx/kubens
 sudo mv ./kubectx/kubens /usr/local/bin/
+
+echo "Installing helm"
+curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+sudo apt-get install apt-transport-https -y
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm -y
+
+echo "Installing Dapr"
+wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
+minikube start
+minikube addons enable dashboard
+minikube addons enable ingress
 
 echo "REBOOT REQUIRED"
