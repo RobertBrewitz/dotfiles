@@ -3,6 +3,9 @@ scriptencoding utf-8
 " Encoding
 set encoding=utf-8
 
+" Colors
+set termguicolors
+
 " Being considerate
 set nocompatible
 set secure
