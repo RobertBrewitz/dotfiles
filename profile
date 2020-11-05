@@ -1,8 +1,7 @@
 export LC_ALL=en_US.UTF-8
 
 PS1="\W :. "
-#PS1='$(printf "%$((COLUMNS-1))s\r")'$PS1
-
+export HISTCONTROL=ignoreboth:erasedups
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export CLICOLOR=1
 
@@ -22,6 +21,14 @@ alias nodetrace="node --trace-event-categories v8,node,node.async_hooks"
 alias aptup="sudo apt update && sudo apt upgrade"
 alias aptclean="sudo apt autoremove --purge && dpkg -l | grep '^rc' | awk '{print $2}' | sudo xargs dpkg --purge"
 alias aptlist="sudo apt list --installed"
+
+# Docker & K8s
+alias kn="kubens"
+alias kx="kubectx"
+alias k="kubectl"
+alias mk="minikube"
+alias dk="docker"
+alias dkc="docker-compose"
 
 # Fuzzy finder FZF
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
