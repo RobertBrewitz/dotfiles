@@ -9,7 +9,8 @@
     "sass",
     "scss",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "yaml"
   ],
   "coc.preferences.jumpCommand": "tabe",
   "coc.preferences.previewMaxHeight": 20,
