@@ -13,11 +13,8 @@
     "yaml"
   ],
   "coc.preferences.jumpCommand": "tabe",
-  "coc.preferences.previewMaxHeight": 20,
-  "diagnostic.maxWindowHeight": 20,
   "diagnostic.separateRelatedInformationAsDiagnostics": true,
   "javascript.suggest.autoImports": true,
-  "signature.maxWindowHeight": 20,
   "tsserver.enable": true,
   "tsserver.enableJavascript": true,
   "typescript.suggest.autoImports": true

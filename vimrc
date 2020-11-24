@@ -85,10 +85,13 @@ call plug#begin('~/.vim/plugged')
   " Syntax Highlighting
   Plug 'pangloss/vim-javascript'
   Plug 'MaxMEllon/vim-jsx-pretty'
+  Plug 'peitalin/vim-jsx-typescript'
   Plug 'leafgarland/typescript-vim'
   Plug 'hashivim/vim-terraform'
   Plug 'jparise/vim-graphql'
   Plug 'lepture/vim-velocity'
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
   au BufNewFile,BufRead *.vtl set ft=velocity
 
   " Theme
