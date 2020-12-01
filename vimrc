@@ -31,7 +31,7 @@ set listchars=tab:▸\ ,eol:¬,trail:·
 set list
 
 " Gutter
-set number relativenumber
+set number
 
 " Command timeouts
 set timeoutlen=1000
