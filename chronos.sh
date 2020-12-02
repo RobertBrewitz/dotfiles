@@ -12,6 +12,7 @@ ln -sf $ABSOLUTE_PATH/vimrc_chronos $HOME/.vimrc_chronos
 #ln -sf $ABSOLUTE_PATH/bash_lolcat $HOME/.bash_lolcat
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
+ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
 cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
 echo "Adds exec permissions to chronos home directory"

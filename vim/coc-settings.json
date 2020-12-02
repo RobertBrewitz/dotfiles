@@ -10,7 +10,8 @@
     "scss",
     "typescript",
     "typescriptreact",
-    "yaml"
+    "yaml",
+    "velocity"
   ],
   "coc.preferences.jumpCommand": "tabe",
   "diagnostic.separateRelatedInformationAsDiagnostics": true,
