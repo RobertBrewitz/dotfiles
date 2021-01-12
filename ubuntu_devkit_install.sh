@@ -49,13 +49,4 @@ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt
 sudo apt-get update
 sudo apt-get install helm -y
 
-echo "Installing Dapr"
-wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
-
-echo "Starting Docker & Minikube"
-minikube start
-minikube addons enable dashboard
-minikube addons enable ingress
-dapr init -k
-
 echo "REBOOT REQUIRED"
