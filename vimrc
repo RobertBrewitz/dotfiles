@@ -58,8 +58,8 @@ set shortmess+=c
 set updatetime=300
 
 " Remaps
-nnoremap <S-k> :tabn<cr>
-nnoremap <S-j> :tabp<cr>
+nnoremap <S-k> :call coc#float#close_all() <cr> :tabn <cr>
+nnoremap <S-j> :call coc#float#close_all() <cr> :tabp <cr>
 nnoremap <C-p> :FZF<cr>
 nnoremap ; :
 
@@ -110,7 +110,6 @@ call plug#begin('~/.vim/plugged')
   let g:coc_disable_startup_warning = 1
   au BufNewFile,BufRead *.ts setlocal filetype=typescript
   au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
-  nmap <Esc> :call coc#float#close_all() <CR>
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
