@@ -106,10 +106,11 @@ call plug#begin('~/.vim/plugged')
  \}
 
   " Language Servers
-  Plug 'neoclide/coc.nvim', {'commit': 'f143e5355be56a941ce21a1e48ace417dd263e86', 'do': 'yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   let g:coc_disable_startup_warning = 1
   au BufNewFile,BufRead *.ts setlocal filetype=typescript
   au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+  nmap <Esc> :call coc#float#close_all() <CR>
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
