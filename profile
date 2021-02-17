@@ -2,6 +2,8 @@ export LC_ALL=en_US.UTF-8
 
 PS1="\W :. "
 export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=10000
+export HISTFILESIZE=0
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export CLICOLOR=1
 
