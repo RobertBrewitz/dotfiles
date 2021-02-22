@@ -90,7 +90,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'hashivim/vim-terraform'
   Plug 'jparise/vim-graphql'
   Plug 'lepture/vim-velocity'
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
   au BufNewFile,BufRead *.vtl set ft=velocity
 
