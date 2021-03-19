@@ -80,8 +80,8 @@ set shortmess+=c
 set updatetime=300
 
 " Remaps
-nnoremap <silent> <S-k> :tabn <cr> :call coc#float#close_all() <cr>
-nnoremap <silent> <S-j> :tabp <cr> :call coc#float#close_all() <cr>
+nnoremap <silent> <S-k> :tabn <cr> :call popup_clear() <cr>
+nnoremap <silent> <S-j> :tabp <cr> :call popup_clear() <cr>
 nnoremap <C-p> :FZF<cr>
 nnoremap ; :
 
