@@ -82,6 +82,8 @@ set updatetime=300
 " Remaps
 nnoremap <silent> <S-k> :tabn <cr> :call popup_clear() <cr>
 nnoremap <silent> <S-j> :tabp <cr> :call popup_clear() <cr>
+nnoremap <silent> <C-k> :cnext <cr>
+nnoremap <silent> <C-j> :cprev <cr>
 nnoremap <C-p> :FZF<cr>
 nnoremap ; :
 
