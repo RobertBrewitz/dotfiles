@@ -3,38 +3,30 @@ scriptencoding utf-8
 " Encoding
 set encoding=utf-8
 
-" Colors
-set termguicolors
-
-" Backups
-set undofile
-set undolevels=1000
-set undoreload=10000
-
-set backup
-set swapfile
-set undodir=$HOME/.vim/tmp/undo
-set backupdir=$HOME/.vim/tmp/backup
-set directory=$HOME/.vim/tmp/swap
-
-" Make those folders automatically if they don't already exist.
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-endif
-if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
-endif
-if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
-endif
-
 " Being considerate
 set nocompatible
 set secure
 set ff=unix
 
+" Colors
+set termguicolors
+
+" Errorbell
+set noerrorbells
+
+" Undo/Backup/Swap
+set nobackup
+set noswapfile
+set undofile
+set undolevels=1000
+set undoreload=10000
+set undodir=$HOME/.vim/tmp/undo
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+
 " Completion
-set completeopt=longest,menuone
+set completeopt=longest,menuone,noinsert,noselect
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Allow backspace
@@ -46,14 +38,17 @@ syntax on
 " Indentation & whitespace
 set autoindent
 set smartindent
-set shiftwidth=2
 set expandtab
-set tabstop=2
+set tabstop=2 softtabstop=2
+set colorcolumn=80
+set nowrap
+set shiftwidth=2
 set listchars=tab:▸\ ,eol:¬,trail:·
 set list
 
 " Gutter
 set number
+set relativenumber
 
 " Command timeouts
 set timeoutlen=1000
@@ -68,6 +63,9 @@ set signcolumn=yes
 
 " Folding
 set nofoldenable
+
+" Search
+set incsearch
 
 " Misc
 set nobackup
@@ -84,7 +82,7 @@ nnoremap <silent> <S-k> :tabn <cr> :call popup_clear() <cr>
 nnoremap <silent> <S-j> :tabp <cr> :call popup_clear() <cr>
 nnoremap <silent> <C-k> :cnext <cr>
 nnoremap <silent> <C-j> :cprev <cr>
-nnoremap <C-p> :FZF<cr>
+nnoremap <silent> <C-p> :FZF<cr>
 nnoremap ; :
 
 " Insert mode completion
@@ -126,6 +124,7 @@ call plug#begin('~/.vim/plugged')
  \  'PmenuSel': { 'guibg': 'eeeeee' },
  \  'PmenuSbar': { 'guibg': '111111' },
  \  'PmenuThumb': { 'guibg': '111111' },
+ \  'ColorColumn': { 'guibg': '550000' },
  \}
 
   " Language Servers
@@ -133,12 +132,11 @@ call plug#begin('~/.vim/plugged')
   let g:coc_disable_startup_warning = 1
   au BufNewFile,BufRead *.ts setlocal filetype=typescript
   au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  nmap <leader>rn <Plug>(coc-rename)
-
+  nmap <silent> <leader>gd <Plug>(coc-definition)
+  nmap <silent> <leader>gy <Plug>(coc-type-definition)
+  nmap <silent> <leader>gi <Plug>(coc-implementation)
+  nmap <silent> <leader>gr <Plug>(coc-references)
+  nmap <silent> <leader>rn <Plug>(coc-rename)
 call plug#end()
 
 " Theme
