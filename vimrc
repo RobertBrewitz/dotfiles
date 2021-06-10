@@ -46,8 +46,10 @@ set shiftwidth=2
 set listchars=tab:▸\ ,eol:¬,trail:·
 set list
 
-" Buffers
+" Buffers & Terminal
 set hidden
+tnoremap <Esc> <c-\><c-n>
+tnoremap <c-[> <c-\><c-n>
 
 " Gutter
 set number
@@ -127,7 +129,7 @@ call plug#begin('~/.vim/plugged')
  \  'PmenuSel': { 'guibg': 'eeeeee' },
  \  'PmenuSbar': { 'guibg': '111111' },
  \  'PmenuThumb': { 'guibg': '111111' },
- \  'ColorColumn': { 'guibg': '550000' },
+ \  'ColorColumn': { 'guibg': '111111' },
  \}
 
   " Language Servers
