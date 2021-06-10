@@ -46,6 +46,9 @@ set shiftwidth=2
 set listchars=tab:▸\ ,eol:¬,trail:·
 set list
 
+" Buffers
+set hidden
+
 " Gutter
 set number
 set relativenumber
