@@ -48,8 +48,9 @@ set list
 
 " Buffers & Terminal
 set hidden
-tnoremap <Esc> <c-\><c-n>
-tnoremap <c-[> <c-\><c-n>
+" Conflicts with fzf
+"tnoremap <Esc> <c-\><c-n>
+"tnoremap <c-[> <c-\><c-n>
 
 " Gutter
 set number
