@@ -14,6 +14,9 @@ set termguicolors
 " Errorbell
 set noerrorbells
 
+" Inc/dec
+set nrformats-=octal
+
 " Undo/Backup/Swap
 set nobackup
 set noswapfile
@@ -27,6 +30,8 @@ endif
 
 " Completion
 set completeopt=longest,menuone,noinsert,noselect
+set complete-=i
+set wildmenu
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Allow backspace
@@ -39,6 +44,7 @@ syntax on
 set autoindent
 set smartindent
 set expandtab
+set smarttab
 set tabstop=2 softtabstop=2
 set colorcolumn=80
 set nowrap
@@ -48,9 +54,6 @@ set list
 
 " Buffers & Terminal
 set hidden
-" Conflicts with fzf
-"tnoremap <Esc> <c-\><c-n>
-"tnoremap <c-[> <c-\><c-n>
 
 " Gutter
 set number
@@ -63,6 +66,7 @@ set ttimeoutlen=0
 " Status
 set showtabline=2
 set laststatus=2
+set ruler
 
 " Sign column
 set signcolumn=yes
@@ -78,10 +82,16 @@ set nobackup
 set nowritebackup
 set nostartofline
 set scrolloff=5
+set sidescrolloff=5
 set history=1000
 set cmdheight=1
 set shortmess+=c
 set updatetime=300
+set display+=lastline
+set autoread
+set tabpagemax=50
+set sessionoptions-=options
+set viewoptions-=options
 
 " Remaps
 nnoremap <silent> <S-k> :tabn <cr> :call popup_clear() <cr>
