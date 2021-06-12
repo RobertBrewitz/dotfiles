@@ -86,8 +86,8 @@ set updatetime=300
 " Remaps
 nnoremap <silent> <S-k> :tabn <cr> :call popup_clear() <cr>
 nnoremap <silent> <S-j> :tabp <cr> :call popup_clear() <cr>
-nnoremap <silent> <C-k> :cnext <cr>
-nnoremap <silent> <C-j> :cprev <cr>
+nnoremap <silent> <C-k> :call CocAction('diagnosticNext') <cr>
+nnoremap <silent> <C-j> :call CocAction('diagnosticPrevious') <cr>
 nnoremap <silent> <C-p> :Files <cr>
 nnoremap ; :
 
