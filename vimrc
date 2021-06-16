@@ -94,6 +94,7 @@ set sessionoptions-=options
 set viewoptions-=options
 
 " Remaps
+let mapleader = " "
 nnoremap <silent> <S-k> :tabn <cr> :call popup_clear() <cr>
 nnoremap <silent> <S-j> :tabp <cr> :call popup_clear() <cr>
 nnoremap <silent> <C-k> :call CocAction('diagnosticNext') <cr>
