@@ -47,7 +47,6 @@ set expandtab
 set smarttab
 set tabstop=2 softtabstop=2
 set colorcolumn=80
-set nowrap
 set shiftwidth=2
 set listchars=tab:▸\ ,eol:¬,trail:·
 set list
