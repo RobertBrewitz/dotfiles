@@ -8,6 +8,9 @@ set nocompatible
 set secure
 set ff=unix
 
+" Project .vimrc
+set exrc
+
 " Colors
 set termguicolors
 
