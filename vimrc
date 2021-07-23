@@ -28,11 +28,11 @@ set undolevels=1000
 set undoreload=10000
 set undodir=$HOME/.vim/tmp/undo
 if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), "p")
 endif
 
 " Completion
-set completeopt=longest,menuone,noinsert,noselect
+set completeopt=menuone,noinsert,noselect
 set complete-=i
 set wildmenu
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -43,7 +43,8 @@ set backspace=indent,eol,start
 " Syntax highlighting
 syntax on
 
-" Indentation & whitespace
+" Formatting
+set formatoptions-=cro
 set autoindent
 set smartindent
 set expandtab
@@ -62,6 +63,9 @@ set number
 set relativenumber
 
 " Command timeouts
+set showcmd
+set notimeout
+set ttimeout
 set timeoutlen=1000
 set ttimeoutlen=0
 
@@ -97,20 +101,14 @@ set viewoptions-=options
 
 " Remaps
 let mapleader = " "
-nnoremap <silent> <S-k> :tabn <cr> :call popup_clear() <cr>
-nnoremap <silent> <S-j> :tabp <cr> :call popup_clear() <cr>
+nnoremap <silent> <S-k> :tabn <cr>
+nnoremap <silent> <S-j> :tabp <cr>
 nnoremap <silent> <C-k> :call CocAction('diagnosticNext') <cr>
 nnoremap <silent> <C-j> :call CocAction('diagnosticPrevious') <cr>
 nnoremap <silent> <leader>j :cprev <cr>
 nnoremap <silent> <leader>k :cnext <cr>
 nnoremap <silent> <C-p> :Files <cr>
 nnoremap ; :
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path-relative)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Plugins
 call plug#begin('~/.vim/plugged')
