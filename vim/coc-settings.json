@@ -15,9 +15,6 @@
   ],
   "coc.preferences.jumpCommand": "tabe",
   "diagnostic.separateRelatedInformationAsDiagnostics": true,
-  "javascript.suggest.autoImports": true,
-  "tsserver.enable": true,
-  "tsserver.enableJavascript": true,
   "typescript.preferences.useAliasesForRenames": false,
-  "typescript.suggest.autoImports": true
+  "javascript.preferences.useAliasesForRenames": false
 }
