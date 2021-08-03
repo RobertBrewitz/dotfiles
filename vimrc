@@ -109,6 +109,8 @@ nnoremap <silent> <leader>j :cprev <cr>
 nnoremap <silent> <leader>k :cnext <cr>
 nnoremap <silent> <C-p> :Files <cr>
 nnoremap ; :
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Plugins
 call plug#begin('~/.vim/plugged')
