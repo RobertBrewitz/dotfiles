@@ -108,6 +108,7 @@ nnoremap <silent> <C-j> :call CocAction('diagnosticPrevious') <cr>
 nnoremap <silent> <leader>j :cprev <cr>
 nnoremap <silent> <leader>k :cnext <cr>
 nnoremap <silent> <C-p> :Files <cr>
+nnoremap <silent> <leader>p :Buffers <cr>
 nnoremap ; :
 nnoremap n nzzzv
 nnoremap N Nzzzv
