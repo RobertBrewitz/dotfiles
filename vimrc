@@ -105,13 +105,14 @@ nnoremap <silent> <S-k> :tabn <cr>
 nnoremap <silent> <S-j> :tabp <cr>
 nnoremap <silent> <C-k> :call CocAction('diagnosticNext') <cr>
 nnoremap <silent> <C-j> :call CocAction('diagnosticPrevious') <cr>
-nnoremap <silent> <leader>j :cprev <cr>
-nnoremap <silent> <leader>k :cnext <cr>
+nnoremap <silent> <leader>j :cprev <cr>zzzv
+nnoremap <silent> <leader>k :cnext <cr>zzzv
 nnoremap <silent> <C-p> :Files <cr>
 nnoremap <silent> <leader>p :Buffers <cr>
 nnoremap ; :
 nnoremap n nzzzv
 nnoremap N Nzzzv
+"nnoremap J mzJ`z :delm m<CR>
 nnoremap Y y$
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
@@ -121,6 +122,10 @@ nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+inoremap <c-k> <esc>:m .-2<CR>i
+inoremap <c-j> <esc>:m .+1<CR>i
+nnoremap <leader>k :m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
 
 " Plugins
 call plug#begin('~/.vim/plugged')
