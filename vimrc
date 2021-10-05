@@ -124,8 +124,21 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 inoremap <c-k> <esc>:m .-2<CR>i
 inoremap <c-j> <esc>:m .+1<CR>i
-nnoremap <leader>k :m .-2<CR>==
-nnoremap <leader>j :m .+1<CR>==
+"nnoremap <leader>k :m .-2<CR>==
+"nnoremap <leader>j :m .+1<CR>==
+nnoremap <silent> <leader>d :call <SID>show_documentation()<CR>
+
+" Functions
+"
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 " Plugins
 call plug#begin('~/.vim/plugged')

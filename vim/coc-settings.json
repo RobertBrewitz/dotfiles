@@ -13,8 +13,6 @@
     "yaml",
     "velocity"
   ],
-  "coc.preferences.jumpCommand": "tabe",
-  "diagnostic.separateRelatedInformationAsDiagnostics": true,
   "typescript.preferences.useAliasesForRenames": false,
   "javascript.preferences.useAliasesForRenames": false
 }
