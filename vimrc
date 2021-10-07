@@ -78,7 +78,7 @@ set ruler
 set signcolumn=yes
 
 " Folding
-set nofoldenable
+set fdm=indent fdls=2 fdn=2
 
 " Search
 set incsearch
@@ -98,6 +98,7 @@ set autoread
 set tabpagemax=50
 set sessionoptions-=options
 set viewoptions-=options
+set nowrap
 
 " Remaps
 let mapleader = " "
@@ -173,6 +174,7 @@ call plug#begin('~/.vim/plugged')
  \  'PmenuSel': { 'guibg': 'eeeeee' },
  \  'PmenuSbar': { 'guibg': '111111' },
  \  'PmenuThumb': { 'guibg': '111111' },
+ \  'Folded': { 'guibg': '000000', 'guifg': '555555' },
  \  'ColorColumn': { 'guibg': '111111' },
  \}
 
