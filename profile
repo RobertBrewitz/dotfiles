@@ -53,3 +53,8 @@ fi
 alias ll="l"
 
 export GPG_TTY=$(tty)
+
+# Secrets
+if [ -f $HOME/.secrets.bash ]; then
+  . $HOME/.secrets.bash
+fi
