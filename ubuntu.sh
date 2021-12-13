@@ -25,7 +25,7 @@ echo "Installing fzf"
 sudo apt-get install fzf -y
 
 echo "Installing nvm and node"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | NODE_VERSION=--lts bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | NODE_VERSION=--lts bash
 npm config set ignore-scripts true
 
 echo "Installing git-completion"
