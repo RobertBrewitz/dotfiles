@@ -9,7 +9,6 @@ ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
 ln -sfn $ABSOLUTE_PATH/vim $HOME/.vim
 ln -sf $ABSOLUTE_PATH/vimrc $HOME/.vimrc
 ln -sf $ABSOLUTE_PATH/vimrc_osx $HOME/.vimrc_osx
-ln -sf $ABSOLUTE_PATH/bash_lolcat $HOME/.bash_lolcat
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
@@ -21,23 +20,9 @@ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-com
 echo "Installing homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-echo "Installing lolcat-c into /usr/bin/lolcat"
-git clone https://github.com/dosentmatter/lolcat.git
-cd lolcat
-git submodule init
-git submodule update
-make lolcat
-echo "To symlnk lolcat your sudo password is required."
-sudo cp lolcat /usr/local/bin/
-cd ..
-rm -rf lolcat
-
 echo "Installing nvm and node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | NODE_VERSION=--lts bash
 npm config set ignore-scripts true
-
-echo "Installing figlet"
-brew install figlet
 
 echo "Installing ccat"
 brew install ccat

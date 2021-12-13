@@ -9,7 +9,6 @@ ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
 ln -sfn $ABSOLUTE_PATH/vim $HOME/.vim
 ln -sf $ABSOLUTE_PATH/vimrc $HOME/.vimrc
 ln -sf $ABSOLUTE_PATH/vimrc_wsl $HOME/.vimrc_wsl
-ln -sf $ABSOLUTE_PATH/bash_lolcat $HOME/.bash_lolcat
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
@@ -29,19 +28,8 @@ npm config set ignore-scripts true
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
 
-echo "Installing lolcat-c into /usr/local/bin/lolcat"
-git clone https://github.com/dosentmatter/lolcat.git
-cd lolcat
-make
-sudo make install
-cd ..
-rm -rf lolcat
-
 echo "Installing the silver searcher (ag)"
 sudo apt install silversearcher-ag -y
-
-echo "Installing figlet"
-sudo apt install figlet -y
 
 echo "Adding ~/.profile to ~/.bashrc"
 echo ". ~/.profile" >> ~/.bashrc

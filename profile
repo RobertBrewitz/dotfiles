@@ -46,31 +46,6 @@ if [ -f $HOME/.git-completion.bash ]; then
   . $HOME/.git-completion.bash
 fi
 
-##
-# Rainbow stuff
-if [ -f $HOME/.bash_lolcat ]; then
-  . $HOME/.bash_lolcat
-fi
-
-if lolcat --version >/dev/null 2>&1; then
-  function l() {
-    if [ -n "$1" ]; then
-      ls -al "$1" | lolcat;
-    else
-      ls -al | lolcat;
-    fi
-  }
-
-  alias l=l
-  alias gl="git log | lolcat | less --raw"
-
-  if figlet -v >/dev/null 2>&1; then
-    echo "Focus, commitment, and sheer fn will!" | figlet | lolcat
-  else
-    echo "Focus, commitment, and sheer fn will!" | lolcat
-  fi
-fi
-
 if ccat -v >/dev/null 2>&1; then
   alias cat=ccat
 fi
