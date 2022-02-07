@@ -98,7 +98,10 @@ set autoread
 set tabpagemax=50
 set sessionoptions-=options
 set viewoptions-=options
-set nowrap
+
+" Soft wrapping text
+set wrap
+set linebreak
 
 " Remaps
 let mapleader = " "
