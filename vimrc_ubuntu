@@ -1,4 +1,4 @@
 " Clipboard
 vmap <C-c> "+y<ESC>
 vmap <C-x> "+c<ESC>
-imap <C-v> <ESC>"+p
+imap <C-v> <ESC>"+pa

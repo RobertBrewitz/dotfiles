@@ -1,4 +1,4 @@
 " Clipboard
-vmap <D-c> "+y<ESC>
-vmap <D-x> "+c<ESC>
-imap <D-v> <ESC>"+p
+vmap <C-c> "+y<ESC>
+vmap <C-x> "+c<ESC>
+imap <C-v> <ESC>"+pa
