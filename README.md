@@ -59,8 +59,6 @@ sh wsl.sh
 Open terminal
 
 ```bash
-apt-get update # optional
-apt-get upgrade # optional
 git clone git@github.com:RobertBrewitz/dotfiles.git
 cd dotfiles
 sh ubuntu.sh
