@@ -48,4 +48,7 @@ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt
 sudo apt-get update
 sudo apt-get install helm -y
 
-echo "REBOOT REQUIRED"
+echo "Manage Docker as a non-root user"
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
