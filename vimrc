@@ -179,6 +179,8 @@ call plug#begin('~/.vim/plugged')
  \  'PmenuThumb': { 'guibg': '111111' },
  \  'Folded': { 'guibg': '000000', 'guifg': '555555' },
  \  'ColorColumn': { 'guibg': '111111' },
+ \  'SpecialKey': { 'guibg': '000000', 'guifg': '222222' },
+ \  'NonText': { 'guibg': '000000', 'guifg': '222222' },
  \}
 
   " Language Servers
