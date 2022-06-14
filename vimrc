@@ -72,6 +72,7 @@ set ttimeoutlen=0
 " Status
 set showtabline=2
 set laststatus=2
+set statusline=%F
 set ruler
 
 " Sign column
