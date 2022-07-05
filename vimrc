@@ -16,6 +16,7 @@ set termguicolors
 
 " Errorbell
 set noerrorbells
+set belloff=all
 
 " Inc/dec
 set nrformats-=octal
@@ -85,7 +86,7 @@ set fdm=indent fdls=2 fdn=2
 set incsearch
 
 " Misc
-set nobackup
+set autoread
 set nowritebackup
 set nostartofline
 set scrolloff=5
@@ -101,8 +102,8 @@ set sessionoptions-=options
 set viewoptions-=options
 
 " Soft wrapping text
-set wrap
-set linebreak
+" set wrap
+" set linebreak
 
 " Remaps
 let mapleader = " "
@@ -180,8 +181,8 @@ call plug#begin('~/.vim/plugged')
  \  'PmenuThumb': { 'guibg': '111111' },
  \  'Folded': { 'guibg': '000000', 'guifg': '555555' },
  \  'ColorColumn': { 'guibg': '111111' },
- \  'SpecialKey': { 'guibg': '000000', 'guifg': '222222' },
- \  'NonText': { 'guibg': '000000', 'guifg': '222222' },
+ \  'SpecialKey': { 'guibg': '000000', 'guifg': '555555' },
+ \  'NonText': { 'guibg': '000000', 'guifg': '555555' },
  \}
 
   " Language Servers
