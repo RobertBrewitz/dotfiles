@@ -22,6 +22,7 @@ set belloff=all
 set nrformats-=octal
 
 " Undo/Backup/Swap
+set directory=.,~/.vim/tmp,~/tmp,/var/tmp,/tmp
 set nobackup
 set noswapfile
 set undofile
@@ -36,6 +37,7 @@ endif
 set completeopt=menuone,noinsert,noselect
 set complete-=i
 set wildmenu
+set wildoptions=tagfile
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Allow backspace
@@ -43,6 +45,9 @@ set backspace=indent,eol,start
 
 " Syntax highlighting
 syntax on
+
+" Tabs
+set tabpagemax=50
 
 " Formatting
 set formatoptions-=cro
@@ -58,10 +63,11 @@ set list
 
 " Buffers & Terminal
 set hidden
+set switchbuf=uselast
 
 " Gutter
 set number
-set relativenumber
+" set relativenumber
 
 " Command timeouts
 set showcmd
@@ -91,7 +97,7 @@ set nowritebackup
 set nostartofline
 set scrolloff=5
 set sidescrolloff=5
-set history=1000
+set history=10000
 set cmdheight=1
 set shortmess+=c
 set updatetime=300
@@ -99,13 +105,18 @@ set display+=lastline
 set autoread
 set tabpagemax=50
 set sessionoptions-=options
+set sessionoptions+=unix,slash
 set viewoptions-=options
+set viewoptions+=unix,slash
+set viminfo+=!
 
 " Soft wrapping text
 " set wrap
 " set linebreak
 
 " Remaps
+set langnoremap
+set nolangremap
 let mapleader = " "
 nnoremap <silent> <S-k> :tabn <cr>
 nnoremap <silent> <S-j> :tabp <cr>
