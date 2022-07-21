@@ -117,6 +117,7 @@ set viminfo+=!
 " Remaps
 set langnoremap
 set nolangremap
+nnoremap <SPACE> <Nop>
 let mapleader = " "
 nnoremap <silent> <S-k> :tabn <cr>
 nnoremap <silent> <S-j> :tabp <cr>
