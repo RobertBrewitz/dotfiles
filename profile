@@ -58,4 +58,7 @@ export GPG_TTY=$(tty)
 if [ -f $HOME/.secrets.bash ]; then
   . $HOME/.secrets.bash
 fi
-. "$HOME/.cargo/env"
+
+if [ -f $HOME/.cargo/env ]; then
+  . "$HOME/.cargo/env"
+fi
