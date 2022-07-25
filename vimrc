@@ -63,7 +63,6 @@ set list
 
 " Buffers & Terminal
 set hidden
-set switchbuf=uselast
 
 " Gutter
 set number
