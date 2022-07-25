@@ -16,6 +16,10 @@ return require("packer").startup(function()
   use("hrsh7th/cmp-cmdline")
   use("hrsh7th/nvim-cmp")
 
+  -- Snippets
+  use("hrsh7th/cmp-vsnip")
+  use("hrsh7th/vim-vsnip")
+
   -- Rust Analyzer
   use("simrat39/rust-tools.nvim")
 
