@@ -9,7 +9,7 @@ ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
 ln -sfn $ABSOLUTE_PATH/vim $HOME/.vim
 ln -sf $ABSOLUTE_PATH/vimrc $HOME/.vimrc
 mkdir $HOME/.config/nvim
-ln -sf $ABSOLUTE_PATH/nvimrc $HOME/.config/nvim/init.vim
+ln -sfn $ABSOLUTE_PATH/nvim $HOME/.config/nvim
 ln -sf $ABSOLUTE_PATH/vimrc_ubuntu $HOME/.vimrc_ubuntu
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
@@ -17,11 +17,12 @@ ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
 cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
 echo "Upgrading and updating apt"
+sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
 echo "Installing dependencies"
-sudo apt-get install curl build-essential -y
+sudo apt-get install curl build-essential software-properties-common -y
 
 echo "Installing fzf"
 sudo apt-get install fzf -y
@@ -42,8 +43,11 @@ echo ". ~/.profile" >> ~/.bashrc
 echo "Installing tmux"
 sudo apt install tmux -y
 
-echo "Installing vim-gtk3"
-sudo apt install vim-gtk3 -y
+#echo "Installing vim-gtk3"
+#sudo apt install vim-gtk3 -y
+
+echo "Installing neovim"
+sudo apt-get install neovim
 
 echo "Installing editorconfig core"
 sudo apt install editorconfig -y
