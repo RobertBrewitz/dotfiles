@@ -57,6 +57,9 @@ vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 0
 vim.opt.updatetime = 300
 
+-- Clipboard
+vim.opt.clipboard:append("unnamedplus")
+
 -- leader and prevent cursor movement when used
 nnoremap("<SPACE>", "<Nop>")
 vim.g.mapleader = " "
