@@ -29,8 +29,8 @@ local function config(_config)
   }, _config or {})
 end
 
--- require("lspconfig").rust_analyzer.setup({
---   cmd = { "rustup", "run", "nightly", "rust-analyzer" },
--- });
+require("lspconfig").rust_analyzer.setup({
+  cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+});
 
 require("lspconfig").tsserver.setup(config());
