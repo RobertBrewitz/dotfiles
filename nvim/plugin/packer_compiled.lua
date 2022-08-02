@@ -99,11 +99,6 @@ _G.packer_plugins = {
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/fzf.vim",
     url = "https://github.com/junegunn/fzf.vim"
   },
-  ["git-worktree.nvim"] = {
-    loaded = true,
-    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/git-worktree.nvim",
-    url = "https://github.com/ThePrimeagen/git-worktree.nvim"
-  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -128,11 +123,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
-  },
-  ["rust-tools.nvim"] = {
-    loaded = true,
-    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
-    url = "https://github.com/simrat39/rust-tools.nvim"
   },
   ["vim-moonfly-colors"] = {
     loaded = true,
