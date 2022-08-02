@@ -33,4 +33,5 @@ require("lspconfig").rust_analyzer.setup({
   cmd = { "rustup", "run", "nightly", "rust-analyzer" },
 });
 
+-- npm i -g typescript typescript-language-server
 require("lspconfig").tsserver.setup(config());
