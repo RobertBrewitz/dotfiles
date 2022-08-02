@@ -89,6 +89,21 @@ _G.packer_plugins = {
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  fzf = {
+    loaded = true,
+    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/fzf",
+    url = "https://github.com/junegunn/fzf"
+  },
+  ["fzf.vim"] = {
+    loaded = true,
+    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/fzf.vim",
+    url = "https://github.com/junegunn/fzf.vim"
+  },
+  ["git-worktree.nvim"] = {
+    loaded = true,
+    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/git-worktree.nvim",
+    url = "https://github.com/ThePrimeagen/git-worktree.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -118,11 +133,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
-  },
-  ["telescope.nvim"] = {
-    loaded = true,
-    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/telescope.nvim",
-    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["vim-moonfly-colors"] = {
     loaded = true,

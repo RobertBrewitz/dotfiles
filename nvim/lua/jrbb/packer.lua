@@ -17,8 +17,8 @@ return require("packer").startup(function()
   use("hrsh7th/nvim-cmp")
 
   -- Snippets
-  use("hrsh7th/cmp-vsnip")
-  use("hrsh7th/vim-vsnip")
+  -- use("hrsh7th/cmp-vsnip")
+  -- use("hrsh7th/vim-vsnip")
 
   -- Rust Analyzer
   use("simrat39/rust-tools.nvim")
@@ -26,7 +26,12 @@ return require("packer").startup(function()
   -- Fuzzy finder
   use("nvim-lua/plenary.nvim")
   use("nvim-lua/popup.nvim")
-  use("nvim-telescope/telescope.nvim")
+  -- use("nvim-telescope/telescope.nvim")
+  use("junegunn/fzf")
+  use("junegunn/fzf.vim")
+
+  -- Git
+  use("ThePrimeagen/git-worktree.nvim")
 
   -- Colorscheme
   use("bluz71/vim-moonfly-colors")
