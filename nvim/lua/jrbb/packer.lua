@@ -29,4 +29,7 @@ return require("packer").startup(function()
 
   -- Colorscheme
   use("bluz71/vim-moonfly-colors")
+  use("nvim-treesitter/nvim-treesitter", {
+    run = ":TSUpdate"
+  })
 end)
