@@ -27,6 +27,9 @@ return require("packer").startup(function()
   use("junegunn/fzf")
   use("junegunn/fzf.vim")
 
+  -- Formatting
+  use("sbdchd/neoformat")
+
   -- Colorscheme
   use("bluz71/vim-moonfly-colors")
   use("nvim-treesitter/nvim-treesitter", {

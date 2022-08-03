@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/fzf.vim",
     url = "https://github.com/junegunn/fzf.vim"
   },
+  neoformat = {
+    loaded = true,
+    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/neoformat",
+    url = "https://github.com/sbdchd/neoformat"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/nvim-cmp",
