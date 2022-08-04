@@ -1,5 +1,8 @@
 local cmp = require("cmp")
 
+-- Disable inline messages
+vim.diagnostic.config({virtual_text = false})
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -35,3 +38,4 @@ require("lspconfig").rust_analyzer.setup({
 
 -- npm i -g typescript typescript-language-server
 require("lspconfig").tsserver.setup(config());
+
