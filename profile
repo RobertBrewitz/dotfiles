@@ -33,6 +33,7 @@ alias dk="docker"
 alias dkc="docker-compose"
 
 # Fuzzy finder FZF
+export FZF_DEFAULT_OPTS='--bind "alt-a:select-all,alt-d:deselect-all"'
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
