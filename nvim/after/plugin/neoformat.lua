@@ -15,4 +15,9 @@ autocmd({"BufWritePre"}, {
   pattern = "*.json"
 })
 
+autocmd({"BufWritePre"}, {
+  command = "Neoformat",
+  pattern = "*.md"
+})
+
 vim.g.neoformat_try_node_exe = 1
