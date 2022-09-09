@@ -29,6 +29,7 @@ return require("packer").startup(function()
 
   -- Formatting
   use("sbdchd/neoformat")
+  use("editorconfig/editorconfig-vim")
 
   -- Colorscheme
   use("bluz71/vim-moonfly-colors")
