@@ -18,6 +18,8 @@ alias gs="git status"
 alias gl="git log"
 alias l="ls -al"
 alias nodetrace="node --trace-event-categories v8,node,node.async_hooks"
+alias gd="git diff -- ':!package-lock.json' ':!yarn.lock'"
+alias gds="git diff --stat -- ':!package-lock.json' ':!yarn.lock'"
 
 # apt
 alias aptup="sudo apt update && sudo apt upgrade"
