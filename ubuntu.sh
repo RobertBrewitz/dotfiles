@@ -32,6 +32,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | NODE_
 npm config set ignore-scripts true
 
 echo "Installing rust and rust-analyzer"
+sudo apt-get install cmake libfontconfig1 -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 curl -L https://github.com/rust-lang/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.cargo/bin/rust-analyzer
 chmod +x ~/.cargo/bin/rust-analyzer
