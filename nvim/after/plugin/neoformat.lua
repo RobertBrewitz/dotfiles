@@ -2,6 +2,11 @@ local autocmd = vim.api.nvim_create_autocmd
 
 autocmd({"BufWritePre"}, {
   command = "Neoformat",
+  pattern = "*.rs"
+})
+
+autocmd({"BufWritePre"}, {
+  command = "Neoformat",
   pattern = "*.{t,j}s"
 })
 
