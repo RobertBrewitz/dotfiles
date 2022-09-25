@@ -12,6 +12,9 @@ return require("packer").startup(function()
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
 
+  -- Snippets
+  use("hrsh7th/vim-vsnip")
+
   -- Language servers
   use("neovim/nvim-lspconfig")
   use("hrsh7th/cmp-nvim-lsp")

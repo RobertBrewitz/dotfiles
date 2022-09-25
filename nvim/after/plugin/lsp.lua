@@ -4,7 +4,11 @@ local cmp = require("cmp")
 vim.diagnostic.config({virtual_text = false})
 
 cmp.setup({
-  snippet = { expand = function() end },
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
