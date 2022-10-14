@@ -1,5 +1,7 @@
 local Remap = require("jrbb.keymap")
 local nnoremap = Remap.nnoremap
+local vmap = Remap.vmap
+local imap = Remap.imap
 
 vim.opt.secure = true
 vim.opt.fileformat = "unix"
@@ -58,7 +60,10 @@ vim.opt.ttimeoutlen = 0
 vim.opt.updatetime = 300
 
 -- Clipboard
-vim.opt.clipboard:append("unnamedplus")
+-- vim.opt.clipboard:append("unnamedplus")
+vmap("<C-c>", "\"+y<ESC>")
+vmap("<C-x>", "\"+c<ESC>")
+imap("<C-v>", "<ESC>\"+pa")
 
 -- leader and prevent cursor movement when used
 nnoremap("<SPACE>", "<Nop>")
