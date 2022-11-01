@@ -34,8 +34,7 @@ npm config set ignore-scripts true
 echo "Installing rust and rust-analyzer"
 sudo apt-get install cmake libfontconfig1 -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-curl -L https://github.com/rust-lang/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.cargo/bin/rust-analyzer
-chmod +x ~/.cargo/bin/rust-analyzer
+rustup component add rust-analyzer
 
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
