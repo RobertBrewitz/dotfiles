@@ -67,6 +67,15 @@ echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
 echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 
+echo "UFW setup"
+sudo apt install ufw
+sudo ufw limit 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw enable
+
 echo "##########################################"
 echo "#             Setup completed            #"
 echo "##########################################"
