@@ -8,7 +8,6 @@ ln -sf $ABSOLUTE_PATH/gitignore $HOME/.gitignore
 ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
 ln -sfn $ABSOLUTE_PATH/vim $HOME/.vim
 ln -sf $ABSOLUTE_PATH/vimrc $HOME/.vimrc
-mkdir $HOME/.config/nvim
 ln -sfn $ABSOLUTE_PATH/nvim $HOME/.config/nvim
 ln -sf $ABSOLUTE_PATH/vimrc_ubuntu $HOME/.vimrc_ubuntu
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
