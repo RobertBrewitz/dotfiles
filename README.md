@@ -113,3 +113,15 @@ sudo systemctl disable systemd-resolved
 sudo systemctl stop systemd-resolved
 sudo systemctl restart NetworkManager
 ```
+
+### Ubuntu 22.04 Handle OpenVPN dns push updates
+
+```bash
+sudo apt install openvpn-systemd-resolved
+
+# add to .ovpn conf
+script-security 2
+up /etc/openvpn/update-systemd-resolved
+down /etc/openvpn/update-systemd-resolved
+down-pre
+```
