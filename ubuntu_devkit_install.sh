@@ -13,9 +13,10 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 echo "Manage Docker as a non-root user"
-sudo groupadd docker -f # exit successfully if group already exists
+sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
+docker version
 
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
 echo "Installing kubectl"
@@ -23,6 +24,7 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
 echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
 
 # https://help.ubuntu.com/community/KVM/Installation#Installation_of_KVM
 echo "Installing kvm for minikube"
