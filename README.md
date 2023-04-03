@@ -122,6 +122,7 @@ sudo apt install openvpn-systemd-resolved
 # add to .ovpn conf
 script-security 2
 up /etc/openvpn/update-systemd-resolved
+up-restart
 down /etc/openvpn/update-systemd-resolved
 down-pre
 ```
