@@ -28,11 +28,12 @@ vim.opt.completeopt = "menuone,noinsert,noselect"
 
 -- formatting
 vim.opt.smartindent = true
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.wrap = true
+-- vim.opt.expandtab = true -- editorconfig indent_style
+-- vim.opt.tabstop = 2 -- editorconfig tab_width
+-- vim.opt.softtabstop = 2 -- editorconfig indent_size
+-- vim.opt.shiftwidth = 2 -- editorconfig indent_size
+
+-- navigation
 vim.opt.startofline = false
 
 -- presentation
@@ -50,6 +51,7 @@ vim.opt.shortmess:append("c")
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 vim.opt.colorcolumn = "80"
+vim.opt.wrap = true
 
 -- timeouts
 vim.opt.showcmd = true
