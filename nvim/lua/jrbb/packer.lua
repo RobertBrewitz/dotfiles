@@ -36,8 +36,6 @@ return require("packer").startup(function()
   use("editorconfig/editorconfig-vim")
 
   -- Colorscheme
-  use("bluz71/vim-moonfly-colors")
-  use("nvim-treesitter/nvim-treesitter", {
-    run = ":TSUpdate"
-  })
+  use({"bluz71/vim-moonfly-colors", branch = "legacy"})
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 end)
