@@ -139,16 +139,6 @@ _G.packer_plugins = {
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["plenary.nvim"] = {
-    loaded = true,
-    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/plenary.nvim",
-    url = "https://github.com/nvim-lua/plenary.nvim"
-  },
-  ["popup.nvim"] = {
-    loaded = true,
-    path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/popup.nvim",
-    url = "https://github.com/nvim-lua/popup.nvim"
-  },
   ["vim-moonfly-colors"] = {
     loaded = true,
     path = "/home/jrbb/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors",

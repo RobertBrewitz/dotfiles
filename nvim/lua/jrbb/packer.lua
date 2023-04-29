@@ -25,9 +25,6 @@ return require("packer").startup(function()
   use("github/copilot.vim")
 
   -- Fuzzy finder
-  use("nvim-lua/plenary.nvim")
-  use("nvim-lua/popup.nvim")
-  -- use("nvim-telescope/telescope.nvim")
   use("junegunn/fzf")
   use("junegunn/fzf.vim")
 
@@ -36,6 +33,6 @@ return require("packer").startup(function()
   use("editorconfig/editorconfig-vim")
 
   -- Colorscheme
-  use({"bluz71/vim-moonfly-colors", branch = "legacy"})
+  use({ "bluz71/vim-moonfly-colors" })
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 end)
