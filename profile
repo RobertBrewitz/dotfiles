@@ -66,3 +66,20 @@ fi
 if [ -f $HOME/.cargo/env ]; then
   . "$HOME/.cargo/env"
 fi
+
+if [ -d $HOME/neovim ]; then
+  export PATH="$HOME/neovim/usr/bin:$PATH"
+else
+  if [ -x "$(command -v curl)" ]; then
+    echo "#################"
+    echo "INSTALLING Neovim"
+    echo "#################"
+    echo ""
+    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+    chmod +x nvim.appimage
+    ./nvim.appimage --appimage-extract
+    mv squashfs-root $HOME/neovim
+    rm nvim.appimage
+    export PATH="$HOME/neovim/usr/bin:$PATH"
+  fi
+fi
