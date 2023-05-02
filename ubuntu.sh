@@ -16,7 +16,6 @@ ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
 cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
 echo "Upgrading and updating apt"
-sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
@@ -46,12 +45,6 @@ echo ". ~/.profile" >> ~/.bashrc
 
 echo "Installing tmux"
 sudo apt install tmux -y
-
-#echo "Installing vim-gtk3"
-#sudo apt install vim-gtk3 -y
-
-echo "Installing neovim"
-sudo apt-get install neovim
 
 echo "Installing editorconfig core"
 sudo apt install editorconfig -y
