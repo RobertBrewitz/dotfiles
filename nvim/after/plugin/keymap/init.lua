@@ -3,6 +3,8 @@ local nnoremap = Remap.nnoremap
 local vnoremap = Remap.vnoremap
 local inoremap = Remap.inoremap
 local xnoremap = Remap.xnoremap
+local vmap = Remap.vmap
+local imap = Remap.imap
 local nmap = Remap.nmap
 
 nnoremap(";", ":")
@@ -19,3 +21,9 @@ inoremap(".", ".<c-g>u")
 inoremap("!", "!<c-g>u")
 inoremap("?", "?<c-g>u")
 nnoremap("<leader>f", "vi{hzf")
+
+-- Clipboard
+-- vim.opt.clipboard:append("unnamedplus")
+vmap("<C-c>", "\"+y<ESC>")
+vmap("<C-x>", "\"+c<ESC>")
+imap("<C-v>", "<ESC>\"+pa")

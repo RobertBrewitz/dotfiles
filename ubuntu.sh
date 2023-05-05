@@ -20,7 +20,7 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 echo "Installing dependencies"
-sudo apt-get install curl build-essential software-properties-common -y
+sudo apt-get install curl build-essential software-properties-common xclip -y
 
 echo "Installing fzf"
 sudo apt-get install fzf -y
