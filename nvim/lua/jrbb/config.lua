@@ -62,3 +62,6 @@ vim.opt.updatetime = 300
 -- leader and prevent cursor movement when used
 nnoremap("<SPACE>", "<Nop>")
 vim.g.mapleader = " "
+
+-- mouse
+vim.opt.mouse = ""
