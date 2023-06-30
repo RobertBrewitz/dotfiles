@@ -22,6 +22,17 @@ if ! id -nG "$USER" | grep -qw "docker"; then
   newgrp docker
 fi
 
+echo "Make Docker use host machine's DNS"
+sudo apt-get install dnsmasq
+sudo touch /etc/resolvconf/resolv.conf.d/tail
+sudo echo "nameserver 172.17.0.1" > /etc/resolvconf/resolv.conf.d/tail
+sudo touch /etc/NetworkManager/dnsmasq.d/docker.conf
+sudo tee -a /etc/NetworkManager/dnsmasq.d/docker.conf <<EOF
+interface=docker0
+bind-dynamic
+listen-address=172.17.0.1
+EOF
+
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
 echo "Installing kubectl"
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
