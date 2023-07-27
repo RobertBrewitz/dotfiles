@@ -21,8 +21,8 @@ inoremap(".", ".<c-g>u")
 inoremap("!", "!<c-g>u")
 inoremap("?", "?<c-g>u")
 nnoremap("<leader>f", "vi{hzf")
-nnoremap("<leader>j", ":cnext <cr>", { silent = true })
-nnoremap("<leader>k", ":cprev <cr>", { silent = true })
+nnoremap("<leader>k", function() vim.diagnostic.goto_next() end)
+nnoremap("<leader>j", function() vim.diagnostic.goto_prev() end)
 
 -- Clipboard
 -- vim.opt.clipboard:append("unnamedplus")
