@@ -33,6 +33,7 @@ echo "Installing rust and rust-analyzer"
 sudo apt-get install cmake libfontconfig1 -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup component add rust-analyzer
+cargo install cross --git https://github.com/cross-rs/cross
 
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
