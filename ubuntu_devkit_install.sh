@@ -28,9 +28,11 @@ sudo touch /etc/resolvconf/resolv.conf.d/tail
 sudo echo "nameserver 172.17.0.1" > /etc/resolvconf/resolv.conf.d/tail
 sudo touch /etc/NetworkManager/dnsmasq.d/docker.conf
 sudo tee -a /etc/NetworkManager/dnsmasq.d/docker.conf <<EOF
+interface=lo
+interface=tun0
 interface=docker0
-bind-dynamic
 listen-address=172.17.0.1
+bind-dynamic
 EOF
 
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
