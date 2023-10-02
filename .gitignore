@@ -1,7 +1,7 @@
 .DS_Store
 *.swp
 vim/plugged
-nvim/plugged
+nvim/plugin/*.lua
 *.netrwhist
 npmrc
 tmp
