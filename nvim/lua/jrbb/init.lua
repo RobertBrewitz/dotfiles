@@ -1,2 +1,3 @@
 require("jrbb.config")
-require("jrbb.packer")
+require("jrbb.plugins")
+require("jrbb.remaps")
