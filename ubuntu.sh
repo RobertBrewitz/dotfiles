@@ -47,6 +47,9 @@ echo ". ~/.profile" >> ~/.bashrc
 echo "Installing tmux"
 sudo apt install tmux -y
 
+echo "Installing tmux plugin manager"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "Installing editorconfig core"
 sudo apt install editorconfig -y
 
