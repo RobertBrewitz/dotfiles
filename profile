@@ -4,6 +4,7 @@ PS1="\W :. "
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=10000
 export HISTFILESIZE=10000
+export PROMPT_COMMAND="history -a; history -c; history -r"
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export CLICOLOR=1
 
