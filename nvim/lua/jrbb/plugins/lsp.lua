@@ -5,18 +5,6 @@ return {
       local Remap = require("jrbb.keymap")
       local nnoremap = Remap.nnoremap
 
-      local function config(_config)
-        return vim.tbl_deep_extend("force", {
-          capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        }, _config or {})
-      end
-
-      --require("lspconfig").rust_analyzer.setup({
-      --  cmd = { "rustup", "run", "stable", "rust-analyzer" },
-      --});
-
-      require("lspconfig").tsserver.setup(config());
-
       nnoremap("<leader>gd", function() vim.lsp.buf.definition() end)
       nnoremap("<leader>d", function() vim.lsp.buf.hover() end)
       nnoremap("<leader>gi", function() vim.lsp.buf.implementation() end)

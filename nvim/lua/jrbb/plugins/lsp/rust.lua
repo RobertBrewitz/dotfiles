@@ -1,7 +1,7 @@
 return {
   {
     'simrat39/rust-tools.nvim',
-    dependencies = "neovim/nvim-lspconfig",
+    dependencies = { 'neovim/nvim-lspconfig', 'hrsh7th/cmp-nvim-lsp' },
     ft = { 'rust' },
     opts = function()
       local rust_tools = require("rust-tools")
@@ -17,7 +17,9 @@ return {
           adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
         },
         server = {
-          capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+          capabilities = require("cmp_nvim_lsp").default_capabilities(
+            vim.lsp.protocol.make_client_capabilities()
+          ),
           on_attach = function(_, bufnr)
             local Remap = require("jrbb.keymap")
             local nmap = Remap.nmap
