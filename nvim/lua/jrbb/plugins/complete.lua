@@ -21,6 +21,9 @@ return {
     "hrsh7th/nvim-cmp",
     config = function()
       local cmp = require("cmp")
+      local winhighlight = {
+        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+      }
 
       cmp.setup({
         snippet = {
@@ -43,6 +46,10 @@ return {
           --{ name = 'cmdline' },
           --{ name = 'emoji' },
           { name = 'crates' },
+        },
+        window = {
+          completion = cmp.config.window.bordered(winhighlight),
+          documentation = cmp.config.window.bordered(winhighlight),
         },
       })
     end,

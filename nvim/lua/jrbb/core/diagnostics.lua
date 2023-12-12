@@ -4,6 +4,9 @@ local nnoremap = Remap.nnoremap
 -- Disable inline messages
 vim.diagnostic.config({ virtual_text = false })
 
+-- Turn on floating window diagnostics border
+vim.diagnostic.config({ float = { border = "single" } })
+
 nnoremap("<leader>gl", function() vim.diagnostic.setloclist() end)
 nnoremap("<leader>gg", function()
   vim.diagnostic.setqflist()
