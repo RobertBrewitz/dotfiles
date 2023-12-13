@@ -1,6 +1,6 @@
 return {
   {
-    'mantoni/eslint_d',
+    'mantoni/eslint_d.js',
     dependencies = { 'neovim/nvim-lspconfig', 'hrsh7th/cmp-nvim-lsp' },
     ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
     opts = function()
