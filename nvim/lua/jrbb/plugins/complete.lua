@@ -26,6 +26,12 @@ return {
       }
 
       cmp.setup({
+        formatting = {
+          format = function(entry, vim_item)
+            vim_item.menu = nil
+            return vim_item
+          end,
+        },
         snippet = {
           expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
