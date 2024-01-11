@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      local lspconfig = require("lspconfig")
       local Remap = require("jrbb.keymap")
       local nnoremap = Remap.nnoremap
 
@@ -16,6 +17,9 @@ return {
           border = "single"
         }
       )
+
+      lspconfig.gopls.setup({})
+      lspconfig.lua_ls.setup({})
 
       nnoremap("<leader>gd", function() vim.lsp.buf.definition() end)
       nnoremap("<leader>d", function() vim.lsp.buf.hover() end)
