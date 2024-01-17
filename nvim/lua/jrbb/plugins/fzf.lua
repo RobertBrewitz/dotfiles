@@ -6,6 +6,6 @@ return {
     local nnoremap = Remap.nnoremap
 
     nnoremap("<c-p>", ":Files<cr>")
-    nnoremap("<leader>p", ":Buffers<cr>")
+    nnoremap("<leader>p", ":Files<cr>")
   end,
 }
