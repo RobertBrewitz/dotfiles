@@ -64,6 +64,10 @@ cd dotfiles
 sh ubuntu.sh
 ```
 
+### .gitconfig-user
+
+Update .gitconfig-user email, user, username, and signingkey if applicable.
+
 ### Hot Reloading frameworks
 
 To have developer servers such as react and preact, filewatch limit has to be increased for users.
@@ -72,16 +76,6 @@ To have developer servers such as react and preact, filewatch limit has to be in
 echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
 echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
-```
-
-## .gitconfig-user
-
-Update .gitconfig-user email, user, username, and signingkey if applicable.
-
-### Coc-nvim extensions
-
-```bash
-:CocInstall coc-prettier coc-css coc-cssmodules coc-git coc-html coc-json coc-svg coc-tsserver coc-xml coc-yaml coc-markdownlint coc-highlight coc-sh
 ```
 
 ### Ubuntu on NUC Audio & Mic combojack fix

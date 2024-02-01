@@ -6,9 +6,6 @@ echo "Symlinking dotfiles in $ABSOLUTE_PATH to $HOME"
 ln -sf $ABSOLUTE_PATH/gitconfig $HOME/.gitconfig
 ln -sf $ABSOLUTE_PATH/gitignore $HOME/.gitignore
 ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
-ln -sfn $ABSOLUTE_PATH/vim $HOME/.vim
-ln -sf $ABSOLUTE_PATH/vimrc $HOME/.vimrc
-ln -sf $ABSOLUTE_PATH/vimrc_chronos $HOME/.vimrc_chronos
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
@@ -26,9 +23,6 @@ npm config set ignore-scripts true
 
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
-
-echo "Installing crew vim"
-crew install vim
 
 echo "Installing the silver searcher (ag)"
 crew install ag

@@ -6,10 +6,7 @@ echo "Symlinking dotfiles in $ABSOLUTE_PATH to $HOME"
 ln -sf $ABSOLUTE_PATH/gitconfig $HOME/.gitconfig
 ln -sf $ABSOLUTE_PATH/gitignore $HOME/.gitignore
 ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
-ln -sfn $ABSOLUTE_PATH/vim $HOME/.vim
-ln -sf $ABSOLUTE_PATH/vimrc $HOME/.vimrc
 ln -sfn $ABSOLUTE_PATH/nvim $HOME/.config/nvim
-ln -sf $ABSOLUTE_PATH/vimrc_ubuntu $HOME/.vimrc_ubuntu
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig

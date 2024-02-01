@@ -1,8 +1,0 @@
-let g:fzf_action = { 'alt-t': 'tab split', 'alt-x': 'split', 'alt-v': 'vsplit' }
-let base16colorspace=256
-set termguicolors
-
-" Clipboard
-vmap <C-c> "+y<ESC>
-vmap <C-x> "+c<ESC>
-imap <C-v> <ESC>"+pa

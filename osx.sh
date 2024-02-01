@@ -6,9 +6,6 @@ echo "Symlinking dotfiles in $ABSOLUTE_PATH to $HOME"
 ln -sf $ABSOLUTE_PATH/gitconfig $HOME/.gitconfig
 ln -sf $ABSOLUTE_PATH/gitignore $HOME/.gitignore
 ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
-ln -sfn $ABSOLUTE_PATH/vim $HOME/.vim
-ln -sf $ABSOLUTE_PATH/vimrc $HOME/.vimrc
-ln -sf $ABSOLUTE_PATH/vimrc_osx $HOME/.vimrc_osx
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
@@ -32,9 +29,6 @@ brew install the_silver_searcher
 
 echo "Installing fzf"
 brew install fzf
-
-echo "Installing vim to include clipboard"
-brew install vim
 
 echo "Installing tmux"
 brew install tmux

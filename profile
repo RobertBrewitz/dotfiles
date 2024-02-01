@@ -10,7 +10,6 @@ export CLICOLOR=1
 
 # Aliases
 alias ..="cd .."
-alias vi="nvim"
 alias gf="git fetch --all --prune"
 alias gb="git branch"
 alias gdm="git branch --merged | egrep -v \"(^\*|master)\" | xargs git branch -d"
