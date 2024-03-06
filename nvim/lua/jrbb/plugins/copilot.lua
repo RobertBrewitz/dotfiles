@@ -6,5 +6,5 @@ return {
 
     nnoremap("<leader>cp", ":Copilot panel<cr>")
     nnoremap("<leader>cs", ":Copilot status<cr>")
-  end
+  end,
 }

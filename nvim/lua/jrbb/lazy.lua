@@ -13,10 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
-    import = "jrbb.plugins"
+    import = "jrbb.plugins",
   },
   {
-    import = "jrbb.plugins.lsp"
+    import = "jrbb.plugins.lsp",
   },
 }, {
   checker = {

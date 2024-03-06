@@ -3,29 +3,29 @@ return {
   config = function()
     local autocmd = vim.api.nvim_create_autocmd
 
-    autocmd({"BufWritePre"}, {
+    autocmd({ "BufWritePre" }, {
       command = "Neoformat",
-      pattern = "*.rs"
+      pattern = "*.rs",
     })
 
-    autocmd({"BufWritePre"}, {
+    autocmd({ "BufWritePre" }, {
       command = "Neoformat",
-      pattern = "*.{t,j}s"
+      pattern = "*.{t,j}s",
     })
 
-    autocmd({"BufWritePre"}, {
+    autocmd({ "BufWritePre" }, {
       command = "Neoformat",
-      pattern = "*.{t,j}sx"
+      pattern = "*.{t,j}sx",
     })
 
-    autocmd({"BufWritePre"}, {
+    autocmd({ "BufWritePre" }, {
       command = "Neoformat",
-      pattern = "*.json"
+      pattern = "*.json",
     })
 
-    autocmd({"BufWritePre"}, {
+    autocmd({ "BufWritePre" }, {
       command = "Neoformat",
-      pattern = "*.md"
+      pattern = "*.md",
     })
 
     vim.g.neoformat_try_node_exe = 1

@@ -24,6 +24,6 @@ nnoremap("<leader>e", ":Ex <cr>", { silent = true })
 
 -- Clipboard
 -- vim.opt.clipboard:append("unnamedplus")
-vmap("<C-c>", "\"+y<ESC>")
-vmap("<C-x>", "\"+c<ESC>")
-imap("<C-v>", "<ESC>\"+pa")
+vmap("<C-c>", '"+y<ESC>')
+vmap("<C-x>", '"+c<ESC>')
+imap("<C-v>", '<ESC>"+pa')

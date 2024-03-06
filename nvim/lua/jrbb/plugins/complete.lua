@@ -3,7 +3,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   {
-    "hrsh7th/vim-vsnip"
+    "hrsh7th/vim-vsnip",
   },
   {
     "hrsh7th/cmp-buffer",
@@ -38,23 +38,23 @@ return {
           end,
         },
         mapping = {
-          ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-          ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-          ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-          ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-y>'] = cmp.mapping.confirm({select = true}),
-          ['<CR>'] = cmp.mapping.confirm({select = true}),
-          ['<C-Space>'] = cmp.mapping.complete()
+          ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+          ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+          ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+          ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-d>"] = cmp.mapping.scroll_docs(4),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-Space>"] = cmp.mapping.complete(),
         },
         sources = {
-          { name = 'nvim_lsp' },
-          { name = 'path' },
-          { name = 'buffer' },
+          { name = "nvim_lsp" },
+          { name = "path" },
+          { name = "buffer" },
           --{ name = 'cmdline' },
           --{ name = 'emoji' },
-          { name = 'crates' },
+          { name = "crates" },
         },
         window = {
           completion = cmp.config.window.bordered(winhighlight),

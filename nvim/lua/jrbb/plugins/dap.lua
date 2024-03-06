@@ -51,9 +51,15 @@ return {
       local nnoremap = Remap.nnoremap
       local dapui = require("dapui")
 
-      nnoremap("<leader>bui", function() dapui.open() end)
-      nnoremap("<leader>bur", function() dapui.open({ reset = true }) end)
-      nnoremap("<leader>biu", function() dapui.close() end)
+      nnoremap("<leader>bui", function()
+        dapui.open()
+      end)
+      nnoremap("<leader>bur", function()
+        dapui.open({ reset = true })
+      end)
+      nnoremap("<leader>biu", function()
+        dapui.close()
+      end)
     end,
   },
   {

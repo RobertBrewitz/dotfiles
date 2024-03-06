@@ -10,10 +10,10 @@ return {
             package_uninstalled = "✗",
           },
         },
-      };
+      }
     end,
     config = function(_, opts)
-      require("mason").setup(opts);
+      require("mason").setup(opts)
     end,
   },
   {
@@ -25,10 +25,10 @@ return {
           "tsserver",
           "wgsl_analyzer",
         },
-      };
+      }
     end,
     config = function(_, opts)
-      require("mason-lspconfig").setup(opts);
+      require("mason-lspconfig").setup(opts)
     end,
   },
 }
