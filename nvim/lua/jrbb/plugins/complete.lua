@@ -1,5 +1,8 @@
 return {
   {
+    "hrsh7th/vim-vsnip",
+  },
+  {
     "hrsh7th/cmp-nvim-lsp",
   },
   {
@@ -20,6 +23,11 @@ return {
           format = function(_, vim_item)
             vim_item.menu = nil
             return vim_item
+          end,
+        },
+        snippet = {
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
           end,
         },
         mapping = {
