@@ -21,6 +21,7 @@ nnoremap("<leader>f", "vi{hzf")
 nnoremap("<leader>k", ":cnext <cr>", { silent = true })
 nnoremap("<leader>j", ":cprev <cr>", { silent = true })
 nnoremap("<leader>e", ":Ex <cr>", { silent = true })
+nnoremap("-", "g_", { silent = true })
 
 -- Clipboard
 -- vim.opt.clipboard:append("unnamedplus")
