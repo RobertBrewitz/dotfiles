@@ -88,9 +88,9 @@ return {
             select_alt = { "s" },
             toggle_feature = { "<cr>" },
             copy_value = { "yy" },
-            goto_item = { "gd", "K", "<C-LeftMouse>" },
+            goto_item = { "gd" },
             jump_forward = { "<c-i>" },
-            jump_back = { "<c-o>", "<C-RightMouse>" },
+            jump_back = { "<c-o>" },
           },
         },
       }
