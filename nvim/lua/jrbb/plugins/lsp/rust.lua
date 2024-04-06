@@ -96,6 +96,7 @@ return {
       }
     end,
     config = function(_, opts)
+      require("crates.src.cmp").setup()
       require("crates").setup(opts)
     end,
   },
