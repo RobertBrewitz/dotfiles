@@ -6,5 +6,7 @@ return {
 
     nnoremap("<leader>cp", ":Copilot panel<cr>")
     nnoremap("<leader>cs", ":Copilot status<cr>")
+    nnoremap("<leader>cd", ":Copilot disable<cr>")
+    nnoremap("<leader>ce", ":Copilot enable<cr>")
   end,
 }
