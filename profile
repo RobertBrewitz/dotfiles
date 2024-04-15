@@ -1,6 +1,6 @@
 export LC_ALL=en_US.UTF-8
 
-PS1=".: \w 🐧 :. "
+PS1=".: \w :. "
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export CLICOLOR=1
 
