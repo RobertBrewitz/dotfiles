@@ -1,6 +1,6 @@
 export LC_ALL=en_US.UTF-8
 
-PS1=".: \w :. "
+PS1="$ \W :. "
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export CLICOLOR=1
 
@@ -8,8 +8,18 @@ export CLICOLOR=1
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=10000
 export HISTFILESIZE=10000
-export PROMPT_COMMAND="history -a; history -r"
-shopt -s histappend
+
+# custom prompt command to share history between panes but still allow isolated history in each tmux pane
+#
+# turn off histappend in case it is set
+shopt -u histappend
+#
+# 1) append new commands TO the history file since session started
+# 2) append new commands FROM the history file since session started
+# 3) write session history TO the history file
+# 4) clear the session history
+# 5) read the history file into the history list
+export PROMPT_COMMAND="history -a; history -n; history -w; history -c; history -r;"
 
 # Aliases
 alias ..="cd .."
