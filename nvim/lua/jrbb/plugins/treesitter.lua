@@ -3,9 +3,16 @@ return {
   run = ":TSUpdate",
   config = function()
     vim.filetype.add({ extension = { wgsl = "wgsl" } })
-
     require("nvim-treesitter.configs").setup({
-      ensure_installed = { "typescript", "javascript", "tsx", "rust", "markdown", "lua", "wgsl" },
+      ensure_installed = {
+        "typescript",
+        "javascript",
+        "tsx",
+        "rust",
+        "markdown",
+        "lua",
+        "wgsl",
+      },
       sync_install = false,
       auto_install = true,
       highlight = {

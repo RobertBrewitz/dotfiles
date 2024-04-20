@@ -2,6 +2,7 @@ return {
   {
     "mrcjkb/rustaceanvim",
     version = "^4",
+    lazy = false,
     ft = { "rust" },
   },
   {
@@ -82,7 +83,7 @@ return {
             loading = " ⏳ Loading",
           },
           keys = {
-            hide = { "q", "<esc>" },
+            hide = { "q" },
             open_url = { "<cr>" },
             select = { "<cr>" },
             select_alt = { "s" },
