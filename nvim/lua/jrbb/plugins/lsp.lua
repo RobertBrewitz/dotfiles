@@ -26,11 +26,6 @@ return {
         },
       })
 
-      nmap("<space>of", vim.diagnostic.open_float)
-      nmap("<leader>p", vim.diagnostic.goto_prev)
-      nmap("<leader>n", vim.diagnostic.goto_next)
-      nmap("<space>ql", vim.diagnostic.setloclist)
-
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
