@@ -48,6 +48,17 @@ alias mk="minikube"
 alias dk="docker"
 alias dkc="docker-compose"
 
+# Patching
+
+pdiff () {
+  if [ "$#" -ne 3 ]; then
+    echo "Usage: pdiff <original> <modified> <output>"
+    return 1
+  fi
+
+  git diff --no-index --patch --output=$3 $1 $2
+}
+
 # Fuzzy finder FZF
 export FZF_DEFAULT_OPTS='--bind "alt-a:select-all,alt-d:deselect-all"'
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
