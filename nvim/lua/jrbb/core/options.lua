@@ -42,7 +42,9 @@ vim.opt.listchars = "tab:▸ ,eol:¬,trail:·"
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.showtabline = 2
-vim.opt.statusline = "%F"
+--vim.opt.statusline = "%#NvimTreeFolderName#%<%f"-- %h%m%r%=%-14.(%l,%c%V%) %P"
+--vim.opt.tabline = "%#NvimTreeFolderName#%1*%T"
+--vim.opt.guitablabel = "%#NvimTreeFolderName#%<%f"
 vim.opt.signcolumn = "yes"
 vim.opt.cmdheight = 1
 vim.opt.shortmess:append("c")
