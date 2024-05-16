@@ -41,6 +41,7 @@ return {
     "saecki/crates.nvim",
     dependencies = "hrsh7th/nvim-cmp",
     ft = { "rust", "toml" },
+    tag = "stable",
     opts = function()
       local Remap = require("jrbb.keymap")
       local vmap = Remap.vmap
@@ -129,7 +130,6 @@ return {
       }
     end,
     config = function(_, opts)
-      require("crates.src.cmp").setup()
       require("crates").setup(opts)
     end,
   },
