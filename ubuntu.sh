@@ -19,6 +19,9 @@ sudo apt-get upgrade -y
 echo "Installing dependencies"
 sudo apt-get install curl build-essential software-properties-common xclip -y
 
+echo "Installing mold and clang for rust compilation"
+sudo apt-get install mold clang
+
 echo "Installing fzf"
 sudo apt-get install fzf -y
 
