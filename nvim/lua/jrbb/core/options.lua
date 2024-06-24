@@ -50,7 +50,7 @@ vim.opt.cmdheight = 1
 vim.opt.shortmess:append("c")
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 vim.opt.wrap = true
 
 -- timeouts
