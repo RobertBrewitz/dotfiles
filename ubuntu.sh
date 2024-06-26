@@ -16,6 +16,9 @@ echo "Upgrading and updating apt"
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
+echo "Disabling ubuntu auto upgrades"
+sudo sed -i 's/1/0/g' /etc/apt/apt.conf.d/20auto-upgrades
+
 echo "Installing dependencies"
 sudo apt-get install curl build-essential software-properties-common xclip -y
 

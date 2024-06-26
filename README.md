@@ -120,3 +120,9 @@ up-restart
 down /etc/openvpn/update-systemd-resolved
 down-pre
 ```
+
+### Ubuntu 22.04 disable auto updates
+
+```bash
+sudo sed -i 's/1/0/g' /etc/apt/apt.conf.d/20auto-upgrades
+```
