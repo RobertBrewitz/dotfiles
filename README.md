@@ -126,3 +126,13 @@ down-pre
 ```bash
 sudo sed -i 's/1/0/g' /etc/apt/apt.conf.d/20auto-upgrades
 ```
+
+### Ubuntu 22.04 nvidia drivers
+
+#### Disable nouveau
+
+```bash
+  echo "blacklist nouveau" | sudo tee -a /etc/modprobe.d/blacklist.conf > /dev/null
+  echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/blacklist.conf > /dev/null
+  sudo update-initramfs -u
+```
