@@ -12,6 +12,11 @@ ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
 cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
+echo "Symlinking root dotfiles in $ABSOLUTE_PATH to /root"
+echo "[ -f ~/.profile ] && source ~/.profile" | sudo tee -a /root/.bashrc
+sudo ln -sf $ABSOLUTE_PATH/root_profile /root/.profile
+sudo ln -sfn $ABSOLUTE_PATH/nvim /root/.config/nvim
+
 echo "Upgrading and updating apt"
 sudo apt-get update -y
 sudo apt-get upgrade -y
