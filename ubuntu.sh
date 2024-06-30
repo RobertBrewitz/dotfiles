@@ -46,6 +46,7 @@ npm config set ignore-scripts true
 echo "Installing rust and rust-analyzer"
 sudo apt-get install cmake libfontconfig1 -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.profile
 rustup component add rust-analyzer
 cargo install cross --git https://github.com/cross-rs/cross
 
