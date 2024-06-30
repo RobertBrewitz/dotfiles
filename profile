@@ -30,6 +30,7 @@ alias l='ls -CF'
 
 # Git aliases
 alias gf="git fetch --all --prune"
+alias gb="git branch"
 alias gdm="git branch --merged | egrep -v \"(^\*|master)\" | xargs git branch -d"
 alias gss="git submodule sync --recursive && git submodule update --init --recursive"
 alias gs="git status"
