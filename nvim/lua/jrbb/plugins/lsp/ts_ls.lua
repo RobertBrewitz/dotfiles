@@ -9,7 +9,7 @@ return {
       }
     end,
     config = function(_, opts)
-      require("lspconfig").tsserver.setup(opts)
+      require("lspconfig").ts_ls.setup(opts)
     end,
   },
 }

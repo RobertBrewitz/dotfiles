@@ -22,8 +22,9 @@ return {
       return {
         ensure_installed = {
           "rust_analyzer",
-          "tsserver",
-          "wgsl_analyzer",
+          "ts_ls",
+          "lua_ls",
+          "eslint",
         },
       }
     end,
