@@ -17,11 +17,26 @@ return {
     end,
   },
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = function()
+      return {
+        ensure_installed = {
+          "eslint_d",
+          "prettier",
+        },
+      }
+    end,
+    config = function(_, opts)
+      require("mason-tool-installer").setup(opts)
+    end,
+  },
+  {
     "williamboman/mason-lspconfig.nvim",
     opts = function()
       return {
         ensure_installed = {
           "rust_analyzer",
+          "wgsl_analyzer",
           "ts_ls",
           "lua_ls",
           "eslint",
