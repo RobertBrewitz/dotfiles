@@ -6,7 +6,7 @@ return {
     opts = {
       server = {
         on_attach = function(client, bufnr)
-          vim.lsp.inlay_hint.enable(true)
+          vim.lsp.inlay_hint.enable(false)
         end,
         default_settings = {
           -- rust-analyzer language server configuration
