@@ -21,6 +21,18 @@ echo "Upgrading and updating apt"
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
+echo "Disable auto update and upgrade"
+sudo systemctl stop apt-daily.timer
+sudo systemctl stop apt-daily-upgrade.timer
+sudo systemctl stop apt-daily.service
+sudo systemctl stop apt-daily-upgrade.service
+sudo systemctl disable apt-daily.timer
+sudo systemctl disable apt-daily-upgrade.timer
+sudo systemctl mask apt-daily.service
+sudo systemctl mask apt-daily-upgrade.service
+sudo systemctl daemon-reload
+sudo systemctl reset-failed
+
 echo "Disabling ubuntu auto upgrades"
 sudo sed -i 's/1/0/g' /etc/apt/apt.conf.d/20auto-upgrades
 
