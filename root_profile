@@ -6,8 +6,8 @@ export CLICOLOR=1
 
 # History
 export HISTCONTROL=ignoreboth:erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTSIZE=100000
+export HISTFILESIZE=100000
 
 # custom prompt command to share history between panes but still allow isolated history in each tmux pane
 #
