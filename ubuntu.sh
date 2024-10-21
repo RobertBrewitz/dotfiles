@@ -69,7 +69,7 @@ echo "Installing the silver searcher (ag)"
 sudo apt install silversearcher-ag -y
 
 echo "Adding ~/.profile to ~/.bashrc"
-echo ". ~/.profile" >> ~/.bashrc
+echo "[ -f ~/.profile ] && source ~/.profile" | sudo tee -a ~/.bashrc
 
 echo "Installing tmux"
 sudo apt install tmux -y
