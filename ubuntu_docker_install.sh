@@ -37,4 +37,19 @@ fi
 # bind-dynamic
 # EOF
 
+echo "Add Docker daemon.json"
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<EOF
+{
+  "dns": ["192.168.50.200"]
+}
+EOF
+sudo systemctl restart docker
+
+echo "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+echo ""
+echo "Add any tlscert and tlskey to /etc/docker/daemon.json manually"
+echo ""
+echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+echo ""
 echo "DONE"
