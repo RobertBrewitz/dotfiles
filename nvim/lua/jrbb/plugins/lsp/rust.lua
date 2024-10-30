@@ -12,25 +12,20 @@ return {
           -- rust-analyzer language server configuration
           ["rust-analyzer"] = {
             cargo = {
-              allFeatures = true,
-              loadOutDirsFromCheck = true,
               buildScripts = {
                 enable = true,
               },
             },
-            -- Add clippy lints for Rust.
-            checkOnSave = {
-              allFeatures = true,
+            check = {
+              enable = true,
               command = "clippy",
+              allFeatures = true,
+              allTargets = true,
               extraArgs = { "--no-deps" },
             },
+            checkOnSave = true,
             procMacro = {
               enable = true,
-              ignored = {
-                ["async-trait"] = { "async_trait" },
-                ["napi-derive"] = { "napi" },
-                ["async-recursion"] = { "async_recursion" },
-              },
             },
           },
         },
