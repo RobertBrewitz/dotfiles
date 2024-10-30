@@ -3,9 +3,11 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
+      local rust_target = "x86_64-unknown-linux-gnu"
       local Remap = require("jrbb.keymap")
       local nmap = Remap.nmap
       local vmap = Remap.vmap
+      local nnoremap = Remap.nnoremap
 
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "single",
@@ -25,6 +27,52 @@ return {
           },
         },
       })
+
+      lspconfig.rust_analyzer.setup({
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              target = "x86_64-unknown-linux-gnu",
+              buildScripts = {
+                enable = true,
+              },
+            },
+            checkOnSave = true,
+            check = {
+              allTargets = true,
+              command = "clippy",
+              extraArgs = { "--no-deps" },
+            },
+            procMacro = {
+              enable = true,
+            },
+          },
+        },
+      })
+
+      function ToggleRustTarget()
+        if rust_target == "x86_64-unknown-linux-gnu" then
+          rust_target = "wasm32-unknown-unknown"
+        else
+          rust_target = "x86_64-unknown-linux-gnu"
+        end
+
+        require('lspconfig').rust_analyzer.setup({
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = {
+                target = rust_target,
+              },
+            },
+          },
+        })
+
+        vim.cmd('LspRestart')
+        print("Switched rust-analyzer target to " .. rust_target)
+      end
+
+      nnoremap("<leader>rt", ToggleRustTarget)
+
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),

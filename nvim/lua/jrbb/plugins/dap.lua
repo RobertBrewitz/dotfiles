@@ -20,30 +20,30 @@ return {
       --end
 
       nnoremap("<leader>bc", ":DapContinue<cr>", { silent = true })
-      --nnoremap("<leader>bj", ":DapLoadLaunchJSON<cr>", { silent = true })
-      --nnoremap("<leader>br", ":DapRestartFrame<cr>", { silent = true })
-      --nnoremap("<leader>bv", ":DapSetLogLevel<cr>", { silent = true })
-      --nnoremap("<leader>bl", ":DapShowLog<cr>", { silent = true })
-      --nnoremap("<leader>bi", ":DapStepInto<cr>", { silent = true })
-      --nnoremap("<leader>bo", ":DapStepOut<cr>", { silent = true })
-      --nnoremap("<leader>bO", ":DapStepOver<cr>", { silent = true })
-      --nnoremap("<leader>bt", ":DapTerminate<cr>", { silent = true })
-      nnoremap("<leader>bb", ":DapToggleBreakpoint<cr>", { silent = true })
-      --nnoremap("<leader>bp", ":DapToggleRepl<cr>", { silent = true })
+      nnoremap("<leader>bj", ":DapLoadLaunchJSON<cr>", { silent = true })
+      nnoremap("<leader>brf", ":DapRestartFrame<cr>", { silent = true })
+      nnoremap("<leader>blv", ":DapSetLogLevel<cr>", { silent = true })
+      nnoremap("<leader>bsl", ":DapShowLog<cr>", { silent = true })
+      nnoremap("<leader>bsi", ":DapStepInto<cr>", { silent = true })
+      nnoremap("<leader>bso", ":DapStepOut<cr>", { silent = true })
+      nnoremap("<leader>bsv", ":DapStepOver<cr>", { silent = true })
+      nnoremap("<leader>bq", ":DapTerminate<cr>", { silent = true })
+      nnoremap("<leader>btb", ":DapToggleBreakpoint<cr>", { silent = true })
+      nnoremap("<leader>btr", ":DapToggleRepl<cr>", { silent = true })
     end,
   },
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     opts = {
-      --mappings = {
-      --  expand = { "<CR>" },
-      --  open = "o",
-      --  remove = "d",
-      --  edit = "e",
-      --  repl = "r",
-      --  toggle = "t",
-      --}
+      mappings = {
+        expand = { "<CR>" },
+        open = "o",
+        remove = "d",
+        edit = "e",
+        repl = "r",
+        toggle = "t",
+      }
     },
     config = function(_, opts)
       require("dapui").setup(opts)

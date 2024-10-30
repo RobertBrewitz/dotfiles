@@ -1,40 +1,72 @@
 return {
-  {
-    "mrcjkb/rustaceanvim",
-    version = "^4",
-    ft = { "rust" },
-    opts = {
-      server = {
-        on_attach = function(client, bufnr)
-          vim.lsp.inlay_hint.enable(false)
-        end,
-        default_settings = {
-          -- rust-analyzer language server configuration
-          ["rust-analyzer"] = {
-            cargo = {
-              buildScripts = {
-                enable = true,
-              },
-            },
-            check = {
-              enable = true,
-              command = "clippy",
-              allFeatures = true,
-              allTargets = true,
-              extraArgs = { "--no-deps" },
-            },
-            checkOnSave = true,
-            procMacro = {
-              enable = true,
-            },
-          },
-        },
-      },
-    },
-    config = function(_, opts)
-      vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
-    end,
-  },
+  --{
+  --  "mrcjkb/rustaceanvim",
+  --  version = "^4",
+  --  ft = { "rust" },
+  --  opts = {
+  --    server = {
+  --      on_attach = function(client, bufnr)
+  --        vim.lsp.inlay_hint.enable(false)
+  --      end,
+  --      default_settings = {
+  --        -- rust-analyzer language server configuration
+  --        ["rust-analyzer"] = {
+  --          cargo = {
+  --            target = "x86_64-unknown-linux-gnu",
+  --            buildScripts = {
+  --              enable = true,
+  --            },
+  --          },
+  --          -- Add clippy lints for Rust.
+  --          check = {
+  --            allTargets = true,
+  --            command = "clippy",
+  --            extraArgs = { "--no-deps" },
+  --          },
+  --          checkOnSave = true,
+  --          procMacro = {
+  --            enable = true,
+  --            ignored = {
+  --              ["async-trait"] = { "async_trait" },
+  --              ["napi-derive"] = { "napi" },
+  --              ["async-recursion"] = { "async_recursion" },
+  --            },
+  --          },
+  --        },
+  --      },
+  --    },
+  --  },
+  --  config = function(_, opts)
+  --    local Remap = require("jrbb.keymap")
+  --    local nnoremap = Remap.nnoremap
+  --    local current_target = "x86_64-unknown-linux-gnu"
+
+  --    vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
+
+  --    function ToggleRustTarget()
+  --      if current_target == "x86_64-unknown-linux-gnu" then
+  --        current_target = "wasm32-unknown-unknown"
+  --      else
+  --        current_target = "x86_64-unknown-linux-gnu"
+  --      end
+
+  --      require('lspconfig').rust_analyzer.setup({
+  --        settings = {
+  --          ["rust-analyzer"] = {
+  --            cargo = {
+  --              target = current_target,
+  --            },
+  --          },
+  --        },
+  --      })
+
+  --      vim.cmd('LspRestart')
+  --      print("Switched rust-analyzer target to " .. current_target)
+  --    end
+
+  --    nnoremap("<leader>rt", ToggleRustTarget)
+  --  end,
+  --},
   {
     "saecki/crates.nvim",
     dependencies = "hrsh7th/nvim-cmp",
