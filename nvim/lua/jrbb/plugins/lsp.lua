@@ -1,7 +1,13 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    config = function()
+    dependencies = { "hrsh7th/nvim-cmp" },
+    opts = function()
+      return {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      }
+    end,
+    config = function(_, opts)
       local lspconfig = require("lspconfig")
       local rust_target = "x86_64-unknown-linux-gnu"
       local Remap = require("jrbb.keymap")
@@ -17,8 +23,11 @@ return {
         border = "single",
       })
 
-      lspconfig.gopls.setup({})
+      lspconfig.gopls.setup(opts)
+      lspconfig.wgsl_analyzer.setup(opts)
+      lspconfig.ts_ls.setup(opts)
       lspconfig.lua_ls.setup({
+        capabilities = opts.capabilities,
         settings = {
           Lua = {
             diagnostics = {
@@ -29,10 +38,10 @@ return {
       })
 
       lspconfig.rust_analyzer.setup({
+        capabilities = opts.capabilities,
         settings = {
           ["rust-analyzer"] = {
             cargo = {
-              target = "x86_64-unknown-linux-gnu",
               buildScripts = {
                 enable = true,
               },
@@ -73,6 +82,17 @@ return {
 
       nnoremap("<leader>rt", ToggleRustTarget)
 
+      -- Temporary workaround for 32802 error
+      for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+        local default_diagnostic_handler = vim.lsp.handlers[method]
+        vim.lsp.handlers[method] = function(err, result, context, config)
+          if err ~= nil and err.code == -32802 then
+            return
+          end
+
+          return default_diagnostic_handler(err, result, context, config)
+        end
+      end
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),

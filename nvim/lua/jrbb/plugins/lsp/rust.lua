@@ -1,7 +1,7 @@
 return {
   --{
   --  "mrcjkb/rustaceanvim",
-  --  version = "^4",
+  --  version = "^5.13.0",
   --  ft = { "rust" },
   --  opts = {
   --    server = {
@@ -17,51 +17,80 @@ return {
   --              enable = true,
   --            },
   --          },
-  --          -- Add clippy lints for Rust.
+  --          checkOnSave = true,
   --          check = {
   --            allTargets = true,
   --            command = "clippy",
   --            extraArgs = { "--no-deps" },
   --          },
-  --          checkOnSave = true,
   --          procMacro = {
   --            enable = true,
-  --            ignored = {
-  --              ["async-trait"] = { "async_trait" },
-  --              ["napi-derive"] = { "napi" },
-  --              ["async-recursion"] = { "async_recursion" },
-  --            },
   --          },
   --        },
   --      },
   --    },
   --  },
   --  config = function(_, opts)
+  --    local rustacean = require("rustaceanvim")
   --    local Remap = require("jrbb.keymap")
   --    local nnoremap = Remap.nnoremap
-  --    local current_target = "x86_64-unknown-linux-gnu"
+  --    local rust_target = "x86_64-unknown-linux-gnu"
 
   --    vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
 
-  --    function ToggleRustTarget()
-  --      if current_target == "x86_64-unknown-linux-gnu" then
-  --        current_target = "wasm32-unknown-unknown"
-  --      else
-  --        current_target = "x86_64-unknown-linux-gnu"
-  --      end
+  --    function change_rust_analyzer_target(new_target)
+  --        -- Get the LSP client attached to the current buffer
+  --        local clients = vim.lsp.buf_get_clients(0)
+  --        local rust_analyzer = nil
+  --        for _, client in pairs(clients) do
+  --          if client.name == 'rust-analyzer' then
+  --            rust_analyzer = client
+  --            break
+  --          end
+  --        end
+  --        if rust_analyzer == nil then
+  --          print('rust-analyzer is not attached to this buffer')
+  --          return
+  --        end
 
-  --      require('lspconfig').rust_analyzer.setup({
-  --        settings = {
-  --          ["rust-analyzer"] = {
+  --        -- Build the new settings for rust-analyzer
+  --        local new_settings = {
+  --          ['rust-analyzer'] = {
   --            cargo = {
-  --              target = current_target,
+  --              target = new_target,
   --            },
   --          },
-  --        },
-  --      })
+  --        }
 
-  --      vim.cmd('LspRestart')
-  --      print("Switched rust-analyzer target to " .. current_target)
+  --        -- Send a notification to rust-analyzer to update its settings
+  --        rust_analyzer.notify('workspace/didChangeConfiguration', {
+  --          settings = new_settings,
+  --        })
+
+  --        print('rust-analyzer cargo target set to: ' .. new_target)
+  --      end
+
+  --    function ToggleRustTarget()
+  --      if rust_target == "x86_64-unknown-linux-gnu" then
+  --        rust_target = "wasm32-unknown-unknown"
+  --      else
+  --        rust_target = "x86_64-unknown-linux-gnu"
+  --      end
+
+  --      --require('lspconfig').rust_analyzer.setup({
+  --      --  settings = {
+  --      --    ["rust-analyzer"] = {
+  --      --      cargo = {
+  --      --        target = rust_target,
+  --      --      },
+  --      --    },
+  --      --  },
+  --      --})
+
+  --      change_rust_analyzer_target(rust_target)
+
+  --      vim.cmd('LspRestart rust_analyzer')
+  --      --print("Switched rust-analyzer target to " .. rust_target)
   --    end
 
   --    nnoremap("<leader>rt", ToggleRustTarget)
@@ -99,6 +128,7 @@ return {
       nmap("<leader>cC", crates.open_crates_io, keymapOpts)
 
       return {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
         text = {
           loading = " ⏳ Loading",
           version = " 🟢 %s",
