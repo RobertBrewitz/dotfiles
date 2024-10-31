@@ -90,6 +90,10 @@ return {
             return
           end
 
+          if err ~= nil and err.code == -32603 then
+            return
+          end
+
           return default_diagnostic_handler(err, result, context, config)
         end
       end
