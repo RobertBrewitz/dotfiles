@@ -9,11 +9,6 @@ export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 
-# custom prompt command to share history between panes but still allow isolated history in each tmux pane
-#
-# turn off histappend in case it is set
-shopt -u histappend
-
 # 1) append new commands TO the history file since session started
 # 2) append new commands FROM the history file since session started
 # 3) write session history TO the history file
