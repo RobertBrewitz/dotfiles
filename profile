@@ -9,6 +9,9 @@ export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 
+# Explicityly turn on history appending again, since I disabled in a previous commit
+shopt -s histappend
+
 # 1) append new commands TO the history file since session started
 # 2) append new commands FROM the history file since session started
 # 3) write session history TO the history file
