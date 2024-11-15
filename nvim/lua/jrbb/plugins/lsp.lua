@@ -45,6 +45,7 @@ return {
               buildScripts = {
                 enable = true,
               },
+              features = "all",
             },
             checkOnSave = true,
             check = {
