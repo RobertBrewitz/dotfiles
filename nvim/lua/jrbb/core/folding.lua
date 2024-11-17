@@ -2,26 +2,14 @@ local Remap = require("jrbb.keymap")
 local nnoremap = Remap.nnoremap
 
 -- folding
-nnoremap("<leader>fo", "zR")
-nnoremap("<leader>fc", "zM")
-nnoremap("<leader>ff", "za")
+nnoremap("<leader>f", "za")
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 vim.opt.foldcolumn = "0"
 vim.opt.foldtext = ""
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 1
-
-vim.keymap.set("n", "<CR>", function()
-  local line = vim.fn.line(".")
-  local foldlevel = vim.fn.foldlevel(line)
-  if foldlevel == 0 then
-    vim.notify("No fold found", vim.log.levels.INFO)
-  else
-    vim.cmd("normal! za")
-  end
-end)
+vim.opt.foldlevelstart = 99
 
 local function fold_headings_of_level(level)
   vim.cmd("normal! gg")
