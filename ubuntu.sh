@@ -49,7 +49,8 @@ echo "Installing mold and clang for rust compilation"
 sudo apt-get install mold clang -y
 
 echo "Installing fzf"
-sudo apt-get install fzf -y
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --key-bindings --completion --no-update-rc
 
 echo "Installing nvm and node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | NODE_VERSION=--lts bash
