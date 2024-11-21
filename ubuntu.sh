@@ -48,9 +48,8 @@ sudo apt-get install libssl-dev libudev-dev libasound2-dev -y
 echo "Installing mold and clang for rust compilation"
 sudo apt-get install mold clang -y
 
-echo "Installing fzf"
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --key-bindings --completion --no-update-rc
+echo "Installing ripgrep and fd-find"
+sudo apt install ripgrep fd-find -y
 
 echo "Installing nvm and node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | NODE_VERSION=--lts bash
