@@ -8,15 +8,16 @@ return {
     local nnoremap = Remap.nnoremap
     local nmap = Remap.nmap
 
-    --builtin.find_files({ find_command = { 'fzf' }})
-
+    -- Telescope
     nnoremap("<c-p>", builtin.find_files)
-    nnoremap("<leader>p", builtin.live_grep)
+    nnoremap("<leader>p", builtin.git_files)
+    nnoremap("<c-f>", builtin.live_grep)
+    nnoremap("<leader>f", builtin.grep_string)
 
+    -- LSP
     nmap("<leader>gd", builtin.lsp_definitions)
     nmap("<leader>gi", builtin.lsp_implementations)
     nmap("<leader>gt", builtin.lsp_type_definitions)
-
     nmap("<leader>gr", builtin.lsp_references)
     nmap("<leader>gs", builtin.lsp_document_symbols)
     nmap("<leader>gS", builtin.lsp_workspace_symbols)

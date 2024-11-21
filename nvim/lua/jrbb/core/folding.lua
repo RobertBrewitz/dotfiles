@@ -1,8 +1,6 @@
 local Remap = require("jrbb.keymap")
-local nnoremap = Remap.nnoremap
 
 -- folding
-nnoremap("<leader>f", "za")
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
