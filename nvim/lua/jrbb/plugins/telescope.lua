@@ -2,11 +2,53 @@ return {
   'nvim-telescope/telescope.nvim',
   tag = '0.1.8',
   dependencies = { 'nvim-lua/plenary.nvim' },
-  config = function()
+  opts = function()
+    local builtin = require('telescope.builtin')
+
+    return {
+      defaults = {
+        sorting_strategy = "descending",
+        layout_strategy = "flex",
+        layout_config = {
+          prompt_position = "bottom",
+          preview_cutoff = 120,
+          width = 0.99,
+          height = 0.99,
+        },
+        preview = {
+          mime_hook = function(filepath, bufnr, opts)
+            local is_image = function(fp)
+              local image_extensions = { 'png', 'jpg' } -- Supported image formats
+              local split_path = vim.split(fp:lower(), '.', { plain = true })
+              local extension = split_path[#split_path]
+              return vim.tbl_contains(image_extensions, extension)
+            end
+            if is_image(filepath) then
+              local term = vim.api.nvim_open_term(bufnr, {})
+              local function send_output(_, data, _)
+                for _, d in ipairs(data) do
+                  vim.api.nvim_chan_send(term, d .. '\r\n')
+                end
+              end
+              vim.fn.jobstart(
+                {
+                  'catimg', filepath -- Terminal image viewer command
+                },
+                { on_stdout = send_output, stdout_buffered = true, pty = true })
+            else
+              require("telescope.previewers.utils").set_preview_message(bufnr, opts.winid, "Binary cannot be previewed")
+            end
+          end
+        },
+      },
+    }
+  end,
+  config = function(_, opts)
     local builtin = require('telescope.builtin')
     local Remap = require("jrbb.keymap")
     local nnoremap = Remap.nnoremap
     local nmap = Remap.nmap
+    local telescope = require('telescope')
 
     -- Telescope
     nnoremap("<c-p>", builtin.find_files)
@@ -26,5 +68,8 @@ return {
     nmap("<leader>gC", builtin.lsp_outgoing_calls)
 
     nmap("<leader>gg", builtin.diagnostics)
+
+    telescope.setup(opts)
   end
+
 }
