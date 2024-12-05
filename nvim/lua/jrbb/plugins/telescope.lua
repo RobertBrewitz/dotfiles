@@ -6,7 +6,31 @@ return {
     local builtin = require('telescope.builtin')
 
     return {
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+        grep_string = {
+          hidden = true,
+        },
+        live_grep = {
+          hidden = true,
+        },
+        git_files = {
+          hidden = true,
+        },
+      },
       defaults = {
+        vimgrep_arguments = {
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--hidden',
+        },
         sorting_strategy = "descending",
         layout_strategy = "flex",
         layout_config = {
