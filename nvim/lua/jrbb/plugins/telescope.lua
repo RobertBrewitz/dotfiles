@@ -82,14 +82,21 @@ return {
 
     -- LSP
     nmap("<leader>gd", builtin.lsp_definitions)
+    nmap("<leader>gD", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
     nmap("<leader>gi", builtin.lsp_implementations)
+    nmap("<leader>gI", "<cmd>tab split | lua vim.lsp.buf.implementation()<CR>")
     nmap("<leader>gt", builtin.lsp_type_definitions)
+    nmap("<leader>gT", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
     nmap("<leader>gr", builtin.lsp_references)
+    nmap("<leader>gR", "<cmd>tab split | lua vim.lsp.buf.references()<CR>")
+    nmap("<leader>gci", builtin.lsp_incoming_calls)
+    nmap("<leader>gcI", "<cmd>tab split | lua vim.lsp.buf.incoming_calls()<CR>")
+    nmap("<leader>gco", builtin.lsp_outgoing_calls)
+    nmap("<leader>gcO", "<cmd>tab split | lua vim.lsp.buf.outgoing_calls()<CR>")
+
     nmap("<leader>gs", builtin.lsp_document_symbols)
     nmap("<leader>gS", builtin.lsp_workspace_symbols)
     nmap("<leader>gy", builtin.lsp_dynamic_workspace_symbols)
-    nmap("<leader>gc", builtin.lsp_incoming_calls)
-    nmap("<leader>gC", builtin.lsp_outgoing_calls)
 
     nmap("<leader>gg", builtin.diagnostics)
 
