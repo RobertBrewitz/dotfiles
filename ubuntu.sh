@@ -99,6 +99,10 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
 
+echo "Fix crackling audio in pipewire (Ubuntu 24.04)"
+sudo sed -i 's/#pulse.min.quantum      = 128/pulse.min.quantum      = 1024/g' /usr/share/pipewire/pipewire-pulse.conf
+sudo systemctl --user restart wireplumber pipewire pipewire-pulse
+
 echo "##########################################"
 echo "#             Setup completed            #"
 echo "##########################################"
