@@ -8,6 +8,7 @@ return {
     return {
       pickers = {
         find_files = {
+          find_command = { 'rg', '--files', '--hidden', '--follow', '--glob', '!.git' },
           hidden = true,
         },
         grep_string = {
