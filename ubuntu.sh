@@ -10,6 +10,8 @@ ln -sfn $ABSOLUTE_PATH/nvim $HOME/.config/nvim
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
+ln -sf $ABSOLUTE_PATH/config/rio $HOME/.config/rio
+
 cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
 echo "Symlinking root dotfiles in $ABSOLUTE_PATH to /root"

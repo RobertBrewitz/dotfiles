@@ -1,0 +1,10 @@
+theme = "moonfly"
+
+[fonts]
+family = "Ubuntu Mono"
+size = 18
+
+[editor]
+program = "nvim"
+args = []
+
