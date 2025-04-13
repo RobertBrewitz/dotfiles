@@ -7,4 +7,3 @@ size = 18
 [editor]
 program = "nvim"
 args = []
-

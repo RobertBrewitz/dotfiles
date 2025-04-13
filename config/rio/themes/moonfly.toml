@@ -1,21 +1,21 @@
 [colors]
 
 # Normal
-foreground       = "#c6c6c6"   # Moonfly white
+foreground       = "#FFFFAA"   # Moonfly white
 background       = "#080808"   # Moonfly background (black)
 black            = "#4e4e4e"   # Approximated using Moonfly grey30 as a midgrey
 blue             = "#80a0ff"   # Moonfly blue
-cursor           = "#c6c6c6"   # Using white for high visibility
+cursor           = "#FFFFAA"   # Using white for high visibility
 cyan             = "#79dac8"   # Using Moonfly turquoise
 green            = "#8cc85f"   # Moonfly green
 magenta          = "#e196a2"   # Using Moonfly orchid for a pastel magenta feel
 red              = "#ff5189"   # Using Moonfly crimson for a warm red accent
-white            = "#c6c6c6"   # Moonfly white
+white            = "#FFFFAA"   # Moonfly white
 yellow           = "#e3c78a"   # Moonfly yellow
 
 # UI colors
 tabs                      = "#080808"   # Matching the background
-tabs-foreground           = "#c6c6c6"   # Using white for legibility
+tabs-foreground           = "#FFFFAA"   # Using white for legibility
 tabs-active               = "#80a0ff"   # Active tab gets Moonfly blue
 tabs-active-highlight     = "#80a0ff"   # Same accent for highlight
 tabs-active-foreground    = "#121212"   # A very dark tone (akin to Moonfly’s darkest grey)
@@ -26,18 +26,18 @@ selection-background      = "#e4e4e4"   # A light grey highlight (Moonfly grey89
 dim-black        = "#4e4e4e"
 dim-blue         = "#80a0ff"
 dim-cyan         = "#79dac8"
-dim-foreground   = "#c6c6c6"
+dim-foreground   = "#FFFFAA"
 dim-green        = "#8cc85f"
 dim-magenta      = "#e196a2"
 dim-red          = "#ff5189"
-dim-white        = "#c6c6c6"
+dim-white        = "#FFFFAA"
 dim-yellow       = "#e3c78a"
 
 # Light colors
 light-black      = "#585858"   # Using Moonfly grey35 as a lighter grey
 light-blue       = "#80a0ff"
 light-cyan       = "#79dac8"
-light-foreground = "#c6c6c6"
+light-foreground = "#FFFFAA"
 light-green      = "#8cc85f"
 light-magenta    = "#e196a2"
 light-red        = "#ff5189"

@@ -48,6 +48,8 @@ alias mk="minikube"
 alias dk="docker"
 alias dkc="docker-compose"
 
+alias rio="$HOME/Projects/rio/target/release/rio &"
+
 # Patching
 pdiff () {
   if [ "$#" -ne 3 ]; then
