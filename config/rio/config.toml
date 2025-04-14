@@ -7,3 +7,8 @@ size = 18
 [editor]
 program = "nvim"
 args = []
+
+[renderer]
+strategy = "game"
+backend = "Vulkan"
+# filters = ["newpixiecrt"]
