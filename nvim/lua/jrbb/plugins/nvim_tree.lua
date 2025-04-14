@@ -4,6 +4,30 @@ local nnoremap = Remap.nnoremap
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argc() == 0 then
+      ToggleNvimTree()
+      vim.cmd('wincmd p')
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  callback = function()
+    if vim.fn.argc() == 0 then
+      local ft = vim.api.nvim_buf_get_option(0, "filetype")
+
+      if ft == "NvimTree" then
+        return
+      end
+
+      vim.cmd('NvimTreeFindFile')
+      vim.cmd('wincmd p')
+    end
+  end,
+})
+
 function ToggleNvimTree()
   local nvim_tree = nil
   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
@@ -17,15 +41,12 @@ function ToggleNvimTree()
 
   if not nvim_tree then
     -- netrw is not open: open it on the left.
-    print("Opening NvimTree")
     vim.cmd('NvimTreeOpen')
   else
     if vim.api.nvim_get_current_win() == nvim_tree then
       -- If currently in netrw, jump back to the last used window.
-      print("Jumping back to the last used window")
       vim.cmd('wincmd p')
     else
-      print("Switching focus to the NvimTree window")
       -- Switch focus to the netrw window.
       vim.api.nvim_set_current_win(nvim_tree)
     end
