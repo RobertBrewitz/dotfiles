@@ -19,7 +19,6 @@ inoremap("!", "!<c-g>u")
 inoremap("?", "?<c-g>u")
 nnoremap("<leader>k", ":cnext <cr>", { silent = true })
 nnoremap("<leader>j", ":cprev <cr>", { silent = true })
-nnoremap("<leader>e", ":Ex <cr>", { silent = true })
 nnoremap("-", "g_", { silent = true })
 
 -- Clipboard
