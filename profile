@@ -98,11 +98,11 @@ else
     echo "INSTALLING Neovim"
     echo "#################"
     echo ""
-    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-    chmod +x nvim.appimage
-    ./nvim.appimage --appimage-extract
+    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage
+    chmod +x nvim-linux-x86_64.appimage
+    ./nvim-linux-x86_64.appimage --appimage-extract
     mv squashfs-root $HOME/neovim
-    rm nvim.appimage
+    rm nvim-linux-x86_64.appimage
     export PATH="$HOME/neovim/usr/bin:$PATH"
   fi
 fi
