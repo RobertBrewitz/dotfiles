@@ -33,12 +33,12 @@ return {
           '--hidden',
         },
         sorting_strategy = "descending",
-        layout_strategy = "flex",
+        layout_strategy = "horizontal",
         layout_config = {
           prompt_position = "bottom",
           preview_cutoff = 120,
-          width = 0.99,
-          height = 0.99,
+          width = 0.80,
+          height = 0.90,
         },
         preview = {
           mime_hook = function(filepath, bufnr, opts)
