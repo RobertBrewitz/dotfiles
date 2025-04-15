@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   end,
 })
 
+-- Opens NvimTree and switches between the active window and NvimTree
 function ToggleNvimTree()
   local nvim_tree = nil
   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
@@ -40,18 +41,32 @@ function ToggleNvimTree()
   end
 
   if not nvim_tree then
-    -- netrw is not open: open it on the left.
     vim.cmd('NvimTreeOpen')
   else
     if vim.api.nvim_get_current_win() == nvim_tree then
-      -- If currently in netrw, jump back to the last used window.
       vim.cmd('wincmd p')
     else
-      -- Switch focus to the netrw window.
       vim.api.nvim_set_current_win(nvim_tree)
     end
   end
 end
+
+-- I want nvim-tree to act like a file explorer, so I want to close if the "working file"
+-- is closed and nvim-tree is the only window open.
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.defer_fn(function()
+      local wins = vim.api.nvim_tabpage_list_wins(0)
+      if #wins == 1 then
+        local buf = vim.api.nvim_win_get_buf(wins[1])
+        local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+        if ft == "NvimTree" then
+          vim.cmd("quit")
+        end
+      end
+    end, 50)
+  end,
+})
 
 nnoremap("<leader>e", ToggleNvimTree, { desc = "ToggleNvimTree" })
 
