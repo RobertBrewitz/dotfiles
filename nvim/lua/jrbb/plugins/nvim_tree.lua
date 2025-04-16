@@ -86,6 +86,16 @@ return {
           width = 30,
           side = "left",
         },
+        filesystem_watchers = {
+          enable = true,
+          debounce_delay = 50,
+          ignore_dirs = {
+            ".git",
+            "node_modules",
+            "build",
+            "target",
+          },
+        },
         renderer = {
           group_empty = true,
         },
