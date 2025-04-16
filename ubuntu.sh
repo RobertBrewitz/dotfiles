@@ -1,25 +1,5 @@
 #!/bin/bash
 
-ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-echo "Symlinking dotfiles in $ABSOLUTE_PATH to $HOME"
-ln -sf $ABSOLUTE_PATH/gitconfig $HOME/.gitconfig
-ln -sf $ABSOLUTE_PATH/gitignore $HOME/.gitignore
-ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
-ln -sfn $ABSOLUTE_PATH/nvim $HOME/.config/nvim
-ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
-ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
-ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
-ln -sf $ABSOLUTE_PATH/config/rio $HOME/.config/rio
-ln -sf $ABSOLUTE_PATH/tmux/layouts $HOME/.tmux/layouts
-
-cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
-
-echo "Symlinking root dotfiles in $ABSOLUTE_PATH to /root"
-echo "[ -f ~/.profile ] && source ~/.profile" | sudo tee -a /root/.bashrc
-sudo ln -sf $ABSOLUTE_PATH/root_profile /root/.profile
-sudo ln -sfn $ABSOLUTE_PATH/nvim /root/.config/nvim
-
 echo "Upgrading and updating apt"
 sudo apt-get update -y
 sudo apt-get upgrade -y
