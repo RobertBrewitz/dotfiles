@@ -49,6 +49,7 @@ alias dk="docker"
 alias dkc="docker-compose"
 
 alias rio="$HOME/Projects/rio/target/release/rio &"
+alias tw="tmuxifier load-window"
 
 # Patching
 pdiff () {
@@ -88,6 +89,12 @@ fi
 
 if [ -f $HOME/.cargo/env ]; then
   . "$HOME/.cargo/env"
+fi
+
+if [ -d $HOME/.tmux/plugins/tmuxifier/bin ]; then
+  export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
+  eval "$(tmuxifier init -)"
+  export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux/layouts"
 fi
 
 if [ -d $HOME/neovim ]; then

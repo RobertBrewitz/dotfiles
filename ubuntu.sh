@@ -11,6 +11,7 @@ ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
 ln -sf $ABSOLUTE_PATH/config/rio $HOME/.config/rio
+ln -sf $ABSOLUTE_PATH/tmux/layouts $HOME/.tmux/layouts
 
 cp $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
