@@ -2,7 +2,7 @@ theme = "moonfly"
 
 [fonts]
 family = "Ubuntu Mono"
-size = 18
+size = 16
 
 [editor]
 program = "nvim"
