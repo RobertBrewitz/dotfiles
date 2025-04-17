@@ -57,12 +57,29 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.defer_fn(function()
       local wins = vim.api.nvim_tabpage_list_wins(0)
-      if #wins == 1 then
-        local buf = vim.api.nvim_win_get_buf(wins[1])
-        local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-        if ft == "NvimTree" then
-          vim.cmd("quit")
+      local nvim_tree_check = false
+      local screenkey_check = false
+
+      if #wins <= 2 then
+        for _, win in ipairs(wins) do
+          local buf = vim.api.nvim_win_get_buf(win)
+          local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+
+          if ft == "NvimTree" then
+            nvim_tree_check = true
+            if #wins == 1 then
+              screenkey_check = true
+            end
+          end
+
+          if ft == "screenkey" then
+            screenkey_check = true
+          end
         end
+      end
+
+      if nvim_tree_check and screenkey_check then
+        vim.cmd("quit")
       end
     end, 50)
   end,
