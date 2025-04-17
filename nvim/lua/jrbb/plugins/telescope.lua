@@ -3,22 +3,62 @@ return {
   tag = '0.1.8',
   dependencies = { 'nvim-lua/plenary.nvim' },
   opts = function()
-    local builtin = require('telescope.builtin')
+    local actions = require('telescope.actions')
 
     return {
       pickers = {
         find_files = {
           find_command = { 'rg', '--files', '--hidden', '--follow', '--glob', '!.git' },
           hidden = true,
+          mappings = {
+            i = {
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<M-q>"] = actions.send_selected_to_qflist,
+            },
+            n = {
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<M-q>"] = actions.send_selected_to_qflist,
+            },
+          },
         },
         grep_string = {
           hidden = true,
+          mappings = {
+            i = {
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<M-q>"] = actions.send_selected_to_qflist,
+            },
+            n = {
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<M-q>"] = actions.send_selected_to_qflist,
+            },
+          },
         },
         live_grep = {
           hidden = true,
+          mappings = {
+            i = {
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<M-q>"] = actions.send_selected_to_qflist,
+            },
+            n = {
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<M-q>"] = actions.send_selected_to_qflist,
+            },
+          },
         },
         git_files = {
           hidden = true,
+          mappings = {
+            i = {
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<M-q>"] = actions.send_selected_to_qflist,
+            },
+            n = {
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<M-q>"] = actions.send_selected_to_qflist,
+            },
+          },
         },
       },
       defaults = {
