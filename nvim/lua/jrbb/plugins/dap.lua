@@ -19,17 +19,17 @@ return {
       --  widgets.sidebar(widgets.scopes).close()
       --end
 
-      nnoremap("<leader>bc", ":DapContinue<cr>", { silent = true })
-      nnoremap("<leader>bj", ":DapLoadLaunchJSON<cr>", { silent = true })
-      nnoremap("<leader>brf", ":DapRestartFrame<cr>", { silent = true })
-      nnoremap("<leader>blv", ":DapSetLogLevel<cr>", { silent = true })
-      nnoremap("<leader>bsl", ":DapShowLog<cr>", { silent = true })
-      nnoremap("<leader>bsi", ":DapStepInto<cr>", { silent = true })
-      nnoremap("<leader>bso", ":DapStepOut<cr>", { silent = true })
-      nnoremap("<leader>bsv", ":DapStepOver<cr>", { silent = true })
-      nnoremap("<leader>bq", ":DapTerminate<cr>", { silent = true })
-      nnoremap("<leader>btb", ":DapToggleBreakpoint<cr>", { silent = true })
-      nnoremap("<leader>btr", ":DapToggleRepl<cr>", { silent = true })
+      nnoremap("<leader>bc", ":DapContinue<cr>", { silent = true, desc = "DapContinue" })
+      nnoremap("<leader>bj", ":DapLoadLaunchJSON<cr>", { silent = true, desc = "DapLoadLaunchJSON" })
+      nnoremap("<leader>brf", ":DapRestartFrame<cr>", { silent = true, desc = "DapRestartFrame" })
+      nnoremap("<leader>blv", ":DapSetLogLevel<cr>", { silent = true, desc = "DapSetLogLevel" })
+      nnoremap("<leader>bsl", ":DapShowLog<cr>", { silent = true, desc = "DapShowLog" })
+      nnoremap("<leader>bsi", ":DapStepInto<cr>", { silent = true, desc = "DapStepInto" })
+      nnoremap("<leader>bso", ":DapStepOut<cr>", { silent = true, desc = "DapStepOut" })
+      nnoremap("<leader>bsv", ":DapStepOver<cr>", { silent = true, desc = "DapStepOver" })
+      nnoremap("<leader>bq", ":DapTerminate<cr>", { silent = true, desc = "DapTerminate" })
+      nnoremap("<leader>btb", ":DapToggleBreakpoint<cr>", { silent = true, desc = "DapToggleBreakpoint" })
+      nnoremap("<leader>btr", ":DapToggleRepl<cr>", { silent = true, desc = "DapToggleRepl" })
     end,
   },
   {
@@ -53,13 +53,13 @@ return {
 
       nnoremap("<leader>bui", function()
         dapui.open()
-      end)
+      end, { desc = "DapUI" })
       nnoremap("<leader>bur", function()
         dapui.open({ reset = true })
-      end)
+      end, { desc = "DapUI Reset" })
       nnoremap("<leader>biu", function()
         dapui.close()
-      end)
+      end, { desc = "DapUI Close" })
     end,
   },
   {

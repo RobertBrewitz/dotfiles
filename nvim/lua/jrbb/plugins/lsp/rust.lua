@@ -107,25 +107,24 @@ return {
       local nmap = Remap.nmap
 
       local crates = require("crates")
-      local keymapOpts = { silent = true }
 
-      nmap("<leader>ct", crates.toggle, keymapOpts)
-      nmap("<leader>cr", crates.reload, keymapOpts)
-      nmap("<leader>cv", crates.show_versions_popup, keymapOpts)
-      nmap("<leader>cf", crates.show_features_popup, keymapOpts)
-      nmap("<leader>cd", crates.show_dependencies_popup, keymapOpts)
-      nmap("<leader>cu", crates.update_crate, keymapOpts)
-      vmap("<leader>cu", crates.update_crates, keymapOpts)
-      nmap("<leader>ca", crates.update_all_crates, keymapOpts)
-      nmap("<leader>cU", crates.upgrade_crate, keymapOpts)
-      vmap("<leader>cU", crates.upgrade_crates, keymapOpts)
-      nmap("<leader>cA", crates.upgrade_all_crates, keymapOpts)
-      nmap("<leader>ce", crates.expand_plain_crate_to_inline_table, keymapOpts)
-      nmap("<leader>cE", crates.extract_crate_into_table, keymapOpts)
-      nmap("<leader>cH", crates.open_homepage, keymapOpts)
-      nmap("<leader>cR", crates.open_repository, keymapOpts)
-      nmap("<leader>cD", crates.open_documentation, keymapOpts)
-      nmap("<leader>cC", crates.open_crates_io, keymapOpts)
+      nmap("<leader>ct", crates.toggle, { silent = true, desc = "Toggle Crates" })
+      nmap("<leader>cr", crates.reload, { silent = true, desc = "Reload Crates" })
+      nmap("<leader>cv", crates.show_versions_popup, { silent = true, desc = "Show Versions Popup" })
+      nmap("<leader>cf", crates.show_features_popup, { silent = true, desc = "Show Features Popup" })
+      nmap("<leader>cd", crates.show_dependencies_popup, { silent = true, desc = "Show Dependencies Popup" })
+      nmap("<leader>cu", crates.update_crate, { silent = true, desc = "Update Crate" })
+      vmap("<leader>cu", crates.update_crates, { silent = true, desc = "Update Crates" })
+      nmap("<leader>ca", crates.update_all_crates, { silent = true, desc = "Update All Crates" })
+      nmap("<leader>cU", crates.upgrade_crate, { silent = true, desc = "Upgrade Crate" })
+      vmap("<leader>cU", crates.upgrade_crates, { silent = true, desc = "Upgrade Crates" })
+      nmap("<leader>cA", crates.upgrade_all_crates, { silent = true, desc = "Upgrade All Crates" })
+      nmap("<leader>ce", crates.expand_plain_crate_to_inline_table, { silent = true, desc = "Expand Plain Crate" })
+      nmap("<leader>cE", crates.extract_crate_into_table, { silent = true, desc = "Extract Crate" })
+      nmap("<leader>cH", crates.open_homepage, { silent = true, desc = "Open Homepage" })
+      nmap("<leader>cR", crates.open_repository, { silent = true, desc = "Open Repository" })
+      nmap("<leader>cD", crates.open_documentation, { silent = true, desc = "Open Documentation" })
+      nmap("<leader>cC", crates.open_crates_io, { silent = true, desc = "Open Crates.io" })
 
       return {
         capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),

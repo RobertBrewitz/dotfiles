@@ -80,7 +80,7 @@ return {
         print("Switched rust-analyzer target to " .. rust_target)
       end
 
-      nnoremap("<leader>rt", ToggleRustTarget)
+      nnoremap("<leader>rt", ToggleRustTarget, { desc = "ToggleRustTarget wasm/linux" })
 
       -- Temporary workaround for 32802 error
       for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
@@ -103,19 +103,17 @@ return {
         callback = function(ev)
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-          local attach_opts = { buffer = ev.buf }
-
-          nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, attach_opts)
-          nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, attach_opts)
+          nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, { buffer = ev.buf, desc = "Add workspace folder" })
+          nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf, desc = "Remove workspace folder" })
           nmap("<leader>wl", function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, attach_opts)
-          nmap("<leader>ga", vim.lsp.buf.code_action, attach_opts)
-          nmap("<leader>d", vim.lsp.buf.hover, attach_opts)
-          nmap("<leader>rn", vim.lsp.buf.rename, attach_opts)
+          end, { buffer = ev.buf, desc = "List workspace folders" })
+          nmap("<leader>ga", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code action" })
+          nmap("<leader>d", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover" })
+          nmap("<leader>rn", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
           nmap("<leader>gf", function()
             vim.lsp.buf.format({ async = true })
-          end, attach_opts)
+          end, { buffer = ev.buf, desc = "Format" })
         end,
       })
     end,
