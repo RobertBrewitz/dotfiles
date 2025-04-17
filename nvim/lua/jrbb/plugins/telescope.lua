@@ -38,7 +38,7 @@ return {
           prompt_position = "bottom",
           preview_cutoff = 120,
           width = 0.80,
-          height = 0.90,
+          height = 0.80,
         },
         preview = {
           mime_hook = function(filepath, bufnr, opts)
