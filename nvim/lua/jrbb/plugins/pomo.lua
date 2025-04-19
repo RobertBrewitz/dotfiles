@@ -154,6 +154,21 @@ return {
         },
       },
     },
+    sessions = {
+      begin = {
+        { name = "Starting soon, next up: Chat & Plan", duration = "5m" },
+        { name = "Chatting & Planning, next up: Break", duration = "25m" },
+        { name = "Break, next up: Chat & Plan", duration = "5m" },
+        { name = "Chatting & Planning", duration = "25m" },
+      },
+      code = {
+        { name = "Code", duration = "25m" },
+        { name = "Break", duration = "5m" },
+      },
+      stop = {
+        { name = "Ending the stream", duration = "20m" },
+      },
+    },
   },
   config = function(_, opts)
     require("pomo").setup(opts)
