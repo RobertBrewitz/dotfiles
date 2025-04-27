@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
   callback = function()
     if vim.fn.argc() == 0 then
       local ft = vim.api.nvim_buf_get_option(0, "filetype")
