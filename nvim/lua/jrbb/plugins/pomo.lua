@@ -1,11 +1,12 @@
 local Remap = require("jrbb.keymap")
 local nnoremap = Remap.nnoremap
 
-nnoremap("<leader>ttb", ":TimerSession start<cr>", { silent = true, desc = "Begin stream 5m timer" })
-nnoremap("<leader>ttt", ":TimerSession tea<cr>", { silent = true, desc = "Break mode 5m timer" })
+nnoremap("<leader>tts", ":TimerSession start<cr>", { silent = true, desc = "Begin stream 5m timer" })
 nnoremap("<leader>ttc", ":TimerSession chat<cr>", { silent = true, desc = "Chat mode 25m timer" })
-nnoremap("<leader>ttd", ":TimerSession dev<cr>", { silent = true, desc = "Code/focus/dev 25m timer" })
-nnoremap("<leader>tts", ":TimerSession stop<cr>", { silent = true, desc = "End stream 25m timer" })
+nnoremap("<leader>ttb", ":TimerSession tea<cr>", { silent = true, desc = "Break mode 5m timer" })
+nnoremap("<leader>ttl", ":TimerSession dev<cr>", { silent = true, desc = "Learn mode 25m timer" })
+nnoremap("<leader>ttd", ":TimerSession dev<cr>", { silent = true, desc = "Dev mode 25m timer" })
+nnoremap("<leader>tte", ":TimerSession stop<cr>", { silent = true, desc = "End stream 25m timer" })
 
 nnoremap("<leader>th", ":TimerHide<cr>", { silent = true, desc = "Hide timer" })
 nnoremap("<leader>ts", ":TimerShow<cr>", { silent = true, desc = "Show timer" })
@@ -170,6 +171,9 @@ return {
       },
       chat = {
         { name = "Chat mode", duration = "25m" },
+      },
+      learn = {
+        { name = "Learn mode", duration = "25m" },
       },
       dev = {
         { name = "Dev mode", duration = "25m" },
