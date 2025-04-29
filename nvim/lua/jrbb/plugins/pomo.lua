@@ -145,7 +145,16 @@ return {
   "epwalsh/pomo.nvim",
   version = "*",
   lazy = true,
-  cmd = { "TimerStart", "TimerRepeat", "TimerSession" },
+  cmd = {
+    "TimerStart",
+    "TimerRepeat",
+    "TimerSession",
+    "TimerStop",
+    "TimerPause",
+    "TimerResume",
+    "TimerShow",
+    "TimerHide",
+  },
   dependencies = {
     "rcarriga/nvim-notify",
   },
