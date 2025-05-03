@@ -1,0 +1,1 @@
+ab=384k acodec=aac ar=48000 bf=2 channels=2 coder=1 f=mp4 frame_rate_den=1 frame_rate_num=60 g=30 height=1080 movflags=+faststart pix_fmt=yuv420p profile:v=high progressive=1 real_time=-1 threads=0 vb=15000k vcodec=h264_nvenc width=1920
