@@ -1,4 +1,5 @@
 theme = "moonfly"
+hide-mouse-cursor-when-typing = true
 
 [fonts]
 family = "Ubuntu Mono"
