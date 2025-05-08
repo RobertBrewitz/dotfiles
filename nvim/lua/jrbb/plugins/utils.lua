@@ -5,7 +5,4 @@ return {
   {
     "tpope/vim-repeat",
   },
-  {
-    "editorconfig/editorconfig-vim",
-  },
 }
