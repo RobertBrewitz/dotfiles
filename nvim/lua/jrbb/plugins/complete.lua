@@ -31,6 +31,7 @@ return {
           end,
         },
         mapping = {
+          ["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-e>"] = cmp.mapping.abort(),
