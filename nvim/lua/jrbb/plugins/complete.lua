@@ -42,7 +42,7 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<C-k>"] = cmp.mapping.scroll_docs(-4),
           ["<C-j>"] = cmp.mapping.scroll_docs(4),
-          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
           ["<C-Space>"] = cmp.mapping.complete(),
         },
         sources = {
