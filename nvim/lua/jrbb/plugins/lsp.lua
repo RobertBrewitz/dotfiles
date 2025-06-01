@@ -59,29 +59,6 @@ return {
         },
       })
 
-      function ToggleRustTarget()
-        if rust_target == "x86_64-unknown-linux-gnu" then
-          rust_target = "wasm32-unknown-unknown"
-        else
-          rust_target = "x86_64-unknown-linux-gnu"
-        end
-
-        require('lspconfig').rust_analyzer.setup({
-          settings = {
-            ["rust-analyzer"] = {
-              cargo = {
-                target = rust_target,
-              },
-            },
-          },
-        })
-
-        vim.cmd('LspRestart')
-        print("Switched rust-analyzer target to " .. rust_target)
-      end
-
-      nnoremap("<leader>rt", ToggleRustTarget, { desc = "ToggleRustTarget wasm/linux" })
-
       -- Temporary workaround for 32802 error
       for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
         local default_diagnostic_handler = vim.lsp.handlers[method]
