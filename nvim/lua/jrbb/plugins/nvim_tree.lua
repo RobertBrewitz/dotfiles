@@ -97,8 +97,8 @@ return {
       require("nvim-tree").setup({
         sort_by = "case_sensitive",
         view = {
-          adaptive_size = true,
-          width = 30,
+          adaptive_size = false,
+          width = 20,
           side = "left",
         },
         filesystem_watchers = {
