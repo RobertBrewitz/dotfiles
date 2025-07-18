@@ -5,4 +5,7 @@ return {
   {
     "tpope/vim-repeat",
   },
+  {
+    'numToStr/Comment.nvim',
+  },
 }
