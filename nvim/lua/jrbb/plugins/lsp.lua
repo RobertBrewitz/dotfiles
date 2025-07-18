@@ -9,10 +9,8 @@ return {
     end,
     config = function(_, opts)
       local lspconfig = require("lspconfig")
-      local rust_target = "x86_64-unknown-linux-gnu"
       local Remap = require("jrbb.keymap")
       local nmap = Remap.nmap
-      local nnoremap = Remap.nnoremap
 
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "single",
