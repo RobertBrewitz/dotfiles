@@ -98,7 +98,7 @@ return {
         sort_by = "case_sensitive",
         view = {
           adaptive_size = false,
-          width = 20,
+          width = 30,
           side = "left",
         },
         filesystem_watchers = {
