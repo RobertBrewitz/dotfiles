@@ -11,6 +11,8 @@ return {
       local lspconfig = require("lspconfig")
       local Remap = require("jrbb.keymap")
       local nmap = Remap.nmap
+      local nnoremap = Remap.nnoremap
+      local rust_target = "x86_64-unknown-linux-gnu"
 
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "single",
@@ -34,6 +36,27 @@ return {
         },
       })
 
+      function ToggleRustTarget()
+        if rust_target == "x86_64-unknown-linux-gnu" then
+          rust_target = "wasm32-unknown-unknown"
+        else
+          rust_target = "x86_64-unknown-linux-gnu"
+        end
+
+        require("lspconfig").rust_analyzer.setup({
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = {
+                target = rust_target,
+              },
+            },
+          },
+        })
+
+        vim.cmd("LspRestart")
+        print("Switched rust-analyzer target to " .. rust_target)
+      end
+
       lspconfig.rust_analyzer.setup({
         capabilities = opts.capabilities,
         settings = {
@@ -42,13 +65,28 @@ return {
               buildScripts = {
                 enable = true,
               },
-              features = "all",
+              extraArgs = {
+                "+nightly",
+                "--edition=2024",
+              },
+              target = rust_target,
             },
-            checkOnSave = true,
             check = {
               allTargets = true,
-              command = "clippy",
-              extraArgs = { "--no-deps" },
+              features = "all",
+              targets = {
+                "x86_64-unknown-linux-gnu",
+                "wasm32-unknown-unknown",
+                "x86_64-pc-windows-gnu",
+              },
+              extraArgs = {
+                "+nightly",
+                "--edition=2024",
+              },
+            },
+            rustfmt = {
+              enable = true,
+              extraArgs = { "+nightly", "--edition=2024" },
             },
             procMacro = {
               enable = true,
@@ -57,8 +95,10 @@ return {
         },
       })
 
+      nnoremap("<leader>rt", ToggleRustTarget, { desc = "ToggleRustTarget wasm/linux" })
+
       -- Temporary workaround for 32802 error
-      for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+      for _, method in ipairs({ "textDocument/diagnostic", "workspace/diagnostic" }) do
         local default_diagnostic_handler = vim.lsp.handlers[method]
         vim.lsp.handlers[method] = function(err, result, context, config)
           if err ~= nil and err.code == -32802 then
