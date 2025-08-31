@@ -65,23 +65,21 @@ return {
               buildScripts = {
                 enable = true,
               },
-              extraArgs = {
-                "+nightly",
-                "--edition=2024",
-              },
+              features = "all",
               target = rust_target,
             },
+            -- used for diagnostics
             check = {
               allTargets = true,
+              command = "clippy",
+              extraArgs = {
+                "--no-deps",
+              },
               features = "all",
               targets = {
                 "x86_64-unknown-linux-gnu",
                 "wasm32-unknown-unknown",
                 "x86_64-pc-windows-gnu",
-              },
-              extraArgs = {
-                "+nightly",
-                "--edition=2024",
               },
             },
             rustfmt = {
