@@ -67,3 +67,6 @@ vim.g.mapleader = " "
 
 -- mouse
 vim.opt.mouse = ""
+
+-- border
+vim.o.winborder = "rounded"
