@@ -16,7 +16,9 @@ return {
         integrations = {
           gitsigns = true,
           nvimtree = true,
-          telescope = true,
+          telescope = {
+            enabled = true,
+          },
           treesitter = true,
           which_key = true,
           mason = true,
