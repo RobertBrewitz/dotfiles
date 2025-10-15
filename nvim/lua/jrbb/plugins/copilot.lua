@@ -3,14 +3,14 @@ return {
   config = function()
     local Remap = require("jrbb.keymap")
     local nnoremap = Remap.nnoremap
-    local imap = Remap.imap
+    -- local imap = Remap.imap
 
     nnoremap("<leader>cp", ":Copilot panel<cr>", { desc = "Copilot panel" })
     nnoremap("<leader>cs", ":Copilot status<cr>", { desc = "Copilot status" })
     nnoremap("<leader>cd", ":Copilot disable<cr>", { desc = "Copilot disable" })
     nnoremap("<leader>ce", ":Copilot enable<cr>", { desc = "Copilot enable" })
 
-    imap("<leader>cc", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
-    vim.g.copilot_no_tab_map = true
+    -- imap("<leader>cc", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
+    -- vim.g.copilot_no_tab_map = true
   end,
 }

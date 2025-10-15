@@ -24,7 +24,7 @@ return {
             vim_item.menu = nil
 
             if #vim_item.abbr > 40 then
-              vim_item.abbr = vim_item.abbr:sub(1,40) .. '…'
+              vim_item.abbr = vim_item.abbr:sub(1, 40) .. "…"
             end
 
             return vim_item

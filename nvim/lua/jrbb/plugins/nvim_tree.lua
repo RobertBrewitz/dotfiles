@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argc() == 0 then
       ToggleNvimTree()
-      vim.cmd('wincmd p')
+      vim.cmd("wincmd p")
     end
   end,
 })
@@ -22,8 +22,8 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
         return
       end
 
-      vim.cmd('NvimTreeFindFile')
-      vim.cmd('wincmd p')
+      vim.cmd("NvimTreeFindFile")
+      vim.cmd("wincmd p")
     end
   end,
 })
@@ -33,18 +33,18 @@ function ToggleNvimTree()
   local nvim_tree = nil
   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
     local buf = vim.api.nvim_win_get_buf(win)
-    local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
-    if ft == 'NvimTree' then
+    local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+    if ft == "NvimTree" then
       nvim_tree = win
       break
     end
   end
 
   if not nvim_tree then
-    vim.cmd('NvimTreeOpen')
+    vim.cmd("NvimTreeOpen")
   else
     if vim.api.nvim_get_current_win() == nvim_tree then
-      vim.cmd('wincmd p')
+      vim.cmd("wincmd p")
     else
       vim.api.nvim_set_current_win(nvim_tree)
     end
@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.defer_fn(function()
       local wins = vim.api.nvim_tabpage_list_wins(0)
-      local accounted_windows = 0;
+      local accounted_windows = 0
 
       for _, win in ipairs(wins) do
         local buf = vim.api.nvim_win_get_buf(win)
@@ -118,26 +118,26 @@ return {
           dotfiles = false,
         },
         on_attach = function(bufnr)
-          local api = require "nvim-tree.api"
+          local api = require("nvim-tree.api")
 
           local function opts(desc)
             return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
           end
 
           -- custom mappings
-          vim.keymap.set("n", "<C-t>",          api.node.open.tab,                  opts("Open: New Tab"))
-          vim.keymap.set("n", "h",              api.node.navigate.parent_close,     opts("Close Directory"))
-          vim.keymap.set("n", "<cr>",           api.node.open.edit,                 opts("Open"))
-          vim.keymap.set("n", "l",              api.node.open.preview,              opts("Open Preview"))
-          vim.keymap.set("n", "%",              api.fs.create,                      opts("Create File Or Directory"))
-          vim.keymap.set("n", "d",              api.fs.create,                      opts("Create File Or Directory"))
-          vim.keymap.set("n", "y",              api.fs.copy.node,                   opts("Copy"))
-          vim.keymap.set("n", "D",              api.fs.remove,                      opts("Delete"))
-          vim.keymap.set("n", "r",              api.fs.rename_basename,             opts("Rename: Basename"))
-          vim.keymap.set("n", "p",              api.fs.paste,                       opts("Paste"))
-          vim.keymap.set("n", "r",              api.fs.rename,                      opts("Rename"))
-          vim.keymap.set("n", "/",              api.tree.search_node,               opts("Search"))
-          vim.keymap.set("n", "x",              api.fs.cut,                         opts("Cut"))
+          vim.keymap.set("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
+          vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
+          vim.keymap.set("n", "<cr>", api.node.open.edit, opts("Open"))
+          vim.keymap.set("n", "l", api.node.open.preview, opts("Open Preview"))
+          vim.keymap.set("n", "%", api.fs.create, opts("Create File Or Directory"))
+          vim.keymap.set("n", "d", api.fs.create, opts("Create File Or Directory"))
+          vim.keymap.set("n", "y", api.fs.copy.node, opts("Copy"))
+          vim.keymap.set("n", "D", api.fs.remove, opts("Delete"))
+          vim.keymap.set("n", "r", api.fs.rename_basename, opts("Rename: Basename"))
+          vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
+          vim.keymap.set("n", "r", api.fs.rename, opts("Rename"))
+          vim.keymap.set("n", "/", api.tree.search_node, opts("Search"))
+          vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
           -- vim.keymap.set("n", "<C-e>",          api.node.open.replace_tree_buffer,  opts("Open: In Place"))
           -- vim.keymap.set("n", "<C-k>",          api.node.show_info_popup,           opts("Info"))
           -- vim.keymap.set("n", "<C-r>",          api.fs.rename_sub,                  opts("Rename: Omit Filename"))
@@ -183,7 +183,7 @@ return {
           -- vim.keymap.set("n", "Y",              api.fs.copy.relative_path,          opts("Copy Relative Path"))
           -- vim.keymap.set("n", "<2-LeftMouse>",  api.node.open.edit,                 opts("Open"))
           -- vim.keymap.set("n", "<2-RightMouse>", api.tree.change_root_to_node,       opts("CD"))
-        end
+        end,
       })
     end,
   },

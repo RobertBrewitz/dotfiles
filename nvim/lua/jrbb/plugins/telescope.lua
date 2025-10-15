@@ -1,14 +1,14 @@
 return {
-  'nvim-telescope/telescope.nvim',
-  tag = '0.1.8',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  "nvim-telescope/telescope.nvim",
+  tag = "0.1.8",
+  dependencies = { "nvim-lua/plenary.nvim" },
   opts = function()
-    local actions = require('telescope.actions')
+    local actions = require("telescope.actions")
 
     return {
       pickers = {
         find_files = {
-          find_command = { 'rg', '--files', '--hidden', '--follow', '--glob', '!.git' },
+          find_command = { "rg", "--files", "--hidden", "--follow", "--glob", "!.git" },
           hidden = true,
           mappings = {
             i = {
@@ -60,17 +60,20 @@ return {
             },
           },
         },
+        lsp_definitions = {
+          hidden = true,
+        },
       },
       defaults = {
         vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case',
-          '--hidden',
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
         },
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
@@ -83,8 +86,8 @@ return {
         preview = {
           mime_hook = function(filepath, bufnr, opts)
             local is_image = function(fp)
-              local image_extensions = { 'png', 'jpg' } -- Supported image formats
-              local split_path = vim.split(fp:lower(), '.', { plain = true })
+              local image_extensions = { "png", "jpg" } -- Supported image formats
+              local split_path = vim.split(fp:lower(), ".", { plain = true })
               local extension = split_path[#split_path]
               return vim.tbl_contains(image_extensions, extension)
             end
@@ -92,28 +95,27 @@ return {
               local term = vim.api.nvim_open_term(bufnr, {})
               local function send_output(_, data, _)
                 for _, d in ipairs(data) do
-                  vim.api.nvim_chan_send(term, d .. '\r\n')
+                  vim.api.nvim_chan_send(term, d .. "\r\n")
                 end
               end
-              vim.fn.jobstart(
-                {
-                  'catimg', filepath -- Terminal image viewer command
-                },
-                { on_stdout = send_output, stdout_buffered = true, pty = true })
+              vim.fn.jobstart({
+                "catimg",
+                filepath, -- Terminal image viewer command
+              }, { on_stdout = send_output, stdout_buffered = true, pty = true })
             else
               require("telescope.previewers.utils").set_preview_message(bufnr, opts.winid, "Binary cannot be previewed")
             end
-          end
+          end,
         },
       },
     }
   end,
   config = function(_, opts)
-    local builtin = require('telescope.builtin')
+    local builtin = require("telescope.builtin")
     local Remap = require("jrbb.keymap")
     local nnoremap = Remap.nnoremap
     local nmap = Remap.nmap
-    local telescope = require('telescope')
+    local telescope = require("telescope")
 
     -- Telescope
     nnoremap("<c-p>", builtin.find_files, { desc = "Find Files" })
@@ -127,7 +129,11 @@ return {
     nmap("<leader>gi", builtin.lsp_implementations, { desc = "LSP Implementations" })
     nmap("<leader>gI", "<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", { desc = "LSP Implementations in Tab" })
     nmap("<leader>gt", builtin.lsp_type_definitions, { desc = "LSP Type Definitions" })
-    nmap("<leader>gT", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", { desc = "LSP Type Definitions in Tab" })
+    nmap(
+      "<leader>gT",
+      "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>",
+      { desc = "LSP Type Definitions in Tab" }
+    )
     nmap("<leader>gr", builtin.lsp_references, { desc = "LSP References" })
     nmap("<leader>gR", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", { desc = "LSP References in Tab" })
     nmap("<leader>gci", builtin.lsp_incoming_calls, { desc = "LSP Incoming Calls" })
@@ -142,6 +148,5 @@ return {
     nmap("<leader>gg", builtin.diagnostics, { desc = "LSP Diagnostics" })
 
     telescope.setup(opts)
-  end
-
+  end,
 }

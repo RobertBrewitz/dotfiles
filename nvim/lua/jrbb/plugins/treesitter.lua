@@ -5,7 +5,7 @@ return {
     vim.filetype.add({ extension = { wgsl = "wgsl" } })
     require("nvim-treesitter.configs").setup({
       indent = {
-        enable = false
+        enable = false,
       },
       ensure_installed = {
         "typescript",

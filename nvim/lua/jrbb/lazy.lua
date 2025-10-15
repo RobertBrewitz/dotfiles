@@ -15,9 +15,6 @@ require("lazy").setup({
   {
     import = "jrbb.plugins",
   },
-  {
-    import = "jrbb.plugins.lsp",
-  },
 }, {
   checker = {
     enabled = true,

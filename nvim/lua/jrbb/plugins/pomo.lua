@@ -52,17 +52,9 @@ CustomNotifier._update = function(self, text, level, timeout)
 
   local title
   if self.timer.name ~= nil then
-    title = string.format(
-      "%s %s",
-      self.timer.name,
-      repetitions_str
-    )
+    title = string.format("%s %s", self.timer.name, repetitions_str)
   else
-    title = string.format(
-      "Timer #%d %s",
-      self.timer.id,
-      repetitions_str
-    )
+    title = string.format("Timer #%d %s", self.timer.id, repetitions_str)
   end
 
   if text ~= nil then
@@ -116,12 +108,7 @@ end
 
 CustomNotifier.done = function(self)
   self:_update(string.format(" %s timer done!", self.text_icon), vim.log.levels.WARN, 3000)
-  os.execute(
-    string.format(
-      [[notify-send -u critical -i "appointment-soon" "Timer \"%s\" expired"]],
-      self.timer.name
-    )
-  )
+  os.execute(string.format([[notify-send -u critical -i "appointment-soon" "Timer \"%s\" expired"]], self.timer.name))
 end
 
 CustomNotifier.stop = function(self)
@@ -199,4 +186,3 @@ return {
     })
   end,
 }
-

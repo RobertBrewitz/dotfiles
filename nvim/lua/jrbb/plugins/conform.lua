@@ -1,18 +1,18 @@
 return {
-  'stevearc/conform.nvim',
+  "stevearc/conform.nvim",
   opts = {},
   config = function()
-    require('conform').setup {
+    require("conform").setup({
       formatters_by_ft = {
-        lua = { 'stylua' },
-        rust = { 'rustfmt', },
-        javascript = { 'prettier' },
-        typescript = { 'prettier' },
-        typescriptreact = { 'prettier' },
-        json = { 'prettier' },
-        markdown = { 'prettier' },
+        lua = { "stylua" },
+        rust = { "rustfmt" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        json = { "prettier" },
+        markdown = { "prettier" },
       },
-    }
+    })
   end,
 
   init = function()
@@ -23,7 +23,7 @@ return {
         require("conform").format({ bufnr = args.buf })
       end,
     })
-  end
+  end,
 }
 -- return {
 --   "sbdchd/neoformat",
