@@ -127,7 +127,7 @@ return {
       nmap("<leader>cC", crates.open_crates_io, { silent = true, desc = "Open Crates.io" })
 
       return {
-        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
         text = {
           loading = " ⏳ Loading",
           version = " 🟢 %s",

@@ -1,14 +1,13 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "hrsh7th/nvim-cmp" },
+    dependencies = { "saghen/blink.cmp" },
     opts = function()
       return {
-        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
       }
     end,
     config = function(_, opts)
-      local lspconfig = require("lspconfig")
       local Remap = require("jrbb.keymap")
       local nmap = Remap.nmap
       local nnoremap = Remap.nnoremap
@@ -22,10 +21,10 @@ return {
         border = "single",
       })
 
-      lspconfig.gopls.setup(opts)
-      lspconfig.wgsl_analyzer.setup(opts)
-      lspconfig.ts_ls.setup(opts)
-      lspconfig.lua_ls.setup({
+      vim.lsp.enable("gopls", opts)
+      vim.lsp.enable("wgsl_analyzer", opts)
+      vim.lsp.enable("ts_ls", opts)
+      vim.lsp.enable("lua_ls", {
         capabilities = opts.capabilities,
         settings = {
           Lua = {
@@ -43,7 +42,7 @@ return {
           rust_target = "x86_64-unknown-linux-gnu"
         end
 
-        require("lspconfig").rust_analyzer.setup({
+        vim.lsp.config("rust_analyzer", {
           settings = {
             ["rust-analyzer"] = {
               cargo = {
@@ -57,7 +56,7 @@ return {
         print("Switched rust-analyzer target to " .. rust_target)
       end
 
-      lspconfig.rust_analyzer.setup({
+      vim.lsp.enable("rust_analyzer", {
         capabilities = opts.capabilities,
         settings = {
           ["rust-analyzer"] = {
