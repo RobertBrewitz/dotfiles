@@ -6,6 +6,8 @@ The install scripts set `ignore-scripts` to true to ignore any pre- and post-ins
 
 ```bash
 npm config set ignore-scripts true
+yarn config set ignore-scripts true
+pnpm config set ignore-scripts true
 ```
 
 ## Setup OS X
