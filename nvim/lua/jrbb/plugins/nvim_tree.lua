@@ -116,6 +116,7 @@ return {
         },
         filters = {
           dotfiles = false,
+          custom = { ".git" },
         },
         on_attach = function(bufnr)
           local api = require("nvim-tree.api")
