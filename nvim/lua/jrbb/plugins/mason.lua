@@ -35,7 +35,6 @@ return {
     opts = function()
       return {
         ensure_installed = {
-          "wgsl_analyzer",
           "ts_ls",
           "lua_ls",
           "eslint",

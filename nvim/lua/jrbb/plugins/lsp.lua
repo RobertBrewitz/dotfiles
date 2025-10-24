@@ -22,7 +22,41 @@ return {
       })
 
       vim.lsp.enable("gopls", opts)
-      vim.lsp.enable("wgsl_analyzer", opts)
+
+      -- NOTE: WGSL wgsl_analyzer does not provide inlay hints, garbage
+      -- vim.lsp.enable("wgsl_analyzer", {
+      --   filetypes = { "wgsl", "wesl" },
+      --   capabilities = opts.capabilities,
+      -- })
+      --
+      -- vim.lsp.handlers["wgsl-analyzer/requestConfiguration"] = function(err, result, ctx, config)
+      --   return {
+      --     success = true,
+      --     customImports = { _dummy_ = "dummy" },
+      --     shaderDefs = {},
+      --     trace = {
+      --       extension = false,
+      --       server = false,
+      --     },
+      --     inlayHints = {
+      --       enabled = false,
+      --       typeHints = false,
+      --       parameterHints = false,
+      --       structLayoutHints = false,
+      --       typeVerbosity = "inner",
+      --     },
+      --     diagnostics = {
+      --       typeErrors = true,
+      --       nagaParsingErrors = true,
+      --       nagaValidationErrors = true,
+      --       nagaVersion = "main",
+      --     },
+      --   }
+      -- end
+
+      -- NOTE: Using glasgow wgsl LSP server instead of wgsl_analyzer because it provides inlay hints and better features
+      vim.lsp.enable("glasgow", { capabilities = opts.capabilities })
+
       vim.lsp.enable("ts_ls", opts)
       vim.lsp.enable("lua_ls", {
         capabilities = opts.capabilities,
@@ -114,6 +148,8 @@ return {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+          vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.wgsl", command = "setfiletype wgsl" })
+          vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.wesl", command = "setfiletype wesl" })
 
           nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, { buffer = ev.buf, desc = "Add workspace folder" })
           nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf, desc = "Remove workspace folder" })
