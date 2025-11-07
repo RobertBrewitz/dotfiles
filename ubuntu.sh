@@ -82,6 +82,15 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
 
+echo "Installing UbuntuSans Nerd Font"
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuSans.zip
+unzip UbuntuSans.zip
+rm UbuntuSans.zip
+fc-cache -fv
+cd -
+
 echo "Fix crackling audio in pipewire (Ubuntu 24.04)"
 sudo sed -i 's/#pulse.min.quantum      = 128/pulse.min.quantum      = 1024/g' /usr/share/pipewire/pipewire-pulse.conf
 sudo systemctl --user restart wireplumber pipewire pipewire-pulse
