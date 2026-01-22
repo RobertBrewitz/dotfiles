@@ -15,8 +15,11 @@
   m = merge
   co = checkout
   cp = cherry-pick
-  dom = pull origin master
-  pom = push origin master
+  wt = worktree
+  wa = worktree add
+  wr = worktree remove
+  wl = worktree list
+  wtf = config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 [branch]
   autosetuprebase = always
 [push]
