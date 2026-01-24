@@ -2,7 +2,7 @@
 
 set -e
 
-sudo apt install -y libwayland-dev lld mold clang gcc-mingw-w64 cmake libfontconfig1
+sudo pacman -S --noconfirm --needed wayland lld mold clang mingw-w64-gcc cmake fontconfig
 rustup toolchain install nightly
 rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 rustup component add rust-analyzer --toolchain nightly
