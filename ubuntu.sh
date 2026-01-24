@@ -82,12 +82,12 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
 
-echo "Installing UbuntuSans Nerd Font"
+echo "Installing UbuntuMono Nerd Font"
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
-curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuSans.zip
-unzip UbuntuSans.zip
-rm UbuntuSans.zip
+curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuMono.zip
+unzip UbuntuMono.zip
+rm UbuntuMono.zip
 fc-cache -fv
 cd -
 

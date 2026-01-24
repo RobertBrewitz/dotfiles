@@ -24,7 +24,7 @@ frame_width = 2
 separator_color = frame
 sort = yes
 
-font = UbuntuSans Nerd Font 11
+font = UbuntuMono Nerd Font 11
 line_height = 0
 markup = full
 format = "<b>%s</b>\n%b"
