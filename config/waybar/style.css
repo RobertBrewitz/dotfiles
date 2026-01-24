@@ -1,34 +1,70 @@
+@import "mocha.css";
+
 * {
     font-family: "UbuntuSans Nerd Font", "Font Awesome 6 Free";
     font-size: 13px;
 }
 
 window#waybar {
-    background: rgba(0, 0, 0, 0.8);
-    color: #cdd6f4;
+    background: @base;
+    color: @text;
 }
 
 #workspaces button {
     padding: 0 5px;
-    color: #cdd6f4;
+    color: @subtext0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+#workspaces button:hover {
+    background: @surface0;
+    color: @text;
 }
 
 #workspaces button.active {
-    color: #89b4fa;
+    color: @blue;
+    background: @surface0;
 }
 
 #clock, #battery, #network, #bluetooth, #pulseaudio, #tray {
     padding: 0 10px;
+    color: @text;
+}
+
+#clock {
+    color: @mauve;
+}
+
+#pulseaudio {
+    color: @blue;
+}
+
+#network {
+    color: @teal;
+}
+
+#bluetooth {
+    color: @sapphire;
+}
+
+#battery {
+    color: @green;
 }
 
 #battery.charging {
-    color: #a6e3a1;
+    color: @green;
 }
 
 #battery.warning:not(.charging) {
-    color: #f9e2af;
+    color: @yellow;
 }
 
 #battery.critical:not(.charging) {
-    color: #f38ba8;
+    color: @red;
+}
+
+#tray {
+    color: @text;
 }

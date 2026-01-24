@@ -20,7 +20,6 @@ ln -sfT "$DOTFILES/nvim" "$HOME/.config/nvim"
 ln -sfT "$DOTFILES/config/hypr" "$HOME/.config/hypr"
 ln -sfT "$DOTFILES/config/kitty" "$HOME/.config/kitty"
 ln -sfT "$DOTFILES/config/waybar" "$HOME/.config/waybar"
-ln -sfT "$DOTFILES/config/nvim" "$HOME/.config/nvim"
 
 # User files
 ln -sf "$DOTFILES/gitconfig" "$HOME/.gitconfig"
@@ -31,5 +30,8 @@ ln -sf "$DOTFILES/editorconfig" "$HOME/.editorconfig"
 
 # Copy user-specific config only if it doesn't exist
 [[ -f "$HOME/.gitconfig-user" ]] || cp "$DOTFILES/gitconfig-user" "$HOME/.gitconfig-user"
+
+# Reload Hyprland config
+hyprctl reload
 
 echo "Dotfiles linked."
