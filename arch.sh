@@ -21,6 +21,7 @@ sudo pacman -S --noconfirm --needed \
     hyprland \
     hyprlock \
     hypridle \
+    hyprpaper \
     foot \
     wofi \
     xdg-desktop-portal-hyprland \
@@ -144,6 +145,9 @@ sudo sed -i 's/hosts: mymachines/hosts: mymachines mdns_minimal [NOTFOUND=return
 
 echo "Installing display settings tool"
 sudo pacman -S --noconfirm --needed wdisplays
+
+echo "Installing Thunar file manager"
+sudo pacman -S --noconfirm --needed thunar thunar-volman thunar-archive-plugin gvfs tumbler ffmpegthumbnailer
 
 echo "Installing Waybar and dependencies"
 sudo pacman -S --noconfirm --needed waybar otf-font-awesome pavucontrol
