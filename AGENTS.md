@@ -47,12 +47,15 @@ Configs are stored in `config/` and symlinked via `symlink_arch.sh`.
 
 Current themed applications:
 - Hyprland (`config/hypr/`)
+- Hyprlock (`config/hypr/hyprlock.conf`)
 - Waybar (`config/waybar/`)
 - Kitty (`config/kitty/`)
 - Wofi (`config/wofi/`)
 - Dunst (`config/dunst/`)
 - GTK 3/4 (`config/gtk-3.0/`, `config/gtk-4.0/`)
 - Neovim (`nvim/`)
+- Cursors (catppuccin-mocha-dark-cursors)
+- SDDM (catppuccin-mocha - uses default base, not black)
 
 ## Installation
 

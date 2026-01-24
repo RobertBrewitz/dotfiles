@@ -169,7 +169,7 @@ sudo systemctl enable --now paccache.timer
 
 echo "Installing GTK/Qt theming"
 sudo pacman -S --noconfirm --needed qt6ct kvantum papirus-icon-theme
-yay -S --noconfirm catppuccin-gtk-theme-mocha kvantum-theme-catppuccin-git
+yay -S --noconfirm catppuccin-gtk-theme-mocha kvantum-theme-catppuccin-git catppuccin-cursors-mocha
 
 echo "Configuring Kvantum theme"
 kvantummanager --set catppuccin-mocha-blue
