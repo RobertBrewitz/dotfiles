@@ -23,6 +23,7 @@ ln -sfT "$DOTFILES/config/waybar" "$HOME/.config/waybar"
 ln -sfT "$DOTFILES/config/gtk-3.0" "$HOME/.config/gtk-3.0"
 ln -sfT "$DOTFILES/config/gtk-4.0" "$HOME/.config/gtk-4.0"
 ln -sfT "$DOTFILES/config/wofi" "$HOME/.config/wofi"
+ln -sfT "$DOTFILES/config/dunst" "$HOME/.config/dunst"
 
 # User files
 ln -sf "$DOTFILES/gitconfig" "$HOME/.gitconfig"
