@@ -137,7 +137,7 @@ cat << 'EOF' | sudo tee /etc/sddm.conf.d/10-wayland.conf
 DisplayServer=wayland
 
 [Theme]
-Current=catppuccin-mocha
+Current=catppuccin-mocha-blue
 
 [Wayland]
 SessionDir=/usr/share/wayland-sessions
