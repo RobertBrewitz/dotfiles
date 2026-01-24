@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e
+
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 echo "Upgrading and updating pacman"
 sudo pacman -Syu --noconfirm
 
@@ -159,10 +163,22 @@ echo "Installing system maintenance tools"
 sudo pacman -S --noconfirm --needed pacman-contrib reflector
 sudo systemctl enable --now paccache.timer
 
+echo "Installing GTK/Qt theming"
+sudo pacman -S --noconfirm --needed qt6ct kvantum papirus-icon-theme
+yay -S --noconfirm catppuccin-gtk-theme-mocha kvantum-theme-catppuccin-git
+
+echo "Configuring Kvantum theme"
+kvantummanager --set catppuccin-mocha-blue
+
+echo "Symlinking dotfiles"
+"$DOTFILES/symlink_arch.sh"
+
 echo "##########################################"
 echo "#             Setup completed            #"
 echo "##########################################"
 echo ""
+echo "Next steps:"
 echo "1) source ~/.bashrc"
 echo "2) vi ~/.gitconfig-user"
-echo "3) :PlugInstall"
+echo "3) Open nvim and let plugins install"
+echo "4) Reboot to start SDDM"

@@ -1,7 +1,7 @@
 export LC_ALL=en_US.UTF-8
 
 PS1="$ \W :. "
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$HOME/.local/sbin:$PATH"
 export CLICOLOR=1
 export GPG_TTY=$(tty)
 
