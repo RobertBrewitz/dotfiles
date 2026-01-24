@@ -4,6 +4,40 @@ local nnoremap = Remap.nnoremap
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Helper to check if a window is floating
+local function is_floating(win)
+  local config = vim.api.nvim_win_get_config(win)
+  return config.relative ~= ""
+end
+
+-- Find the first non-NvimTree, non-floating window
+local function find_main_window()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if not is_floating(win) then
+      local buf = vim.api.nvim_win_get_buf(win)
+      local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
+      if ft ~= "NvimTree" then
+        return win
+      end
+    end
+  end
+  return nil
+end
+
+-- Find the NvimTree window
+local function find_nvim_tree_window()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if not is_floating(win) then
+      local buf = vim.api.nvim_win_get_buf(win)
+      local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
+      if ft == "NvimTree" then
+        return win
+      end
+    end
+  end
+  return nil
+end
+
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argc() == 0 then
@@ -16,7 +50,12 @@ vim.api.nvim_create_autocmd("VimEnter", {
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   callback = function()
     if vim.fn.argc() == 0 then
-      local ft = vim.api.nvim_buf_get_option(0, "filetype")
+      -- Skip floating windows
+      if is_floating(vim.api.nvim_get_current_win()) then
+        return
+      end
+
+      local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 
       if ft == "NvimTree" or ft == "screenkey" or ft == "notify" then
         return
@@ -30,22 +69,20 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 
 -- Opens NvimTree and switches between the active window and NvimTree
 function ToggleNvimTree()
-  local nvim_tree = nil
-  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-    if ft == "NvimTree" then
-      nvim_tree = win
-      break
-    end
-  end
+  local nvim_tree = find_nvim_tree_window()
 
   if not nvim_tree then
     vim.cmd("NvimTreeOpen")
   else
-    if vim.api.nvim_get_current_win() == nvim_tree then
-      vim.cmd("wincmd p")
+    local current_win = vim.api.nvim_get_current_win()
+    if current_win == nvim_tree then
+      -- We're in NvimTree, switch to the main window
+      local main_win = find_main_window()
+      if main_win then
+        vim.api.nvim_set_current_win(main_win)
+      end
     else
+      -- We're not in NvimTree, switch to it
       vim.api.nvim_set_current_win(nvim_tree)
     end
   end
@@ -56,28 +93,31 @@ end
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.defer_fn(function()
+      -- Avoid running during cmdline window or if we're already quitting
+      if vim.fn.getcmdwintype() ~= "" then
+        return
+      end
+
       local wins = vim.api.nvim_tabpage_list_wins(0)
-      local accounted_windows = 0
+      local dominated_filetypes = { NvimTree = true, screenkey = true, notify = true }
+      local has_main_window = false
 
       for _, win in ipairs(wins) do
-        local buf = vim.api.nvim_win_get_buf(win)
-        local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+        -- Skip floating windows entirely
+        if not is_floating(win) then
+          local buf = vim.api.nvim_win_get_buf(win)
+          local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
 
-        if ft == "NvimTree" then
-          accounted_windows = accounted_windows + 1
-        end
-
-        if ft == "screenkey" then
-          accounted_windows = accounted_windows + 1
-        end
-
-        if ft == "notify" then
-          accounted_windows = accounted_windows + 1
+          if not dominated_filetypes[ft] then
+            has_main_window = true
+            break
+          end
         end
       end
 
-      if accounted_windows == #wins then
-        vim.cmd("quit")
+      if not has_main_window then
+        -- Use pcall to safely quit without errors
+        pcall(vim.cmd, "quit")
       end
     end, 50)
   end,
