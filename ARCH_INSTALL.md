@@ -21,6 +21,13 @@ If you already have Ubuntu installed:
 - The EFI partition is shared - don't format it
 - GRUB will be reinstalled and will detect Windows automatically
 
+### Installing into existing unallocated space
+
+If you already have unallocated space from removing Linux:
+- Skip to Step 3 (Connect to Internet)
+- In Step 4, just create new partition(s) from free space
+- The EFI partition is shared - don't format it
+
 ---
 
 ## 1. Create Bootable USB
@@ -88,17 +95,23 @@ You can either:
 - **Reuse Ubuntu partitions** - just format them in the next step
 - **Resize/repartition** - use `cfdisk /dev/nvme0n1` to adjust
 
-### If creating new partitions
+### If creating new partitions from unallocated space
 
-In cfdisk, select "Free space" and create:
-1. **Root partition** - 100GB, type "Linux filesystem"
-2. **Home partition** - remaining space, type "Linux filesystem"
+```bash
+cfdisk /dev/nvme0n1   # or /dev/sda
+```
+
+Select "Free space" and create:
+1. **Root partition** - 100GB+ (or all space if no separate home), type "Linux filesystem"
+2. **Home partition** (optional) - remaining space, type "Linux filesystem"
+
+Write and quit.
 
 ### Partition summary
 
 | Partition | Type | Mount | Format? |
 |-----------|------|-------|---------|
-| EFI (existing) | vfat | /boot | **NO** |
+| EFI (existing) | vfat | /boot/efi | **NO** |
 | Root | ext4 | / | Yes |
 | Home | ext4 | /home | Yes (or No to keep data) |
 
@@ -117,10 +130,17 @@ mkfs.ext4 /dev/nvme0n1pY
 ### Mount partitions
 
 ```bash
-mount /dev/nvme0n1pX /mnt              # root
-mount --mkdir /dev/nvme0n1pY /mnt/home # home
-mount --mkdir /dev/nvme0n1pZ /mnt/boot # existing EFI
+# Mount root first
+mount /dev/nvme0n1pX /mnt
+
+# Mount home (if separate)
+mount --mkdir /dev/nvme0n1pY /mnt/home
+
+# Mount EFI at /boot/efi (keeps kernels on root, only bootloader on EFI)
+mount --mkdir /dev/nvme0n1p1 /mnt/boot/efi
 ```
+
+> **Note:** We mount EFI at `/boot/efi` rather than `/boot` because the Windows EFI partition is only ~200MB. This keeps your kernels on the larger ext4 root partition and only puts the GRUB bootloader on the small EFI partition.
 
 ---
 
@@ -131,7 +151,7 @@ mount --mkdir /dev/nvme0n1pZ /mnt/boot # existing EFI
 reflector --country US --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 # Install base system
-pacstrap -K /mnt base linux linux-firmware sudo vim git networkmanager grub efibootmgr
+pacstrap -K /mnt base linux linux-firmware sudo vim git networkmanager grub efibootmgr os-prober
 
 # For Intel CPU, add: intel-ucode
 # For AMD CPU, add: amd-ucode
@@ -181,14 +201,20 @@ systemctl enable NetworkManager
 ## 7. Install Bootloader
 
 ```bash
-# Install GRUB
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+# Install GRUB (note: efi-directory matches mount point)
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 
 # Enable os-prober for dual boot
 echo "GRUB_DISABLE_OS_PROBER=false" >> /etc/default/grub
 
-# Generate config
+# Generate config (should detect Windows automatically)
 grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+If Windows isn't detected, make sure os-prober is installed and the Windows partition is accessible:
+```bash
+os-prober
+# Should output something like: /dev/nvme0n1p3:Windows Boot Manager:Windows:efi
 ```
 
 ---
@@ -275,10 +301,23 @@ GRUB_CMDLINE_LINUX_DEFAULT="nvidia_drm.modeset=1"
 ```
 Then run `sudo grub-mkconfig -o /boot/grub/grub.cfg`
 
-### Dual boot not showing other OS
+### Dual boot not showing Windows
 ```bash
+# Make sure os-prober is installed
+sudo pacman -S os-prober
+
+# Check if it detects Windows
 sudo os-prober
+
+# Regenerate GRUB config
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+### GRUB error: /boot doesn't look like EFI partition
+You're mounting EFI at the wrong location. Use `/boot/efi`:
+```bash
+mount /dev/nvme0n1p1 /mnt/boot/efi
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 ```
 
 ### No sound
@@ -290,4 +329,19 @@ systemctl --user restart pipewire wireplumber pipewire-pulse
 Linux uses UTC, Windows uses local time. Fix by making Linux use local time:
 ```bash
 timedatectl set-local-rtc 1 --adjust-system-clock
+```
+
+### Booting lands in GRUB command line
+GRUB can't find its config. Boot manually:
+```bash
+ls                          # find your partitions
+set root=(hd0,gptX)         # your root partition
+linux /boot/vmlinuz-linux root=/dev/nvme0n1pX rw
+initrd /boot/initramfs-linux.img
+boot
+```
+Once booted, fix GRUB:
+```bash
+sudo mount /dev/nvme0n1p1 /boot/efi
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
