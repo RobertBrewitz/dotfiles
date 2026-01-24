@@ -38,7 +38,7 @@ sudo pacman -S --noconfirm --needed \
     brightnessctl \
     power-profiles-daemon \
     libnotify \
-    mako
+    dunst
 
 echo "Installing basic fonts"
 sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji ttf-liberation ttf-dejavu
@@ -127,11 +127,15 @@ sudo pacman -S --noconfirm --needed bluez bluez-utils blueman
 sudo systemctl enable --now bluetooth
 
 echo "Installing SDDM display manager"
-sudo pacman -S --noconfirm --needed sddm
+sudo pacman -S --noconfirm --needed sddm qt6-svg qt6-declarative
+yay -S --noconfirm catppuccin-sddm-theme-mocha
 sudo mkdir -p /etc/sddm.conf.d
 cat << 'EOF' | sudo tee /etc/sddm.conf.d/10-wayland.conf
 [General]
 DisplayServer=wayland
+
+[Theme]
+Current=catppuccin-mocha
 
 [Wayland]
 SessionDir=/usr/share/wayland-sessions
