@@ -25,6 +25,10 @@ ln -sfT "$DOTFILES/config/gtk-4.0" "$HOME/.config/gtk-4.0"
 ln -sfT "$DOTFILES/config/wofi" "$HOME/.config/wofi"
 ln -sfT "$DOTFILES/config/dunst" "$HOME/.config/dunst"
 
+# User bin scripts
+mkdir -p "$HOME/.local/bin"
+ln -sf "$DOTFILES/bin/less" "$HOME/.local/bin/less"
+
 # User files
 ln -sf "$DOTFILES/gitconfig" "$HOME/.gitconfig"
 ln -sf "$DOTFILES/gitignore" "$HOME/.gitignore"

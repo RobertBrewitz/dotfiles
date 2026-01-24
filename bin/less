@@ -1,0 +1,3 @@
+#!/bin/sh
+# Wrapper to fix less search in kitty terminal
+exec env TERM=xterm /usr/bin/less "$@"
