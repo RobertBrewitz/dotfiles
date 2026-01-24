@@ -18,7 +18,7 @@ ln -sfT "$DOTFILES/nvim" "$HOME/.config/nvim"
 
 # User directories
 ln -sfT "$DOTFILES/config/hypr" "$HOME/.config/hypr"
-ln -sfT "$DOTFILES/config/foot" "$HOME/.config/foot"
+ln -sfT "$DOTFILES/config/kitty" "$HOME/.config/kitty"
 ln -sfT "$DOTFILES/config/waybar" "$HOME/.config/waybar"
 ln -sfT "$DOTFILES/config/nvim" "$HOME/.config/nvim"
 

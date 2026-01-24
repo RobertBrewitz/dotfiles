@@ -4,7 +4,7 @@ echo "Upgrading and updating pacman"
 sudo pacman -Syu --noconfirm
 
 echo "Installing dependencies"
-sudo pacman -S --noconfirm --needed curl pkgconf base-devel wl-clipboard
+sudo pacman -S --noconfirm --needed curl pkgconf base-devel wl-clipboard unzip
 
 echo "Installing yay (AUR helper)"
 if ! command -v yay &> /dev/null; then
@@ -22,7 +22,7 @@ sudo pacman -S --noconfirm --needed \
     hyprlock \
     hypridle \
     hyprpaper \
-    foot \
+    kitty \
     wofi \
     xdg-desktop-portal-hyprland \
     polkit-kde-agent \
@@ -35,6 +35,9 @@ sudo pacman -S --noconfirm --needed \
     power-profiles-daemon \
     libnotify \
     mako
+
+echo "Installing basic fonts"
+sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji ttf-liberation ttf-dejavu
 
 echo "Enabling power-profiles-daemon"
 sudo systemctl enable --now power-profiles-daemon
@@ -73,12 +76,6 @@ sudo pacman -S --noconfirm --needed the_silver_searcher
 
 echo "Adding ~/.profile to ~/.bashrc"
 echo "[ -f ~/.profile ] && source ~/.profile" | sudo tee -a ~/.bashrc
-
-echo "Installing tmux"
-sudo pacman -S --noconfirm --needed tmux
-
-echo "Installing tmux plugin manager"
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Installing editorconfig core"
 sudo pacman -S --noconfirm --needed editorconfig-core-c
