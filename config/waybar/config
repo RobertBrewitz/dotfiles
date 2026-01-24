@@ -10,31 +10,34 @@
         "format": "{name}"
     },
     "clock": {
-        "format": "{:%a %b %d  %H:%M}",
+        "format": "󰥔 {:%a %b %d  %H:%M}",
         "tooltip-format": "{:%Y-%m-%d}"
     },
     "network": {
-        "format-wifi": " {signalStrength}%",
-        "format-ethernet": "",
-        "format-disconnected": "⚠",
+        "format-wifi": "󰤨 {signalStrength}%",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤭",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "on-click": "nm-connection-editor"
     },
     "bluetooth": {
-        "format": "",
-        "format-off": "",
+        "format": "󰂯",
+        "format-off": "󰂲",
+        "format-connected": "󰂱 {num_connections}",
         "on-click": "blueman-manager"
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "",
-        "format-icons": ["", "", ""],
+        "format-muted": "󰝟",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
         "on-click": "pavucontrol"
     },
     "battery": {
         "format": "{icon} {capacity}%",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": " {capacity}%"
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format-charging": "󰂄 {capacity}%"
     },
     "tray": {
         "spacing": 10
