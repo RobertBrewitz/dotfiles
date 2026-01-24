@@ -67,6 +67,7 @@ fi
 
 if [ -d $HOME/neovim ]; then
   export PATH="$HOME/neovim/usr/bin:$PATH"
+  export SUDO_EDITOR=$HOME/neovim/usr/bin/nvim
 else
   if [ -x "$(command -v curl)" ]; then
     echo "#################"
