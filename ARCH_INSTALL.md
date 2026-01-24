@@ -1,24 +1,25 @@
 # Arch Linux Installation Guide
 
-## Prerequisites for Windows Dual Boot
+## Prerequisites
 
-Before starting, do these in Windows:
+### Fresh install alongside Windows
 
-1. **Disable Fast Startup** (required - prevents filesystem corruption)
+1. **Disable Fast Startup** in Windows (prevents filesystem corruption)
    - Control Panel → Power Options → Choose what power buttons do
    - Click "Change settings that are currently unavailable"
-   - Uncheck "Turn on fast startup"
-   - Save changes
+   - Uncheck "Turn on fast startup" → Save
 
-2. **Shrink Windows partition** to make space for Arch
-   - Right-click Start → Disk Management
-   - Right-click Windows partition (usually C:) → Shrink Volume
-   - Shrink by at least 100GB (100000 MB)
-   - Leave the space as "Unallocated"
+2. **Shrink Windows partition** in Disk Management (right-click Start)
+   - Right-click C: → Shrink Volume → Shrink by 100GB+
 
-3. **Note your EFI partition** - usually 100-512MB, labeled "EFI System Partition"
+3. **Disable Secure Boot** in BIOS
 
-4. **Disable Secure Boot** in BIOS (do this when you boot the USB)
+### Replacing Ubuntu (keeping Windows)
+
+If you already have Ubuntu installed:
+- You can reuse Ubuntu's partitions (just format them during install)
+- The EFI partition is shared - don't format it
+- GRUB will be reinstalled and will detect Windows automatically
 
 ---
 
@@ -70,38 +71,47 @@ ping -c 3 archlinux.org
 ```bash
 # List disks - identify your partitions
 lsblk -f
-
-# You should see something like:
-# nvme0n1p1  vfat   EFI        <- Windows EFI (DO NOT TOUCH)
-# nvme0n1p2         Microsoft reserved
-# nvme0n1p3  ntfs   Windows    <- Windows C: drive
-# nvme0n1p4  ntfs   Recovery
-# (free space you created earlier)
-
-# Create partitions in the free space
-cfdisk /dev/nvme0n1
 ```
 
-In cfdisk, select the "Free space" and create:
+### If replacing Ubuntu
+
+You'll see Ubuntu's existing partitions (ext4). Note which ones are Ubuntu's root/home:
+```
+nvme0n1p1  vfat   EFI         <- Shared EFI (DO NOT FORMAT)
+nvme0n1p2         Microsoft reserved
+nvme0n1p3  ntfs   Windows     <- Windows (DO NOT TOUCH)
+nvme0n1p5  ext4   Ubuntu root <- Reuse for Arch root
+nvme0n1p6  ext4   Ubuntu home <- Reuse for Arch home (or keep data)
+```
+
+You can either:
+- **Reuse Ubuntu partitions** - just format them in the next step
+- **Resize/repartition** - use `cfdisk /dev/nvme0n1` to adjust
+
+### If creating new partitions
+
+In cfdisk, select "Free space" and create:
 1. **Root partition** - 100GB, type "Linux filesystem"
 2. **Home partition** - remaining space, type "Linux filesystem"
 
-Write and quit.
+### Partition summary
 
-### After partitioning you should have:
+| Partition | Type | Mount | Format? |
+|-----------|------|-------|---------|
+| EFI (existing) | vfat | /boot | **NO** |
+| Root | ext4 | / | Yes |
+| Home | ext4 | /home | Yes (or No to keep data) |
 
-| Partition | Size | Type | Mount | Format? |
-|-----------|------|------|-------|---------|
-| nvme0n1p1 | 100-512M | EFI (existing) | /boot | **NO** |
-| nvme0n1pX | 100G | Linux filesystem | / | Yes |
-| nvme0n1pY | Remaining | Linux filesystem | /home | Yes |
-
-### Format NEW partitions only
+### Format partitions
 
 ```bash
-# ONLY format the new Linux partitions - NEVER format EFI or Windows partitions
-mkfs.ext4 /dev/nvme0n1pX   # your new root partition
-mkfs.ext4 /dev/nvme0n1pY   # your new home partition
+# Format root (REQUIRED)
+mkfs.ext4 /dev/nvme0n1pX
+
+# Format home (optional - skip to keep existing data)
+mkfs.ext4 /dev/nvme0n1pY
+
+# NEVER format EFI or Windows/NTFS partitions
 ```
 
 ### Mount partitions
