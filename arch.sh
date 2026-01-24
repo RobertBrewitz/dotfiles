@@ -111,6 +111,50 @@ echo "Fix crackling audio in pipewire"
 sudo sed -i 's/#pulse.min.quantum      = 128/pulse.min.quantum      = 1024/g' /usr/share/pipewire/pipewire-pulse.conf
 sudo systemctl --user restart wireplumber pipewire pipewire-pulse
 
+echo "Installing bootloader utilities (os-prober for dual boot)"
+sudo pacman -S --noconfirm --needed os-prober efibootmgr
+sudo sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+echo "Installing WiFi (NetworkManager)"
+sudo pacman -S --noconfirm --needed networkmanager network-manager-applet
+sudo systemctl enable --now NetworkManager
+
+echo "Installing Bluetooth"
+sudo pacman -S --noconfirm --needed bluez bluez-utils blueman
+sudo systemctl enable --now bluetooth
+
+echo "Installing SDDM display manager"
+sudo pacman -S --noconfirm --needed sddm
+sudo mkdir -p /etc/sddm.conf.d
+cat << 'EOF' | sudo tee /etc/sddm.conf.d/10-wayland.conf
+[General]
+DisplayServer=wayland
+
+[Wayland]
+SessionDir=/usr/share/wayland-sessions
+EOF
+sudo systemctl enable sddm
+
+echo "Installing printing (CUPS)"
+sudo pacman -S --noconfirm --needed cups cups-pdf avahi nss-mdns system-config-printer
+sudo systemctl enable --now cups
+sudo systemctl enable --now avahi-daemon
+sudo sed -i 's/hosts: mymachines/hosts: mymachines mdns_minimal [NOTFOUND=return]/' /etc/nsswitch.conf
+
+echo "Installing display settings tool"
+sudo pacman -S --noconfirm --needed wdisplays
+
+echo "Installing Waybar and dependencies"
+sudo pacman -S --noconfirm --needed waybar otf-font-awesome pavucontrol
+
+echo "Installing screenshot and recording tools"
+sudo pacman -S --noconfirm --needed grim slurp wf-recorder
+
+echo "Installing system maintenance tools"
+sudo pacman -S --noconfirm --needed pacman-contrib reflector
+sudo systemctl enable --now paccache.timer
+
 echo "##########################################"
 echo "#             Setup completed            #"
 echo "##########################################"

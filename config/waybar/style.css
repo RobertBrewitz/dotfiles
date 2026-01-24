@@ -1,0 +1,34 @@
+* {
+    font-family: "UbuntuSans Nerd Font", "Font Awesome 6 Free";
+    font-size: 13px;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0.8);
+    color: #cdd6f4;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: #cdd6f4;
+}
+
+#workspaces button.active {
+    color: #89b4fa;
+}
+
+#clock, #battery, #network, #bluetooth, #pulseaudio, #tray {
+    padding: 0 10px;
+}
+
+#battery.charging {
+    color: #a6e3a1;
+}
+
+#battery.warning:not(.charging) {
+    color: #f9e2af;
+}
+
+#battery.critical:not(.charging) {
+    color: #f38ba8;
+}

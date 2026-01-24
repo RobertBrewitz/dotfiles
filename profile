@@ -81,3 +81,10 @@ else
     export PATH="$HOME/neovim/usr/bin:$PATH"
   fi
 fi
+
+# Arch maintenance
+alias orphans="pacman -Qtdq"
+alias orphans-remove="sudo pacman -Rns \$(pacman -Qtdq) 2>/dev/null || echo 'No orphans'"
+alias cache-clean="sudo paccache -r"
+alias mirror-update="sudo reflector --country US --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+alias checkup="checkupdates"
