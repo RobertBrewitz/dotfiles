@@ -33,6 +33,8 @@ sudo pacman -S --noconfirm --needed \
     pipewire \
     wireplumber \
     pipewire-pulse \
+    alsa-utils \
+    sof-firmware \
     qt5-wayland \
     qt6-wayland \
     brightnessctl \
