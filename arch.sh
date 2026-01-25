@@ -33,6 +33,7 @@ sudo pacman -S --noconfirm --needed \
     pipewire \
     wireplumber \
     pipewire-pulse \
+    pipewire-alsa \
     alsa-utils \
     sof-firmware \
     qt5-wayland \
