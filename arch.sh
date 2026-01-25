@@ -48,7 +48,7 @@ sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\([^"]*\)"/GRUB_CMDLINE_LINUX_DEFAULT
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "Installing basic fonts"
-sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji ttf-liberation ttf-dejavu
+sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-dejavu
 
 echo "Enabling power-profiles-daemon"
 sudo systemctl enable --now power-profiles-daemon
