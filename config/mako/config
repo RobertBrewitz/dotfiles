@@ -1,0 +1,17 @@
+# Catppuccin Mocha (black background variant)
+background-color=#000000
+text-color=#cdd6f4
+border-color=#cba6f7
+border-radius=10
+border-size=2
+padding=10
+default-timeout=5000
+
+[urgency=low]
+border-color=#89b4fa
+
+[urgency=normal]
+border-color=#cba6f7
+
+[urgency=high]
+border-color=#f38ba8
