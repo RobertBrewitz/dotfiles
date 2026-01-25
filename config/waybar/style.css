@@ -28,7 +28,7 @@ window#waybar {
     background: @surface0;
 }
 
-#clock, #battery, #network, #bluetooth, #pulseaudio, #tray {
+#clock, #battery, #network, #bluetooth, #pulseaudio, #power-profiles-daemon {
     padding: 0 10px;
     color: @text;
 }
@@ -65,6 +65,14 @@ window#waybar {
     color: @red;
 }
 
-#tray {
-    color: @text;
+#power-profiles-daemon.power-saver {
+    color: @green;
+}
+
+#power-profiles-daemon.balanced {
+    color: @yellow;
+}
+
+#power-profiles-daemon.performance {
+    color: @peach;
 }
