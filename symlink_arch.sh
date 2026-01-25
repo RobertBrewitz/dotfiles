@@ -25,6 +25,10 @@ ln -sfT "$DOTFILES/config/gtk-4.0" "$HOME/.config/gtk-4.0"
 ln -sfT "$DOTFILES/config/wofi" "$HOME/.config/wofi"
 ln -sfT "$DOTFILES/config/dunst" "$HOME/.config/dunst"
 
+# User applications (desktop entries)
+mkdir -p "$HOME/.local/share/applications"
+ln -sf "$DOTFILES/config/applications/google-chrome.desktop" "$HOME/.local/share/applications/google-chrome.desktop"
+
 # User bin scripts
 mkdir -p "$HOME/.local/bin"
 ln -sf "$DOTFILES/bin/less" "$HOME/.local/bin/less"

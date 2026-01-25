@@ -1,5 +1,24 @@
 # Dotfiles
 
+## Setup Arch Linux
+
+```bash
+git clone git@github.com:RobertBrewitz/dotfiles.git
+cd dotfiles
+sh arch.sh
+```
+
+### Chrome Video Playback Fix (NVIDIA + Wayland)
+
+Chrome has issues with VP9 hardware video decode on NVIDIA with native Wayland, causing page freezes during video playback. The workaround is to run Chrome under XWayland.
+
+The dotfiles include a custom `.desktop` file that launches Chrome with `--ozone-platform=x11`. This is automatically symlinked to `~/.local/share/applications/` by `symlink_arch.sh`.
+
+A shell alias is also added to `profile`:
+```bash
+alias chrome='google-chrome-stable --ozone-platform=x11'
+```
+
 ## NPM Security
 
 The install scripts set `ignore-scripts` to true to ignore any pre- and post-install hooks from npm packages.
