@@ -4,7 +4,7 @@
     "height": 30,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["power-profiles-daemon", "network", "bluetooth", "pulseaudio", "battery", "tray"],
+    "modules-right": ["network", "bluetooth", "pulseaudio", "battery", "power-profiles-daemon"],
 
     "hyprland/workspaces": {
         "format": "{name}"
@@ -38,9 +38,6 @@
         "format": "{icon} {capacity}%",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
         "format-charging": "󰂄 {capacity}%"
-    },
-    "tray": {
-        "spacing": 10
     },
     "power-profiles-daemon": {
         "format": "{icon}",
