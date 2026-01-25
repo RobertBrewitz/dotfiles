@@ -31,12 +31,16 @@ return {
         custom_highlights = function(colors)
           return {
             WinSeparator = { fg = colors.overlay1 },
-            BlinkCmpDocBorder = { fg = colors.blue },
+            NormalFloat = { bg = "NONE" },
+            FloatBorder = { bg = "NONE" },
+            BlinkCmpDoc = { bg = "NONE" },
+            BlinkCmpDocBorder = { fg = colors.blue, bg = "NONE" },
             BlinkCmpKind = { fg = colors.blue },
-            BlinkCmpMenu = { fg = colors.text },
-            BlinkCmpMenuBorder = { fg = colors.blue, bg = colors.base },
+            BlinkCmpMenu = { fg = colors.text, bg = "NONE" },
+            BlinkCmpMenuBorder = { fg = colors.blue, bg = "NONE" },
+            BlinkCmpSignatureHelp = { bg = "NONE" },
             BlinkCmpSignatureHelpActiveParameter = { fg = colors.mauve },
-            BlinkCmpSignatureHelpBorder = { fg = colors.blue },
+            BlinkCmpSignatureHelpBorder = { fg = colors.blue, bg = "NONE" },
           }
         end,
         color_overrides = {
