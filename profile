@@ -16,6 +16,7 @@ alias open="xdg-open"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias chrome='google-chrome-stable --ozone-platform=x11'
 
 # Git aliases
 alias gf="git fetch --all --prune"

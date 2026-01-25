@@ -43,7 +43,7 @@ sudo pacman -S --noconfirm --needed \
     mako
 
 echo "Installing NVIDIA drivers"
-sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver
+sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver libva-utils
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\([^"]*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 nvidia_drm.modeset=1"/' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
@@ -169,6 +169,9 @@ sudo pacman -S --noconfirm --needed grim slurp wf-recorder
 
 echo "Installing media controls and clipboard manager"
 sudo pacman -S --noconfirm --needed playerctl cliphist
+
+echo "Installing media players"
+sudo pacman -S --noconfirm --needed vlc
 
 echo "Installing system maintenance tools"
 sudo pacman -S --noconfirm --needed pacman-contrib reflector
