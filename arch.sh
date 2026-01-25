@@ -40,7 +40,7 @@ sudo pacman -S --noconfirm --needed \
     brightnessctl \
     power-profiles-daemon \
     libnotify \
-    dunst
+    mako
 
 echo "Installing NVIDIA drivers"
 sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver
