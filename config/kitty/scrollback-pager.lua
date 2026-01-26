@@ -26,8 +26,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
     baleia.once(vim.api.nvim_get_current_buf())
     vim.cmd("normal G")
     vim.bo.buftype = "nofile"
-    vim.schedule(function()
+    vim.defer_fn(function()
       vim.bo.modifiable = false
-    end)
+    end, 100)
   end,
 })
