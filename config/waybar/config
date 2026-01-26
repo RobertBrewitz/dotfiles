@@ -4,13 +4,13 @@
     "height": 30,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["network", "bluetooth", "pulseaudio", "battery", "power-profiles-daemon"],
+    "modules-right": ["bluetooth", "network", "pulseaudio", "backlight", "battery", "power-profiles-daemon"],
 
     "hyprland/workspaces": {
         "format": "{name}"
     },
     "clock": {
-        "format": "󰥔 {:%a %b %d  %H:%M}",
+        "format": "󰥔  {:%a %b %d  %H:%M}",
         "tooltip-format": "{:%Y-%m-%d}"
     },
     "network": {
@@ -33,6 +33,13 @@
             "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "pavucontrol"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl -d intel_backlight set +5%",
+        "on-scroll-down": "brightnessctl -d intel_backlight set 5%-"
     },
     "battery": {
         "format": "{icon} {capacity}%",
