@@ -4,10 +4,16 @@
     "height": 30,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["bluetooth", "network", "pulseaudio", "backlight", "battery", "power-profiles-daemon"],
+    "modules-right": ["hyprland/language", "bluetooth", "network", "pulseaudio", "backlight", "battery", "power-profiles-daemon"],
 
     "hyprland/workspaces": {
         "format": "{name}"
+    },
+    "hyprland/language": {
+        "format": "󰌌 {}",
+        "format-en": "EN",
+        "format-sv": "SV",
+        "format-pl": "PL"
     },
     "clock": {
         "format": "󰥔  {:%a %b %d  %H:%M}",

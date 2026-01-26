@@ -28,7 +28,7 @@ window#waybar {
     background: @surface0;
 }
 
-#clock, #battery, #network, #bluetooth, #pulseaudio, #power-profiles-daemon {
+#clock, #battery, #network, #bluetooth, #pulseaudio, #power-profiles-daemon, #language {
     padding: 0 8px;
     color: @text;
 }
