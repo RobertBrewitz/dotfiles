@@ -171,8 +171,8 @@ sudo pacman -S --noconfirm --needed grim slurp wf-recorder
 echo "Installing media controls and clipboard manager"
 sudo pacman -S --noconfirm --needed playerctl cliphist
 
-echo "Installing media players"
-sudo pacman -S --noconfirm --needed vlc
+echo "Installing media player"
+sudo pacman -S --noconfirm --needed mpv
 
 echo "Installing system maintenance tools"
 sudo pacman -S --noconfirm --needed pacman-contrib reflector
