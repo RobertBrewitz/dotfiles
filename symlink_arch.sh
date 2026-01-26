@@ -32,6 +32,7 @@ ln -sf "$DOTFILES/config/applications/google-chrome.desktop" "$HOME/.local/share
 # User bin scripts
 mkdir -p "$HOME/.local/bin"
 ln -sf "$DOTFILES/bin/less" "$HOME/.local/bin/less"
+ln -sf "$DOTFILES/bin/capture" "$HOME/.local/bin/capture"
 
 # User files
 ln -sf "$DOTFILES/gitconfig" "$HOME/.gitconfig"

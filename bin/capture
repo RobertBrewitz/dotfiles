@@ -1,0 +1,72 @@
+#!/bin/bash
+# Unified screen capture tool for Hyprland
+# Dependencies: grim, slurp, wf-recorder, wofi, wl-copy, notify-send
+
+SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
+RECORDING_DIR="$HOME/Videos/Recordings"
+RECORDING_PID_FILE="/tmp/capture-recording.pid"
+
+mkdir -p "$SCREENSHOT_DIR" "$RECORDING_DIR"
+
+# Check if currently recording
+if [[ -f "$RECORDING_PID_FILE" ]]; then
+    pid=$(cat "$RECORDING_PID_FILE")
+    if kill -0 "$pid" 2>/dev/null; then
+        kill -SIGINT "$pid"
+        rm -f "$RECORDING_PID_FILE"
+        notify-send "Recording" "Stopped and saved"
+        exit 0
+    else
+        rm -f "$RECORDING_PID_FILE"
+    fi
+fi
+
+# Menu options
+capture_type=$(printf "Screenshot\nRecord" | wofi --dmenu --prompt "Capture type")
+[[ -z "$capture_type" ]] && exit 0
+
+area=$(printf "Region\nFullscreen" | wofi --dmenu --prompt "Area")
+[[ -z "$area" ]] && exit 0
+
+cursor=$(printf "Hide cursor\nShow cursor" | wofi --dmenu --prompt "Cursor")
+[[ -z "$cursor" ]] && exit 0
+
+# Build command options
+cursor_opt=""
+[[ "$cursor" == "Hide cursor" ]] && cursor_opt="-c"
+
+timestamp=$(date +'%Y%m%d_%H%M%S')
+
+if [[ "$capture_type" == "Screenshot" ]]; then
+    output="$SCREENSHOT_DIR/$timestamp.png"
+
+    if [[ "$area" == "Region" ]]; then
+        geometry=$(slurp)
+        [[ -z "$geometry" ]] && exit 0
+        grim $cursor_opt -g "$geometry" "$output"
+    else
+        grim $cursor_opt "$output"
+    fi
+
+    wl-copy < "$output"
+    notify-send "Screenshot" "Saved and copied to clipboard" -i "$output"
+
+elif [[ "$capture_type" == "Record" ]]; then
+    output="$RECORDING_DIR/$timestamp.mp4"
+
+    # wf-recorder uses --no-cursor to hide cursor (opposite of grim)
+    rec_cursor_opt=""
+    [[ "$cursor" == "Hide cursor" ]] && rec_cursor_opt="--no-cursor"
+
+    if [[ "$area" == "Region" ]]; then
+        geometry=$(slurp)
+        [[ -z "$geometry" ]] && exit 0
+        notify-send "Recording" "Started (Press Print Screen to stop)"
+        wf-recorder $rec_cursor_opt -g "$geometry" -f "$output" &
+    else
+        notify-send "Recording" "Started (Press Print Screen to stop)"
+        wf-recorder $rec_cursor_opt -f "$output" &
+    fi
+
+    echo $! > "$RECORDING_PID_FILE"
+fi
