@@ -25,6 +25,7 @@ vim.opt.incsearch = true
 vim.opt.completeopt = "menuone,noinsert,noselect"
 
 -- formatting
+vim.opt.conceallevel = 2
 vim.opt.smartindent = true
 -- vim.opt.expandtab = true -- editorconfig indent_style
 -- vim.opt.tabstop = 2 -- editorconfig tab_width
