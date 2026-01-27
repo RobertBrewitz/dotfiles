@@ -13,14 +13,6 @@ return {
       local nnoremap = Remap.nnoremap
       local rust_target = "x86_64-unknown-linux-gnu"
 
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "single",
-      })
-
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
-        border = "single",
-      })
-
       vim.lsp.enable("gopls", opts)
 
       -- NOTE: WGSL wgsl_analyzer does not provide inlay hints, garbage
