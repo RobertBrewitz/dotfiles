@@ -43,9 +43,55 @@ vim.opt.listchars = "tab:▸ ,eol:¬,trail:·"
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.showtabline = 2
---vim.opt.statusline = "%#NvimTreeFolderName#%<%f"-- %h%m%r%=%-14.(%l,%c%V%) %P"
---vim.opt.tabline = "%#NvimTreeFolderName#%1*%T"
---vim.opt.guitablabel = "%#NvimTreeFolderName#%<%f"
+vim.opt.laststatus = 3
+
+function _G.MyTabline()
+  local s = ''
+  for i = 1, vim.fn.tabpagenr('$') do
+    local buflist = vim.fn.tabpagebuflist(i)
+    local winnr = vim.fn.tabpagewinnr(i)
+    local bufnr = buflist[winnr]
+    local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+
+    -- If current window is NvimTree, find a real file buffer in this tab
+    if ft == "NvimTree" then
+      bufnr = nil
+      for _, b in ipairs(buflist) do
+        local bft = vim.api.nvim_get_option_value("filetype", { buf = b })
+        if bft ~= "NvimTree" and bft ~= "notify" and bft ~= "screenkey" then
+          bufnr = b
+          break
+        end
+      end
+    end
+
+    local label
+    if bufnr then
+      local bufname = vim.fn.bufname(bufnr)
+      local filename = vim.fn.fnamemodify(bufname, ':t')
+      local parent = vim.fn.fnamemodify(bufname, ':p:h:t')
+      label = parent .. '/' .. filename
+      if filename == '' then
+        label = '[No Name]'
+      end
+    else
+      label = '[Explorer]'
+    end
+
+    if i == vim.fn.tabpagenr() then
+      s = s .. '%#TabLineSel#'
+    else
+      s = s .. '%#TabLine#'
+    end
+
+    s = s .. ' ' .. label .. ' '
+  end
+
+  s = s .. '%#TabLineFill#'
+  return s
+end
+
+vim.opt.tabline = '%!v:lua.MyTabline()'
 vim.opt.signcolumn = "yes"
 vim.opt.cmdheight = 1
 vim.opt.shortmess:append("c")
