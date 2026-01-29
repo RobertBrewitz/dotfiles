@@ -70,9 +70,13 @@ function _G.MyTabline()
       local bufname = vim.fn.bufname(bufnr)
       local filename = vim.fn.fnamemodify(bufname, ':t')
       local parent = vim.fn.fnamemodify(bufname, ':p:h:t')
+      local modified = vim.api.nvim_get_option_value("modified", { buf = bufnr })
       label = parent .. '/' .. filename
       if filename == '' then
         label = '[No Name]'
+      end
+      if modified then
+        label = label .. ' ●'
       end
     else
       label = '[Explorer]'
