@@ -43,7 +43,7 @@ vim.opt.listchars = "tab:▸ ,eol:¬,trail:·"
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.showtabline = 2
-vim.opt.laststatus = 3
+vim.opt.laststatus = 0
 
 function _G.MyTabline()
   local s = ''
