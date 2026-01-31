@@ -45,6 +45,9 @@ source ~/.profile
 rustup component add rust-analyzer
 cargo install cross --git https://github.com/cross-rs/cross
 
+echo "Installing tree-sitter-cli for neovim treesitter"
+cargo install tree-sitter-cli
+
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
 
