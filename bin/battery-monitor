@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Battery monitor - notifications at various thresholds
+
+NOTIFIED_50=0
+NOTIFIED_40=0
+NOTIFIED_30=0
+NOTIFIED_20=0
+NOTIFIED_10=0
+
+while true; do
+    BATTERY=$(cat /sys/class/power_supply/BAT0/capacity)
+    STATUS=$(cat /sys/class/power_supply/BAT0/status)
+
+    if [[ "$STATUS" == "Charging" ]]; then
+        NOTIFIED_50=0
+        NOTIFIED_40=0
+        NOTIFIED_30=0
+        NOTIFIED_20=0
+        NOTIFIED_10=0
+    else
+        if [[ "$BATTERY" -le 10 && "$NOTIFIED_10" -eq 0 ]]; then
+            notify-send -u critical "Low Battery" "Battery at ${BATTERY}%"
+            NOTIFIED_10=1
+        elif [[ "$BATTERY" -le 20 && "$NOTIFIED_20" -eq 0 ]]; then
+            notify-send -t 5000 "Battery" "Battery at ${BATTERY}%"
+            NOTIFIED_20=1
+        elif [[ "$BATTERY" -le 30 && "$NOTIFIED_30" -eq 0 ]]; then
+            notify-send -t 5000 "Battery" "Battery at ${BATTERY}%"
+            NOTIFIED_30=1
+        elif [[ "$BATTERY" -le 40 && "$NOTIFIED_40" -eq 0 ]]; then
+            notify-send -t 5000 "Battery" "Battery at ${BATTERY}%"
+            NOTIFIED_40=1
+        elif [[ "$BATTERY" -le 50 && "$NOTIFIED_50" -eq 0 ]]; then
+            notify-send -t 5000 "Battery" "Battery at ${BATTERY}%"
+            NOTIFIED_50=1
+        fi
+    fi
+
+    sleep 60
+done
