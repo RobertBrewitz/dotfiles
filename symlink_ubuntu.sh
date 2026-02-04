@@ -20,5 +20,6 @@ ln -sf $ABSOLUTE_PATH/profile $HOME/.profile
 ln -sf $ABSOLUTE_PATH/tern-project $HOME/.tern-project
 ln -sf $ABSOLUTE_PATH/tmux.conf $HOME/.tmux.conf
 ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
+ln -sf $ABSOLUTE_PATH/make-completion.bash $HOME/.make-completion.bash
 cp --update=none $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 

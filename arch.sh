@@ -8,7 +8,7 @@ echo "Upgrading and updating pacman"
 sudo pacman -Syu --noconfirm
 
 echo "Installing dependencies"
-sudo pacman -S --noconfirm --needed curl pkgconf base-devel wl-clipboard unzip less
+sudo pacman -S --noconfirm --needed curl pkgconf base-devel wl-clipboard unzip less bash-completion
 
 echo "Installing yay (AUR helper)"
 if ! command -v yay &> /dev/null; then

@@ -41,6 +41,14 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Bash completion
+[[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+
+# Make completion
+if [ -f $HOME/.make-completion.bash ]; then
+  . $HOME/.make-completion.bash
+fi
+
 # Git completion
 if [ -f $HOME/.git-completion.bash ]; then
   . $HOME/.git-completion.bash
