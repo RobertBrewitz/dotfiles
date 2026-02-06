@@ -29,7 +29,7 @@ sudo pacman -S --noconfirm --needed \
     kitty \
     wofi \
     xdg-desktop-portal-hyprland \
-    hyprpolkitagent \
+    polkit-kde-agent \
     pipewire \
     wireplumber \
     pipewire-pulse \
