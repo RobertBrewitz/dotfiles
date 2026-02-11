@@ -166,7 +166,7 @@ echo "Installing Thunar file manager"
 sudo pacman -S --noconfirm --needed thunar thunar-volman thunar-archive-plugin gvfs tumbler ffmpegthumbnailer
 
 echo "Installing Waybar and dependencies"
-sudo pacman -S --noconfirm --needed waybar otf-font-awesome pavucontrol xfce4-power-manager
+sudo pacman -S --noconfirm --needed waybar otf-font-awesome pavucontrol
 
 echo "Installing screenshot and recording tools"
 sudo pacman -S --noconfirm --needed grim slurp wf-recorder
