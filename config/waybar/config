@@ -51,7 +51,7 @@
         "format": "{icon} {capacity}%",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
         "format-charging": "󰂄 {capacity}%",
-        "on-click": "xfce4-power-manager-settings"
+        "tooltip-format": "{timeTo}\n{capacity}%\n{power}W"
     },
     "power-profiles-daemon": {
         "format": "{icon}",
