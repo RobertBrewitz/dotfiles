@@ -45,6 +45,7 @@ if [[ "$capture_type" == "Screenshot" ]]; then
         [[ -z "$geometry" ]] && exit 0
         grim $cursor_opt -g "$geometry" "$output"
     else
+        sleep 0.3
         grim $cursor_opt "$output"
     fi
 
