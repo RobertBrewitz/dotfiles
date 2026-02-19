@@ -136,6 +136,13 @@ return {
         end
       end
 
+      -- Force-stop all LSP clients on exit to prevent orphaned processes
+      vim.api.nvim_create_autocmd("VimLeavePre", {
+        callback = function()
+          vim.lsp.stop_client(vim.lsp.get_clients(), true)
+        end,
+      })
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
