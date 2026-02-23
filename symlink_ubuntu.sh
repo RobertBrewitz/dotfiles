@@ -23,3 +23,7 @@ ln -sf $ABSOLUTE_PATH/editorconfig $HOME/.editorconfig
 ln -sf $ABSOLUTE_PATH/make-completion.bash $HOME/.make-completion.bash
 cp --update=none $ABSOLUTE_PATH/gitconfig-user $HOME/.gitconfig-user
 
+# Claude Code
+mkdir -p "$HOME/.claude"
+ln -sf $ABSOLUTE_PATH/claude/statusline-command.sh $HOME/.claude/statusline-command.sh
+

@@ -43,6 +43,10 @@ ln -sf "$DOTFILES/tern-project" "$HOME/.tern-project"
 ln -sf "$DOTFILES/editorconfig" "$HOME/.editorconfig"
 ln -sf "$DOTFILES/make-completion.bash" "$HOME/.make-completion.bash"
 
+# Claude Code
+mkdir -p "$HOME/.claude"
+ln -sf "$DOTFILES/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+
 # Copy user-specific config only if it doesn't exist
 [[ -f "$HOME/.gitconfig-user" ]] || cp "$DOTFILES/gitconfig-user" "$HOME/.gitconfig-user"
 
