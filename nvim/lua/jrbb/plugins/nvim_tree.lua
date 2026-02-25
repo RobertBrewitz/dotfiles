@@ -43,7 +43,12 @@ function ToggleNvimTree()
   local nvim_tree = find_nvim_tree_window()
 
   if nvim_tree then
-    vim.cmd("NvimTreeClose")
+    local current_win = vim.api.nvim_get_current_win()
+    if current_win == nvim_tree then
+      vim.cmd("NvimTreeClose")
+    else
+      vim.api.nvim_set_current_win(nvim_tree)
+    end
   else
     vim.cmd("NvimTreeFindFile")
   end
@@ -144,9 +149,27 @@ return {
           end
 
           -- custom mappings
-          vim.keymap.set("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
+          vim.keymap.set("n", "<C-t>", function()
+            local node = api.tree.get_node_under_cursor()
+            if node and node.type == "file" then
+              local path = node.absolute_path
+              vim.cmd("NvimTreeClose")
+              vim.cmd("tabedit " .. vim.fn.fnameescape(path))
+            else
+              api.node.open.tab()
+            end
+          end, opts("Open: New Tab"))
           vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
-          vim.keymap.set("n", "<cr>", api.node.open.edit, opts("Open"))
+          vim.keymap.set("n", "<cr>", function()
+            local node = api.tree.get_node_under_cursor()
+            if node and node.type == "file" then
+              local path = node.absolute_path
+              vim.cmd("NvimTreeClose")
+              vim.cmd("edit " .. vim.fn.fnameescape(path))
+            else
+              api.node.open.edit()
+            end
+          end, opts("Open"))
           vim.keymap.set("n", "l", api.node.open.preview, opts("Open Preview"))
           vim.keymap.set("n", "%", api.fs.create, opts("Create File Or Directory"))
           vim.keymap.set("n", "d", api.fs.create, opts("Create File Or Directory"))
