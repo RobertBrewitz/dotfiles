@@ -119,6 +119,9 @@ return {
     config = function()
       require("nvim-tree").setup({
         sort_by = "case_sensitive",
+        live_filter = {
+          always_show_folders = false,
+        },
         view = {
           adaptive_size = true,
           width = 30,
@@ -178,7 +181,11 @@ return {
           vim.keymap.set("n", "r", api.fs.rename_basename, opts("Rename: Basename"))
           vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
           vim.keymap.set("n", "r", api.fs.rename, opts("Rename"))
-          vim.keymap.set("n", "/", api.tree.search_node, opts("Search"))
+          vim.keymap.set("n", "/", function()
+            api.tree.expand_all()
+            api.live_filter.start()
+          end, opts("Live Filter: Start"))
+          vim.keymap.set("n", "F", api.live_filter.clear, opts("Live Filter: Clear"))
           vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
           vim.keymap.set("n", ".", api.tree.change_root_to_node, opts("CD"))
           vim.keymap.set("n", ",", api.tree.change_root_to_parent, opts("Up"))
