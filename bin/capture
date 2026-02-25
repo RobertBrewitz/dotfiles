@@ -21,6 +21,16 @@ if [[ -f "$RECORDING_PID_FILE" ]]; then
     fi
 fi
 
+# Instant fullscreen screenshot mode
+if [[ "$1" == "--fullscreen" ]]; then
+    timestamp=$(date +'%Y%m%d_%H%M%S')
+    output="$SCREENSHOT_DIR/$timestamp.png"
+    grim "$output"
+    wl-copy < "$output"
+    notify-send "Screenshot" "Saved and copied to clipboard" -i "$output"
+    exit 0
+fi
+
 # Menu options
 capture_type=$(printf "Screenshot\nRecord" | wofi --dmenu --prompt "Capture type")
 [[ -z "$capture_type" ]] && exit 0
