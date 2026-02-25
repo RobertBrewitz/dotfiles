@@ -38,53 +38,14 @@ local function find_nvim_tree_window()
   return nil
 end
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    if vim.fn.argc() == 0 then
-      ToggleNvimTree()
-      vim.cmd("wincmd p")
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  callback = function()
-    if vim.fn.argc() == 0 then
-      -- Skip floating windows
-      if is_floating(vim.api.nvim_get_current_win()) then
-        return
-      end
-
-      local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-
-      if ft == "NvimTree" or ft == "screenkey" or ft == "notify" then
-        return
-      end
-
-      vim.cmd("NvimTreeFindFile")
-      vim.cmd("wincmd p")
-    end
-  end,
-})
-
--- Opens NvimTree and switches between the active window and NvimTree
+-- Toggle NvimTree open/closed, focusing current file when opening
 function ToggleNvimTree()
   local nvim_tree = find_nvim_tree_window()
 
-  if not nvim_tree then
-    vim.cmd("NvimTreeOpen")
+  if nvim_tree then
+    vim.cmd("NvimTreeClose")
   else
-    local current_win = vim.api.nvim_get_current_win()
-    if current_win == nvim_tree then
-      -- We're in NvimTree, switch to the main window
-      local main_win = find_main_window()
-      if main_win then
-        vim.api.nvim_set_current_win(main_win)
-      end
-    else
-      -- We're not in NvimTree, switch to it
-      vim.api.nvim_set_current_win(nvim_tree)
-    end
+    vim.cmd("NvimTreeFindFile")
   end
 end
 
@@ -123,6 +84,23 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- Sync tree to current file when entering a buffer (only if tree is open)
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    if is_floating(vim.api.nvim_get_current_win()) then
+      return
+    end
+    local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+    if ft == "NvimTree" or ft == "screenkey" or ft == "notify" then
+      return
+    end
+    if find_nvim_tree_window() then
+      vim.cmd("NvimTreeFindFile")
+      vim.cmd("wincmd p")
+    end
+  end,
+})
+
 nnoremap("<leader>e", ToggleNvimTree, { desc = "ToggleNvimTree" })
 
 return {
@@ -137,8 +115,8 @@ return {
       require("nvim-tree").setup({
         sort_by = "case_sensitive",
         view = {
-          adaptive_size = false,
-          width = 20,
+          adaptive_size = true,
+          width = 30,
           side = "left",
         },
         filesystem_watchers = {
