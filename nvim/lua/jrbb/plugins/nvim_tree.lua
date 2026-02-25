@@ -117,6 +117,53 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
+      -- Patch live filter for fuzzy matching on relative path
+      local live_filter = require("nvim-tree.explorer.live-filter")
+      local orig_apply = live_filter.apply_filter
+      live_filter.apply_filter = function(self, node_)
+        if not self.filter or self.filter == "" then
+          orig_apply(self, node_)
+          return
+        end
+
+        local pattern = self.filter:lower()
+        local root = (node_ or self.explorer).absolute_path or ""
+
+        local function fuzzy(path)
+          -- match against path relative to tree root
+          local rel = path:sub(#root + 2):lower()
+          local pi = 1
+          for si = 1, #rel do
+            if rel:sub(si, si) == pattern:sub(pi, pi) then
+              pi = pi + 1
+              if pi > #pattern then return true end
+            end
+          end
+          return false
+        end
+
+        local function iterate(node)
+          local filtered_nodes = 0
+          local nodes = node.group_next and { node.group_next } or node.nodes
+
+          node.hidden_stats = vim.tbl_deep_extend("force", node.hidden_stats or {}, { live_filter = 0 })
+
+          if nodes then
+            for _, n in pairs(nodes) do
+              iterate(n)
+              if n.hidden then filtered_nodes = filtered_nodes + 1 end
+            end
+          end
+
+          node.hidden_stats.live_filter = filtered_nodes
+          local has_children = nodes and (self.always_show_folders or #nodes > filtered_nodes)
+          local is_match = node.absolute_path and fuzzy(node.absolute_path)
+          node.hidden = not (has_children or is_match)
+        end
+
+        iterate(node_ or self.explorer)
+      end
+
       require("nvim-tree").setup({
         sort_by = "case_sensitive",
         live_filter = {
