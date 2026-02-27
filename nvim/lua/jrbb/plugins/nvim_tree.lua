@@ -38,19 +38,53 @@ local function find_nvim_tree_window()
   return nil
 end
 
--- Toggle NvimTree open/closed, focusing current file when opening
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argc() == 0 then
+      ToggleNvimTree()
+      vim.cmd("wincmd p")
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  callback = function()
+    if vim.fn.argc() == 0 then
+      -- Skip floating windows
+      if is_floating(vim.api.nvim_get_current_win()) then
+        return
+      end
+
+      local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+
+      if ft == "NvimTree" or ft == "screenkey" or ft == "notify" then
+        return
+      end
+
+      vim.cmd("NvimTreeFindFile")
+      vim.cmd("wincmd p")
+    end
+  end,
+})
+
+-- Opens NvimTree and switches between the active window and NvimTree
 function ToggleNvimTree()
   local nvim_tree = find_nvim_tree_window()
 
-  if nvim_tree then
+  if not nvim_tree then
+    vim.cmd("NvimTreeOpen")
+  else
     local current_win = vim.api.nvim_get_current_win()
     if current_win == nvim_tree then
-      vim.cmd("NvimTreeClose")
+      -- We're in NvimTree, switch to the main window
+      local main_win = find_main_window()
+      if main_win then
+        vim.api.nvim_set_current_win(main_win)
+      end
     else
+      -- We're not in NvimTree, switch to it
       vim.api.nvim_set_current_win(nvim_tree)
     end
-  else
-    vim.cmd("NvimTreeFindFile")
   end
 end
 
@@ -86,23 +120,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
         pcall(vim.cmd, "quit")
       end
     end, 50)
-  end,
-})
-
--- Sync tree to current file when entering a buffer (only if tree is open)
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    if is_floating(vim.api.nvim_get_current_win()) then
-      return
-    end
-    local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-    if ft == "NvimTree" or ft == "screenkey" or ft == "notify" then
-      return
-    end
-    if find_nvim_tree_window() then
-      vim.cmd("NvimTreeFindFile")
-      vim.cmd("wincmd p")
-    end
   end,
 })
 
@@ -199,27 +216,9 @@ return {
           end
 
           -- custom mappings
-          vim.keymap.set("n", "<C-t>", function()
-            local node = api.tree.get_node_under_cursor()
-            if node and node.type == "file" then
-              local path = node.absolute_path
-              vim.cmd("NvimTreeClose")
-              vim.cmd("tabedit " .. vim.fn.fnameescape(path))
-            else
-              api.node.open.tab()
-            end
-          end, opts("Open: New Tab"))
+          vim.keymap.set("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
           vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
-          vim.keymap.set("n", "<cr>", function()
-            local node = api.tree.get_node_under_cursor()
-            if node and node.type == "file" then
-              local path = node.absolute_path
-              vim.cmd("NvimTreeClose")
-              vim.cmd("edit " .. vim.fn.fnameescape(path))
-            else
-              api.node.open.edit()
-            end
-          end, opts("Open"))
+          vim.keymap.set("n", "<cr>", api.node.open.edit, opts("Open"))
           vim.keymap.set("n", "l", api.node.open.preview, opts("Open Preview"))
           vim.keymap.set("n", "%", api.fs.create, opts("Create File Or Directory"))
           vim.keymap.set("n", "d", api.fs.create, opts("Create File Or Directory"))
