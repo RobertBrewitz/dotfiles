@@ -46,7 +46,30 @@ On Windows, use [Rufus](https://rufus.ie/) or [Ventoy](https://ventoy.net/).
 
 ---
 
-## 2. Boot from USB
+## Quick Install with archinstall
+
+If you prefer a guided installer over manual steps, `archinstall` ships on the Arch ISO and handles partitioning, base system, bootloader, and user creation in one TUI:
+
+```bash
+# Boot from USB, connect to internet (step 3 below), then:
+archinstall
+```
+
+Recommended selections:
+- **Disk layout**: Best effort (select your drive, ext4, separate /home optional)
+- **Bootloader**: GRUB (needed for dual boot with os-prober)
+- **Profile**: Minimal
+- **Audio**: PipeWire
+- **Additional packages**: `git networkmanager os-prober efibootmgr`
+- **Network**: NetworkManager
+
+After it finishes and reboots, skip to [Step 9: Apply Dotfiles](#9-post-install-apply-dotfiles).
+
+---
+
+## Manual Install
+
+### 2. Boot from USB
 
 1. Insert USB and reboot
 2. Enter BIOS/UEFI (usually F2, F12, Del, or Esc)
@@ -56,7 +79,7 @@ On Windows, use [Rufus](https://rufus.ie/) or [Ventoy](https://ventoy.net/).
 
 ---
 
-## 3. Connect to Internet
+### 3. Connect to Internet
 
 ```bash
 # Wired usually works automatically. For WiFi:
@@ -73,7 +96,7 @@ ping -c 3 archlinux.org
 
 ---
 
-## 4. Partition Disks
+### 4. Partition Disks
 
 ```bash
 # List disks - identify your partitions
@@ -144,7 +167,7 @@ mount --mkdir /dev/nvme0n1p1 /mnt/boot/efi
 
 ---
 
-## 5. Install Base System
+### 5. Install Base System
 
 ```bash
 # Update mirrors (optional but faster)
@@ -160,7 +183,7 @@ pacstrap -K /mnt base linux linux-firmware sudo vim git networkmanager grub efib
 
 ---
 
-## 6. Configure System
+### 6. Configure System
 
 ```bash
 # Generate fstab
@@ -198,7 +221,7 @@ systemctl enable NetworkManager
 
 ---
 
-## 7. Install Bootloader
+### 7. Install Bootloader
 
 ```bash
 # Install GRUB (note: efi-directory matches mount point)
@@ -219,7 +242,7 @@ os-prober
 
 ---
 
-## 8. Reboot
+### 8. Reboot
 
 ```bash
 exit
@@ -240,21 +263,11 @@ Login as your user, then:
 nmtui
 
 # Clone dotfiles
+mkdir -p ~/Projects
 git clone https://github.com/yourusername/dotfiles.git ~/Projects/dotfiles
 cd ~/Projects/dotfiles
 
-# Create symlinks
-ln -sf ~/Projects/dotfiles/profile ~/.profile
-ln -sf ~/Projects/dotfiles/vimrc ~/.vimrc
-ln -sf ~/Projects/dotfiles/tmux.conf ~/.tmux.conf
-ln -sf ~/Projects/dotfiles/gitconfig ~/.gitconfig
-mkdir -p ~/.config
-ln -sf ~/Projects/dotfiles/config/hypr ~/.config/hypr
-ln -sf ~/Projects/dotfiles/config/foot ~/.config/foot
-ln -sf ~/Projects/dotfiles/config/waybar ~/.config/waybar
-ln -sf ~/Projects/dotfiles/config/nvim ~/.config/nvim
-
-# Run setup script
+# Run setup script (installs everything and symlinks dotfiles)
 chmod +x arch.sh
 ./arch.sh
 ```
@@ -269,20 +282,27 @@ After reboot, SDDM will start automatically. Select Hyprland and login.
 
 | Key | Action |
 |-----|--------|
-| Super + Return | Terminal (foot) |
+| Super + Return | Terminal (kitty) |
 | Super + E | File manager (thunar) |
-| Super + P | App launcher (wofi) |
+| Super + R | App launcher (wofi) |
 | Super + Q | Close window |
+| Super + F | Toggle floating |
+| Super + T | Toggle split direction |
 | Super + H/J/K/L | Focus left/down/up/right |
-| Super + 1-4 | Switch workspace |
-| Super + Shift + 1-4 | Move window to workspace |
+| Super + Shift + H/J/K/L | Move window |
+| Super + 1-0 | Switch workspace 1-10 |
+| Super + Shift + 1-0 | Move window to workspace |
+| Super + PageUp/PageDown | Previous/next workspace |
+| Super + M | Minimize window |
+| Super + Shift + M | Show minimized windows |
 | Super + V | Clipboard history |
-| Super + R | Record screen region |
-| Super + Shift + R | Stop recording |
+| Super + Space | Switch keyboard layout |
 | Super + Escape | Lock screen |
-| Super + Shift + E | Exit Hyprland |
-| Print | Screenshot region to file |
-| Ctrl + Print | Screenshot region to clipboard |
+| Super + Shift + A | Restart PipeWire |
+| Print | Fullscreen screenshot to clipboard |
+| Shift + Print | Capture menu (screenshot/record) |
+| Mouse 3 (hold) | Voice-to-text (voxtype) |
+| F7/F8/F9 | Power saver/balanced/performance |
 
 ---
 
