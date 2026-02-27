@@ -4,7 +4,7 @@
     "height": 30,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/recording", "hyprland/language", "bluetooth", "network", "pulseaudio", "backlight", "battery", "power-profiles-daemon"],
+    "modules-right": ["custom/voxtype", "custom/recording", "hyprland/language", "bluetooth", "network", "pulseaudio", "backlight", "battery", "power-profiles-daemon"],
 
     "hyprland/workspaces": {
         "format": "{name}"
@@ -61,6 +61,12 @@
             "power-saver": "󰾆"
         },
         "tooltip-format": "Power profile: {profile}"
+    },
+    "custom/voxtype": {
+        "exec": "voxtype status --follow --format json",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true
     },
     "custom/recording": {
         "exec": "if [ -f /tmp/capture-recording.pid ] && kill -0 $(cat /tmp/capture-recording.pid) 2>/dev/null; then echo '󰻂'; else echo ''; fi",
