@@ -1,0 +1,12 @@
+
+[audacious]
+output_plugin=pulseaudio
+
+[qtui]
+player_height=506
+player_width=461
+
+[skins]
+player_x=547
+player_y=368
+skin=/usr/share/audacious/Skins/Winamp2.9
