@@ -1,12 +1,25 @@
 
+[alsa]
+mixer-element=Master
+
 [audacious]
 output_plugin=pulseaudio
+
+[pipewire]
+volume_left=53
+volume_right=53
 
 [qtui]
 player_height=506
 player_width=461
 
 [skins]
-player_x=547
-player_y=368
+player_shaded=TRUE
+player_x=683
+player_y=80
+playlist_height=899
+playlist_visible=TRUE
+playlist_width=800
+playlist_x=1033
+playlist_y=64
 skin=/usr/share/audacious/Skins/Winamp2.9
