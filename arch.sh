@@ -188,6 +188,9 @@ sudo pacman -S --noconfirm --needed playerctl cliphist
 echo "Installing media player"
 sudo pacman -S --noconfirm --needed mpv
 
+echo "Installing Audacious audio player"
+sudo pacman -S --noconfirm --needed audacious audacious-plugins
+
 echo "Installing system maintenance tools"
 sudo pacman -S --noconfirm --needed pacman-contrib reflector
 sudo systemctl enable --now paccache.timer
