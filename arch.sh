@@ -191,6 +191,15 @@ sudo pacman -S --noconfirm --needed mpv
 echo "Installing Audacious audio player"
 sudo pacman -S --noconfirm --needed audacious audacious-plugins
 
+echo "Installing Steam"
+# Enable multilib repository for 32-bit libraries
+sudo sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//}' /etc/pacman.conf
+sudo pacman -Syu --noconfirm
+sudo pacman -S --noconfirm --needed steam lib32-nvidia-utils
+
+echo "Installing filezilla & rsync for SteamOS Devkit Client"
+sudo pacman -S --noconfirm --needed filezilla rsync
+
 echo "Installing system maintenance tools"
 sudo pacman -S --noconfirm --needed pacman-contrib reflector
 sudo systemctl enable --now paccache.timer
