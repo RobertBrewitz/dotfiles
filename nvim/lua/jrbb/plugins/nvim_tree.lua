@@ -187,8 +187,8 @@ return {
           always_show_folders = false,
         },
         view = {
-          adaptive_size = true,
-          width = 30,
+          -- adaptive_size = true,
+          width = 27,
           side = "left",
         },
         filesystem_watchers = {
