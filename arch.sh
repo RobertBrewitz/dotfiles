@@ -200,6 +200,9 @@ sudo pacman -S --noconfirm --needed steam lib32-nvidia-utils
 echo "Installing filezilla & rsync for SteamOS Devkit Client"
 sudo pacman -S --noconfirm --needed filezilla rsync
 
+echo "Disabling faillock (pam_faillock)"
+sudo sed -i 's/^deny = .*/deny = 0/' /etc/security/faillock.conf
+
 echo "Installing system maintenance tools"
 sudo pacman -S --noconfirm --needed pacman-contrib reflector
 sudo systemctl enable --now paccache.timer
