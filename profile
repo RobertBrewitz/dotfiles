@@ -98,3 +98,6 @@ alias orphans-remove="sudo pacman -Rns \$(pacman -Qtdq) 2>/dev/null || echo 'No 
 alias cache-clean="sudo paccache -r"
 alias mirror-update="sudo reflector --country US --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 alias checkup="checkupdates"
+
+# Reset Kitty keyboard protocol in case a program didn't clean up
+PROMPT_COMMAND="printf '\e[>0u'${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
