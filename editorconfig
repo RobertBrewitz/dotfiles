@@ -20,3 +20,9 @@ indent_size = 4
 indent_style = tab
 indent_size = 1
 trim_trailing_whitespace = false
+
+[*.go]
+indent_style = tab
+
+[go.mod]
+indent_style = tab
