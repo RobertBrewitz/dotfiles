@@ -101,3 +101,7 @@ alias checkup="checkupdates"
 
 # Reset Kitty keyboard protocol in case a program didn't clean up
 PROMPT_COMMAND="printf '\e[>0u'${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+
+# golang
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
