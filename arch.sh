@@ -80,6 +80,10 @@ source ~/.profile
 rustup component add rust-analyzer
 cargo install cross --git https://github.com/cross-rs/cross
 
+echo "Installing go and gopls"
+sudo pacman -S --noconfirm --needed go
+go install golang.org/x/tools/gopls@latest
+
 echo "Installing tree-sitter-cli for neovim treesitter"
 cargo install tree-sitter-cli
 
