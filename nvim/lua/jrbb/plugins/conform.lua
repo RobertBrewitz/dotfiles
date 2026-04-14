@@ -11,6 +11,7 @@ return {
         typescriptreact = { "prettier" },
         json = { "prettier" },
         markdown = { "prettier" },
+        go = { "gofmt" },
       },
     })
   end,
