@@ -28,7 +28,7 @@ window#waybar {
     background: @surface0;
 }
 
-#clock, #battery, #network, #bluetooth, #pulseaudio, #power-profiles-daemon, #language, #custom-recording, #custom-voxtype {
+#clock, #battery, #network, #bluetooth, #pulseaudio, #power-profiles-daemon, #language, #custom-recording, #custom-voxtype, #custom-caffeine {
     padding: 0 8px;
     color: @text;
 }
@@ -95,4 +95,12 @@ window#waybar {
 
 #custom-recording {
     color: @red;
+}
+
+#custom-caffeine.off {
+    color: @subtext0;
+}
+
+#custom-caffeine.on {
+    color: @yellow;
 }

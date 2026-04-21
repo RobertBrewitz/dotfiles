@@ -1,0 +1,52 @@
+#!/bin/bash
+# caffeine — toggle keep-awake: blocks sleep, suspend-on-lid, and hypridle's
+# idle timers (hypridle honors logind's idle inhibit via DBus).
+
+PIDFILE="${XDG_RUNTIME_DIR:-/tmp}/caffeine.pid"
+ICON_ON="󰅶"
+ICON_OFF="󰛊"
+
+is_on() {
+    [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null
+}
+
+enable() {
+    is_on && return 0
+    systemd-inhibit \
+        --what=idle:sleep:handle-lid-switch \
+        --who=caffeine \
+        --why="user keep-awake" \
+        --mode=block \
+        sleep infinity &
+    echo $! > "$PIDFILE"
+    notify-send -t 2000 "Caffeine" "Keep awake: ON"
+}
+
+disable() {
+    if is_on; then
+        kill "$(cat "$PIDFILE")" 2>/dev/null
+    fi
+    rm -f "$PIDFILE"
+    notify-send -t 2000 "Caffeine" "Keep awake: OFF"
+}
+
+toggle() {
+    if is_on; then disable; else enable; fi
+    pkill -RTMIN+8 waybar 2>/dev/null
+}
+
+status() {
+    if is_on; then
+        printf '{"text":"%s","tooltip":"Keep awake: ON","class":"on","alt":"on"}\n' "$ICON_ON"
+    else
+        printf '{"text":"%s","tooltip":"Keep awake: OFF","class":"off","alt":"off"}\n' "$ICON_OFF"
+    fi
+}
+
+case "${1:-status}" in
+    on|enable)   enable ;;
+    off|disable) disable ;;
+    toggle)      toggle ;;
+    status)      status ;;
+    *) echo "Usage: $0 {on|off|toggle|status}" >&2; exit 1 ;;
+esac
