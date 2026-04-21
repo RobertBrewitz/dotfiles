@@ -36,6 +36,7 @@ mkdir -p "$HOME/.local/bin"
 ln -sf "$DOTFILES/bin/less" "$HOME/.local/bin/less"
 ln -sf "$DOTFILES/bin/capture" "$HOME/.local/bin/capture"
 ln -sf "$DOTFILES/bin/battery-monitor" "$HOME/.local/bin/battery-monitor"
+ln -sf "$DOTFILES/bin/caffeine" "$HOME/.local/bin/caffeine"
 
 # User files
 ln -sf "$DOTFILES/gitconfig" "$HOME/.gitconfig"
