@@ -4,7 +4,7 @@
     "height": 30,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/voxtype", "custom/recording", "custom/caffeine", "hyprland/language", "bluetooth", "network", "pulseaudio", "backlight", "battery", "power-profiles-daemon"],
+    "modules-right": ["custom/voxtype", "custom/recording", "custom/caffeine", "hyprland/language", "bluetooth", "network", "pulseaudio", "backlight", "battery", "power-profiles-daemon", "custom/power"],
 
     "hyprland/workspaces": {
         "format": "{name}"
@@ -81,5 +81,10 @@
         "signal": 8,
         "on-click": "~/.local/bin/caffeine toggle",
         "tooltip": true
+    },
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "~/.local/bin/powermenu"
     }
 }
