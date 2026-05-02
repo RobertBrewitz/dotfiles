@@ -105,3 +105,8 @@ PROMPT_COMMAND="printf '\e[>0u'${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
 # golang
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
+
+# Podman (Docker API compatibility)
+if [ -S "$XDG_RUNTIME_DIR/podman/podman.sock" ]; then
+  export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+fi
