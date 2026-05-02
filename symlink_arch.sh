@@ -54,7 +54,9 @@ ln -sf "$DOTFILES/claude/statusline-command.sh" "$HOME/.claude/statusline-comman
 # Copy user-specific config only if it doesn't exist
 [[ -f "$HOME/.gitconfig-user" ]] || cp "$DOTFILES/gitconfig-user" "$HOME/.gitconfig-user"
 
-# Reload Hyprland config
-hyprctl reload
+# Reload Hyprland config (only if a Hyprland session is running)
+if command -v hyprctl &> /dev/null && [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
+    hyprctl reload
+fi
 
 echo "Dotfiles linked."

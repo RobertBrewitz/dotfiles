@@ -4,6 +4,10 @@ set -e
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+has_nvidia_gpu() {
+    command -v lspci >/dev/null 2>&1 && [ -n "$(lspci -d 10de: 2>/dev/null)" ]
+}
+
 echo "Upgrading and updating pacman"
 sudo pacman -Syu --noconfirm
 
@@ -16,6 +20,11 @@ if ! command -v yay &> /dev/null; then
     cd /tmp/yay && makepkg -si --noconfirm
     cd -
 fi
+
+echo "Symlinking dotfiles (early, so ~/.profile and friends exist for the rest of the run)"
+"$DOTFILES/symlink_arch.sh"
+# shellcheck disable=SC1090
+[ -f "$HOME/.profile" ] && source "$HOME/.profile" || true
 
 echo "Installing Neovim"
 sudo pacman -S --noconfirm --needed neovim
@@ -43,10 +52,16 @@ sudo pacman -S --noconfirm --needed \
     libnotify \
     mako
 
-echo "Installing NVIDIA drivers"
-sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver libva-utils
-sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\([^"]*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 nvidia_drm.modeset=1"/' /etc/default/grub
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+if has_nvidia_gpu; then
+    echo "Installing NVIDIA drivers"
+    sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver libva-utils
+    if [ -f /etc/default/grub ] && ! grep -q 'nvidia_drm.modeset=1' /etc/default/grub; then
+        sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\([^"]*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 nvidia_drm.modeset=1"/' /etc/default/grub
+        sudo grub-mkconfig -o /boot/grub/grub.cfg
+    fi
+else
+    echo "No NVIDIA GPU detected, skipping NVIDIA driver install"
+fi
 
 echo "Installing basic fonts"
 sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-dejavu
@@ -75,13 +90,18 @@ npm config set ignore-scripts true
 
 echo "Installing rust and rust-analyzer"
 sudo pacman -S --noconfirm --needed cmake fontconfig
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source ~/.profile
+if ! command -v rustup &> /dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
+fi
+# shellcheck disable=SC1091
+. "$HOME/.cargo/env"
 rustup component add rust-analyzer
 cargo install cross --git https://github.com/cross-rs/cross
 
 echo "Installing go and gopls"
 sudo pacman -S --noconfirm --needed go
+export GOPATH="${GOPATH:-$HOME/go}"
+export PATH="$GOPATH/bin:$PATH"
 go install golang.org/x/tools/gopls@latest
 
 echo "Installing tree-sitter-cli for neovim treesitter"
@@ -89,7 +109,7 @@ cargo install tree-sitter-cli
 
 echo "Installing Voxtype (voice-to-text)"
 sudo pacman -S --noconfirm --needed wtype
-mkdir -p ~/Projects/vendor
+mkdir -p ~/Projects/vendor ~/.local/bin
 if [ ! -d ~/Projects/vendor/voxtype ]; then
     git clone https://github.com/peteonrails/voxtype.git ~/Projects/vendor/voxtype
 fi
@@ -105,7 +125,9 @@ echo "Installing the silver searcher (ag)"
 sudo pacman -S --noconfirm --needed the_silver_searcher
 
 echo "Adding ~/.profile to ~/.bashrc"
-echo "[ -f ~/.profile ] && source ~/.profile" | sudo tee -a ~/.bashrc
+if ! grep -qs 'source ~/.profile' "$HOME/.bashrc"; then
+    echo "[ -f ~/.profile ] && source ~/.profile" >> "$HOME/.bashrc"
+fi
 
 echo "Installing editorconfig core"
 sudo pacman -S --noconfirm --needed editorconfig-core-c
@@ -136,8 +158,10 @@ fc-cache -fv
 cd -
 
 echo "Fix crackling audio in pipewire"
-sudo sed -i 's/#pulse.min.quantum      = 128/pulse.min.quantum      = 1024/g' /usr/share/pipewire/pipewire-pulse.conf
-sudo systemctl --user restart wireplumber pipewire pipewire-pulse
+if [ -f /usr/share/pipewire/pipewire-pulse.conf ] && grep -q '#pulse.min.quantum' /usr/share/pipewire/pipewire-pulse.conf; then
+    sudo sed -i 's/#pulse.min.quantum      = 128/pulse.min.quantum      = 1024/g' /usr/share/pipewire/pipewire-pulse.conf
+fi
+systemctl --user restart wireplumber pipewire pipewire-pulse 2>/dev/null || true
 
 echo "Installing bootloader utilities (os-prober for dual boot)"
 sudo pacman -S --noconfirm --needed os-prober efibootmgr
@@ -196,10 +220,15 @@ echo "Installing Audacious audio player"
 sudo pacman -S --noconfirm --needed audacious audacious-plugins
 
 echo "Installing Steam"
-# Enable multilib repository for 32-bit libraries
-sudo sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//}' /etc/pacman.conf
-sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm --needed steam lib32-nvidia-utils
+# Enable multilib repository for 32-bit libraries (idempotent)
+if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
+    sudo sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//}' /etc/pacman.conf
+    sudo pacman -Syu --noconfirm
+fi
+sudo pacman -S --noconfirm --needed steam
+if has_nvidia_gpu; then
+    sudo pacman -S --noconfirm --needed lib32-nvidia-utils
+fi
 
 echo "Installing filezilla & rsync for SteamOS Devkit Client"
 sudo pacman -S --noconfirm --needed filezilla rsync
@@ -214,9 +243,6 @@ sudo systemctl enable --now paccache.timer
 echo "Installing GTK/Qt theming"
 sudo pacman -S --noconfirm --needed qt6ct kvantum papirus-icon-theme
 yay -S --noconfirm catppuccin-gtk-theme-mocha kvantum-theme-catppuccin-git catppuccin-cursors-mocha
-
-echo "Configuring Kvantum theme"
-kvantummanager --set catppuccin-mocha-blue
 
 echo "Installing ZSA keyboard udev rules"
 sudo groupadd -f plugdev
@@ -242,7 +268,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu
 EOF
 sudo udevadm control --reload-rules && sudo udevadm trigger
 
-echo "Symlinking dotfiles"
+echo "Re-running symlink (in case new config dirs were added during install)"
 "$DOTFILES/symlink_arch.sh"
 
 echo "##########################################"
