@@ -46,6 +46,7 @@ ln -sf "$DOTFILES/profile" "$HOME/.profile"
 ln -sf "$DOTFILES/tern-project" "$HOME/.tern-project"
 ln -sf "$DOTFILES/editorconfig" "$HOME/.editorconfig"
 ln -sf "$DOTFILES/make-completion.bash" "$HOME/.make-completion.bash"
+ln -sf "$DOTFILES/tmux.conf" "$HOME/.tmux.conf"
 
 # Claude Code
 mkdir -p "$HOME/.claude"
