@@ -145,7 +145,9 @@ return {
     nmap("<leader>gS", builtin.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
     nmap("<leader>gy", builtin.lsp_dynamic_workspace_symbols, { desc = "LSP Dynamic Workspace Symbols" })
 
-    nmap("<leader>gg", builtin.diagnostics, { desc = "LSP Diagnostics" })
+    nmap("<leader>gg", function()
+      builtin.diagnostics({ severity = vim.diagnostic.severity.ERROR })
+    end, { desc = "LSP Diagnostics (errors)" })
 
     telescope.setup(opts)
   end,
