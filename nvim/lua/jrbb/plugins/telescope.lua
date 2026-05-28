@@ -149,6 +149,8 @@ return {
       builtin.diagnostics({ severity = vim.diagnostic.severity.ERROR })
     end, { desc = "LSP Diagnostics (errors)" })
 
+    nmap("<leader>gG", builtin.diagnostics, { desc = "LSP Diagnostics (all)" })
+
     telescope.setup(opts)
   end,
 }
