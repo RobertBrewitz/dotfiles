@@ -86,7 +86,6 @@ sudo pacman -S --noconfirm --needed ripgrep fd
 
 echo "Installing nvm and node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | NODE_VERSION=--lts bash
-npm config set ignore-scripts true
 
 echo "Installing rust and rust-analyzer"
 sudo pacman -S --noconfirm --needed cmake fontconfig

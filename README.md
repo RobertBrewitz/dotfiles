@@ -19,14 +19,20 @@ A shell alias is also added to `profile`:
 alias chrome='google-chrome-stable --ozone-platform=x11'
 ```
 
-## NPM Security
+## Package Manager Security
 
-The install scripts set `ignore-scripts` to true to ignore any pre- and post-install hooks from npm packages.
+The dotfiles add a one-week release-age gate for npm, pnpm, Yarn, Bun, and Renovate.
+The npm config also sets `ignore-scripts` to true to ignore pre- and post-install hooks from npm packages.
+Deno 2.8+ also reads `min-release-age` from `.npmrc` for npm package installs.
+Cargo does not currently have a stable native minimum-release-age setting.
+If any of these target files already exist, the symlink scripts warn, move the existing file to a timestamped `.backup.*` path, and then link the managed security config.
 
 ```bash
-npm config set ignore-scripts true
-yarn config set ignore-scripts true
-pnpm config set ignore-scripts true
+~/.npmrc                         # security/npmrc.conf, min-release-age=7
+~/.yarnrc.yml                    # security/yarnrc.yml, npmMinimalAgeGate: 7d
+~/.config/pnpm/config.yaml        # security/pnpm.yaml, minimumReleaseAge: 10080
+~/.bunfig.toml                    # security/bunfig.toml, minimumReleaseAge = 604800
+~/.config/renovate/config.json    # security/renovate.json, minimumReleaseAge: 7 days
 ```
 
 ## Setup OS X

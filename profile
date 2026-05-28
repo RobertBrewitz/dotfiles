@@ -68,6 +68,11 @@ if [ -f $HOME/.cargo/env ]; then
   . "$HOME/.cargo/env"
 fi
 
+# Renovate
+if [ -z "${RENOVATE_CONFIG_FILE:-}" ] && [ -f "$HOME/.config/renovate/config.json" ]; then
+  export RENOVATE_CONFIG_FILE="$HOME/.config/renovate/config.json"
+fi
+
 if [ -d $HOME/.tmux/plugins/tmuxifier/bin ]; then
   export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
   eval "$(tmuxifier init -)"

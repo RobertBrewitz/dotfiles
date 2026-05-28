@@ -4,6 +4,28 @@ set -e
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+link_security_config() {
+    local source="$1"
+    local target="$2"
+
+    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+        return
+    fi
+
+    if [ -e "$target" ] || [ -L "$target" ]; then
+        local backup="${target}.backup.$(date +%Y%m%d%H%M%S)"
+        local counter=1
+        while [ -e "$backup" ] || [ -L "$backup" ]; do
+            backup="${target}.backup.$(date +%Y%m%d%H%M%S).$counter"
+            counter=$((counter + 1))
+        done
+        echo "Warning: backing up existing $target to $backup before linking security config."
+        mv "$target" "$backup"
+    fi
+
+    ln -sf "$source" "$target"
+}
+
 # Ensure .config exists
 mkdir -p "$HOME/.config"
 
@@ -45,8 +67,15 @@ ln -sf "$DOTFILES/gitignore" "$HOME/.gitignore"
 ln -sf "$DOTFILES/profile" "$HOME/.profile"
 ln -sf "$DOTFILES/tern-project" "$HOME/.tern-project"
 ln -sf "$DOTFILES/editorconfig" "$HOME/.editorconfig"
+link_security_config "$DOTFILES/security/npmrc.conf" "$HOME/.npmrc"
+link_security_config "$DOTFILES/security/bunfig.toml" "$HOME/.bunfig.toml"
+link_security_config "$DOTFILES/security/yarnrc.yml" "$HOME/.yarnrc.yml"
 ln -sf "$DOTFILES/make-completion.bash" "$HOME/.make-completion.bash"
 ln -sf "$DOTFILES/tmux.conf" "$HOME/.tmux.conf"
+
+mkdir -p "$HOME/.config/pnpm" "$HOME/.config/renovate"
+link_security_config "$DOTFILES/security/pnpm.yaml" "$HOME/.config/pnpm/config.yaml"
+link_security_config "$DOTFILES/security/renovate.json" "$HOME/.config/renovate/config.json"
 
 # Copy user-specific config only if it doesn't exist
 [[ -f "$HOME/.gitconfig-user" ]] || cp "$DOTFILES/gitconfig-user" "$HOME/.gitconfig-user"
