@@ -162,14 +162,8 @@ if [ -f /usr/share/pipewire/pipewire-pulse.conf ] && grep -q '#pulse.min.quantum
 fi
 systemctl --user restart wireplumber pipewire pipewire-pulse 2>/dev/null || true
 
-echo "Installing bootloader utilities (os-prober for dual boot)"
-sudo pacman -S --noconfirm --needed os-prober efibootmgr
-sudo sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
-sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-echo "Installing WiFi (NetworkManager)"
-sudo pacman -S --noconfirm --needed networkmanager network-manager-applet
-sudo systemctl enable --now NetworkManager
+echo "Installing NetworkManager applet (NetworkManager itself is set up during base install)"
+sudo pacman -S --noconfirm --needed network-manager-applet
 
 echo "Installing Bluetooth"
 sudo pacman -S --noconfirm --needed bluez bluez-utils blueman
