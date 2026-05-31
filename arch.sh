@@ -34,7 +34,7 @@ sudo pacman -S --noconfirm --needed \
     hyprland \
     hyprlock \
     hypridle \
-    swww \
+    awww \
     kitty \
     wofi \
     xdg-desktop-portal-hyprland \
