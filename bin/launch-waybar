@@ -1,0 +1,27 @@
+#!/bin/sh
+# Launch Waybar, dropping the battery module on machines without a battery
+# (e.g. desktops) so it doesn't render an empty "%" warning.
+
+# Machines with a battery: launch Waybar unchanged.
+if find /sys/class/power_supply -maxdepth 1 -name 'BAT*' 2>/dev/null | grep -q .; then
+    exec waybar
+fi
+
+# No battery: strip the battery module from a copy of the config. If anything
+# goes wrong, fall back to launching Waybar normally rather than not at all —
+# an empty "%" is cosmetic, a missing bar is not.
+src="${XDG_CONFIG_HOME:-$HOME/.config}/waybar/config"
+
+if ! command -v jq >/dev/null 2>&1; then
+    echo "launch-waybar: jq not found; launching Waybar with the battery module" >&2
+    exec waybar
+fi
+
+cfg="${XDG_RUNTIME_DIR:-/tmp}/waybar-config-nobattery.json"
+if ! jq '(."modules-right") |= map(select(. != "battery")) | del(.battery)' \
+        "$src" > "$cfg"; then
+    echo "launch-waybar: failed to process $src with jq; launching Waybar unchanged" >&2
+    exec waybar
+fi
+
+exec waybar -c "$cfg"

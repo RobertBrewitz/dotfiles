@@ -2,6 +2,11 @@
 
 # Battery monitor - notifications at various thresholds
 
+# No battery (e.g. desktop): nothing to monitor, exit quietly.
+if [[ ! -r /sys/class/power_supply/BAT0/capacity ]]; then
+    exit 0
+fi
+
 NOTIFIED_50=0
 NOTIFIED_40=0
 NOTIFIED_30=0
