@@ -4,8 +4,21 @@ set -e
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+has_gpu_vendor() {
+    local vendor_id="$1"
+    command -v lspci >/dev/null 2>&1 && [ -n "$(lspci -d "${vendor_id}:" 2>/dev/null)" ]
+}
+
 has_nvidia_gpu() {
-    command -v lspci >/dev/null 2>&1 && [ -n "$(lspci -d 10de: 2>/dev/null)" ]
+    has_gpu_vendor 10de
+}
+
+has_intel_gpu() {
+    has_gpu_vendor 8086
+}
+
+has_amd_gpu() {
+    has_gpu_vendor 1002
 }
 
 echo "Upgrading and updating pacman"
@@ -52,9 +65,22 @@ sudo pacman -S --noconfirm --needed \
     libnotify \
     mako
 
+echo "Installing graphics drivers and diagnostics"
+sudo pacman -S --noconfirm --needed mesa vulkan-icd-loader vulkan-tools mesa-utils libva-utils
+
+if has_intel_gpu; then
+    echo "Installing Intel Vulkan/VA-API drivers"
+    sudo pacman -S --noconfirm --needed vulkan-intel intel-media-driver
+fi
+
+if has_amd_gpu; then
+    echo "Installing AMD Vulkan/VA-API drivers"
+    sudo pacman -S --noconfirm --needed vulkan-radeon libva-mesa-driver mesa-vdpau
+fi
+
 if has_nvidia_gpu; then
     echo "Installing NVIDIA drivers"
-    sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver libva-utils
+    sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver
     if [ -f /etc/default/grub ] && ! grep -q 'nvidia_drm.modeset=1' /etc/default/grub; then
         sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\([^"]*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 nvidia_drm.modeset=1"/' /etc/default/grub
         sudo grub-mkconfig -o /boot/grub/grub.cfg
@@ -219,6 +245,15 @@ if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
     sudo pacman -Syu --noconfirm
 fi
 sudo pacman -S --noconfirm --needed steam
+if has_intel_gpu || has_amd_gpu; then
+    sudo pacman -S --noconfirm --needed lib32-mesa lib32-vulkan-icd-loader
+fi
+if has_intel_gpu; then
+    sudo pacman -S --noconfirm --needed lib32-vulkan-intel
+fi
+if has_amd_gpu; then
+    sudo pacman -S --noconfirm --needed lib32-vulkan-radeon
+fi
 if has_nvidia_gpu; then
     sudo pacman -S --noconfirm --needed lib32-nvidia-utils
 fi
