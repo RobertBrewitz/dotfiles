@@ -5,3 +5,4 @@ nvim/plugin/*.lua
 *.netrwhist
 npmrc
 tmp
+config/hypr/gpu.conf
