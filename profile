@@ -13,7 +13,7 @@ export HISTFILESIZE=100000
 # Aliases
 alias ..="cd .."
 alias open="xdg-open"
-alias ll='ls -alF --block-size=M'
+alias ll='ls -alF --block-size=K'
 alias la='ls -A'
 alias l='ls -CF'
 alias chrome='google-chrome-stable --ozone-platform=x11'
