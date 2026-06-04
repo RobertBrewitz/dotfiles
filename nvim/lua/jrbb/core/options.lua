@@ -15,7 +15,9 @@ vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
-vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/tmp/undo"
+local undodir = vim.fn.stdpath("state") .. "/undo"
+vim.fn.mkdir(undodir, "p", 0700)
+vim.opt.undodir = undodir
 
 -- search
 vim.opt.hlsearch = false
