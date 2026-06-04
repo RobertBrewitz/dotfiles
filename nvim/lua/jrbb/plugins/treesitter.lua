@@ -13,6 +13,7 @@ return {
         "tsx",
         "rust",
         "markdown",
+        "markdown_inline",
         "lua",
         "wgsl",
       },
