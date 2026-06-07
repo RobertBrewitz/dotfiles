@@ -215,8 +215,22 @@ return {
             return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
           end
 
+          local function open_tab_background()
+            local current_tab = vim.api.nvim_get_current_tabpage()
+            local current_win = vim.api.nvim_get_current_win()
+
+            api.node.open.tab()
+
+            if vim.api.nvim_tabpage_is_valid(current_tab) then
+              vim.api.nvim_set_current_tabpage(current_tab)
+              if vim.api.nvim_win_is_valid(current_win) then
+                vim.api.nvim_set_current_win(current_win)
+              end
+            end
+          end
+
           -- custom mappings
-          vim.keymap.set("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
+          vim.keymap.set("n", "<C-t>", open_tab_background, opts("Open: New Tab Background"))
           vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
           vim.keymap.set("n", "<cr>", api.node.open.edit, opts("Open"))
           vim.keymap.set("n", "l", api.node.open.preview, opts("Open Preview"))
