@@ -39,6 +39,9 @@ echo "Symlinking dotfiles (early, so ~/.profile and friends exist for the rest o
 # shellcheck disable=SC1090
 [ -f "$HOME/.profile" ] && source "$HOME/.profile" || true
 
+echo "Installing tmux"
+sudo pacman -S --noconfirm --needed tmux
+
 echo "Installing Neovim"
 sudo pacman -S --noconfirm --needed neovim
 
