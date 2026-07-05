@@ -188,7 +188,7 @@ return {
         },
         view = {
           -- adaptive_size = true,
-          width = 27,
+          width = 44,
           side = "left",
         },
         filesystem_watchers = {
