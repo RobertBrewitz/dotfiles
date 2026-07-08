@@ -16,7 +16,7 @@ return {
         nerd_font_variant = "mono",
       },
       completion = {
-        documentation = { auto_show = false },
+        documentation = { auto_show = true },
         list = {
           selection = {
             preselect = true,
@@ -26,6 +26,14 @@ return {
           },
         },
       },
+      signature = {
+        enabled = true,
+        trigger = {
+          show_on_keyword = true,
+          show_on_insert = true,
+          show_on_accept = true,
+        },
+      },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
         per_filetype = {
@@ -33,6 +41,87 @@ return {
           text = { inherit_defaults = true, "emoji" },
         },
         providers = {
+          lsp = {
+            transform_items = function(_, items)
+              if vim.bo.filetype ~= "rust" then
+                return items
+              end
+
+              local qualified_struct_names = {}
+
+              for _, item in ipairs(items) do
+                local text
+                if item.textEdit and type(item.textEdit.newText) == "string" then
+                  text = item.textEdit.newText
+                elseif type(item.insertText) == "string" then
+                  text = item.insertText
+                elseif type(item.label) == "string" then
+                  text = item.label
+                end
+
+                if type(text) == "string" then
+                  local head = text:match("^(.-)%s*{") or text
+                  local basename = head:match("([%w_]+)$")
+                  if basename ~= nil and text:find("::", 1, true) ~= nil and text:find("{", 1, true) ~= nil then
+                    qualified_struct_names[basename] = true
+                    item._jrbb_hide_from_menu = true
+                  end
+                end
+              end
+
+              for _, item in ipairs(items) do
+                local text
+                if item.textEdit and type(item.textEdit.newText) == "string" then
+                  text = item.textEdit.newText
+                elseif type(item.insertText) == "string" then
+                  text = item.insertText
+                elseif type(item.label) == "string" then
+                  text = item.label
+                end
+
+                if type(text) == "string" then
+                  local head = text:match("^(.-)%s*{") or text
+                  local basename = head:match("([%w_]+)$")
+
+                  if basename ~= nil and qualified_struct_names[basename] == true and item.label == basename then
+                    item._jrbb_expand_to_struct_literal = true
+                  end
+
+                  if basename ~= nil and basename ~= "" then
+                    if item._jrbb_expand_to_struct_literal == true then
+                      if item.textEdit and type(item.textEdit.newText) == "string" then
+                        item.textEdit.newText = basename .. " { $0 }"
+                      elseif type(item.insertText) == "string" then
+                        item.insertText = basename .. " { $0 }"
+                      end
+                      item.insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet
+                    else
+                      local struct_head, struct_tail = text:match("^(.-)(%s*{.*)$")
+                      if struct_head ~= nil and struct_head ~= "" and struct_tail ~= nil and text:find("[%w_]+:%s*%${%d+:") then
+                        if item.textEdit and type(item.textEdit.newText) == "string" then
+                          item.textEdit.newText = basename .. " { $0 }"
+                        elseif type(item.insertText) == "string" then
+                          item.insertText = basename .. " { $0 }"
+                        end
+                        item.insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet
+                      end
+                    end
+                  end
+                end
+              end
+
+              return vim.tbl_filter(function(item)
+                return item._jrbb_hide_from_menu ~= true
+              end, items)
+            end,
+            override = {
+              resolve = function(source, item, callback)
+                local request_item = vim.deepcopy(item)
+                request_item._jrbb_expand_to_struct_literal = nil
+                return source:resolve(request_item, callback)
+              end,
+            },
+          },
           emoji = {
             name = "Emoji",
             module = "blink.cmp.sources.complete_func",
