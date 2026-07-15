@@ -98,6 +98,13 @@ sudo ln -sf "$DOTFILES/root_profile" /root/.profile
 sudo mkdir -p /root/.config
 sudo ln -sfT "$DOTFILES/nvim" /root/.config/nvim
 
+# System policy
+sudo install -Dm644 "$DOTFILES/config/systemd/logind.conf.d/10-power-key.conf" \
+    /etc/systemd/logind.conf.d/10-power-key.conf
+if systemctl is-active --quiet systemd-logind.service; then
+    sudo systemctl reload systemd-logind.service
+fi
+
 # User directories
 ln -sfT "$DOTFILES/nvim" "$HOME/.config/nvim"
 
