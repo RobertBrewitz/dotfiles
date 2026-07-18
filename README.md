@@ -19,6 +19,18 @@ A shell alias is also added to `profile`:
 alias chrome='google-chrome-stable --ozone-platform=x11'
 ```
 
+### Chrome Idle Scroll Stutter (Intel eDP)
+
+If Chrome freezes after a few idle seconds and then snaps to the latest scroll position, Intel Panel Self Refresh is likely delaying redraws. `arch.sh` adds `i915.enable_psr=0` to the GRUB kernel command line on Intel systems.
+
+Apply it to an existing install with:
+```bash
+grep -qF 'i915.enable_psr=0' /etc/default/grub || \
+  sudo sed -i 's/^\(GRUB_CMDLINE_LINUX_DEFAULT="[^"]*\)"/\1 i915.enable_psr=0"/' /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+reboot
+```
+
 ## Package Manager Security
 
 The dotfiles add a one-week release-age gate for npm, pnpm, Yarn, Bun, and Renovate.

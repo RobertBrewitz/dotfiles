@@ -21,6 +21,24 @@ has_amd_gpu() {
     has_gpu_vendor 1002
 }
 
+GRUB_CONFIG_UPDATED=0
+
+ensure_grub_cmdline_param() {
+    local param="$1"
+
+    if [ ! -f /etc/default/grub ]; then
+        echo "No /etc/default/grub found; skipping kernel parameter $param"
+        return
+    fi
+
+    if grep -qF -- "$param" /etc/default/grub; then
+        return
+    fi
+
+    sudo sed -i "s/^\(GRUB_CMDLINE_LINUX_DEFAULT=\"[^\"]*\)\"/\1 $param\"/" /etc/default/grub
+    GRUB_CONFIG_UPDATED=1
+}
+
 echo "Upgrading and updating pacman"
 sudo pacman -Syu --noconfirm
 
@@ -74,6 +92,10 @@ sudo pacman -S --noconfirm --needed mesa vulkan-icd-loader vulkan-tools mesa-uti
 if has_intel_gpu; then
     echo "Installing Intel Vulkan/VA-API drivers"
     sudo pacman -S --noconfirm --needed vulkan-intel intel-media-driver
+
+    # Intel eDP Panel Self Refresh can cause idle redraw stalls where Chrome
+    # appears frozen after a few seconds, then snaps to the latest scroll.
+    ensure_grub_cmdline_param "i915.enable_psr=0"
 fi
 
 if has_amd_gpu; then
@@ -84,12 +106,13 @@ fi
 if has_nvidia_gpu; then
     echo "Installing NVIDIA drivers"
     sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver
-    if [ -f /etc/default/grub ] && ! grep -q 'nvidia_drm.modeset=1' /etc/default/grub; then
-        sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\([^"]*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 nvidia_drm.modeset=1"/' /etc/default/grub
-        sudo grub-mkconfig -o /boot/grub/grub.cfg
-    fi
+    ensure_grub_cmdline_param "nvidia_drm.modeset=1"
 else
     echo "No NVIDIA GPU detected, skipping NVIDIA driver install"
+fi
+
+if [ "$GRUB_CONFIG_UPDATED" = 1 ]; then
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
 echo "Installing basic fonts"
