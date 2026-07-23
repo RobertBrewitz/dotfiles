@@ -1,3 +1,53 @@
+local git_diff_origin_tab = nil
+local git_diff_tab = nil
+
+local function disable_nvim_tree()
+  if type(_G.DisableNvimTree) == "function" then
+    _G.DisableNvimTree()
+  else
+    pcall(vim.cmd, "NvimTreeClose")
+  end
+end
+
+local function is_gitsigns_revision_buffer(bufnr)
+  return vim.api.nvim_buf_get_name(bufnr):match("^gitsigns://") ~= nil
+end
+
+local function tab_has_gitsigns_revision(tab)
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
+    local bufnr = vim.api.nvim_win_get_buf(win)
+    if is_gitsigns_revision_buffer(bufnr) then
+      return true
+    end
+  end
+
+  return false
+end
+
+local function close_diff()
+  if git_diff_tab and vim.api.nvim_tabpage_is_valid(git_diff_tab) then
+    vim.api.nvim_set_current_tabpage(git_diff_tab)
+    pcall(vim.cmd, "tabclose")
+  elseif tab_has_gitsigns_revision(vim.api.nvim_get_current_tabpage()) then
+    pcall(vim.cmd, "tabclose")
+  end
+
+  if git_diff_origin_tab and vim.api.nvim_tabpage_is_valid(git_diff_origin_tab) then
+    vim.api.nvim_set_current_tabpage(git_diff_origin_tab)
+  end
+
+  git_diff_origin_tab = nil
+  git_diff_tab = nil
+end
+
+local function open_diff()
+  git_diff_origin_tab = vim.api.nvim_get_current_tabpage()
+  vim.cmd("tab split")
+  git_diff_tab = vim.api.nvim_get_current_tabpage()
+  disable_nvim_tree()
+  require("gitsigns").diffthis("@")
+end
+
 return {
   {
     "lewis6991/gitsigns.nvim",
@@ -58,10 +108,13 @@ return {
       },
       {
         "<leader>hd",
-        function()
-          require("gitsigns").diffthis()
-        end,
-        desc = "Git diff this",
+        open_diff,
+        desc = "Git diff against HEAD",
+      },
+      {
+        "<leader>hD",
+        close_diff,
+        desc = "Git close diff",
       },
       {
         "<leader>hS",

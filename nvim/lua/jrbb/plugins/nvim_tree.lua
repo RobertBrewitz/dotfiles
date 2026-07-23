@@ -4,6 +4,12 @@ local nnoremap = Remap.nnoremap
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+local nvim_tree_disabled_by_tab = {}
+
+local function is_nvim_tree_disabled()
+  return nvim_tree_disabled_by_tab[vim.api.nvim_get_current_tabpage()] == true
+end
+
 -- Helper to check if a window is floating
 local function is_floating(win)
   local config = vim.api.nvim_win_get_config(win)
@@ -40,7 +46,7 @@ end
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    if vim.fn.argc() == 0 then
+    if vim.fn.argc() == 0 and not is_nvim_tree_disabled() then
       ToggleNvimTree()
       vim.cmd("wincmd p")
     end
@@ -49,7 +55,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   callback = function()
-    if vim.fn.argc() == 0 then
+    if vim.fn.argc() == 0 and not is_nvim_tree_disabled() then
       -- Skip floating windows
       if is_floating(vim.api.nvim_get_current_win()) then
         return
@@ -69,6 +75,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 
 -- Opens NvimTree and switches between the active window and NvimTree
 function ToggleNvimTree()
+  nvim_tree_disabled_by_tab[vim.api.nvim_get_current_tabpage()] = false
   local nvim_tree = find_nvim_tree_window()
 
   if not nvim_tree then
@@ -86,6 +93,11 @@ function ToggleNvimTree()
       vim.api.nvim_set_current_win(nvim_tree)
     end
   end
+end
+
+function DisableNvimTree()
+  nvim_tree_disabled_by_tab[vim.api.nvim_get_current_tabpage()] = true
+  vim.cmd("NvimTreeClose")
 end
 
 -- I want nvim-tree to act like a file explorer, so I want to close if the "working file"
@@ -124,6 +136,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 nnoremap("<leader>e", ToggleNvimTree, { desc = "ToggleNvimTree" })
+nnoremap("<leader>E", DisableNvimTree, { desc = "DisableNvimTree" })
 
 return {
   {
