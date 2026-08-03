@@ -93,7 +93,9 @@ EOF
 mkdir -p "$HOME/.config"
 
 # Root setup
-echo "[ -f ~/.profile ] && source ~/.profile" | sudo tee -a /root/.bashrc > /dev/null
+if ! sudo grep -qsF '[ -f ~/.profile ] && source ~/.profile' /root/.bashrc; then
+    echo "[ -f ~/.profile ] && source ~/.profile" | sudo tee -a /root/.bashrc > /dev/null
+fi
 sudo ln -sf "$DOTFILES/root_profile" /root/.profile
 sudo mkdir -p /root/.config
 sudo ln -sfT "$DOTFILES/nvim" /root/.config/nvim

@@ -47,9 +47,10 @@ sudo pacman -S --noconfirm --needed curl pkgconf base-devel wl-clipboard unzip l
 
 echo "Installing yay (AUR helper)"
 if ! command -v yay &> /dev/null; then
-    git clone https://aur.archlinux.org/yay.git /tmp/yay
-    cd /tmp/yay && makepkg -si --noconfirm
-    cd -
+    yay_build_dir="$(mktemp -d)"
+    git clone https://aur.archlinux.org/yay.git "$yay_build_dir"
+    (cd "$yay_build_dir" && makepkg -si --noconfirm)
+    rm -rf "$yay_build_dir"
 fi
 
 echo "Symlinking dotfiles (early, so ~/.profile and friends exist for the rest of the run)"
@@ -122,7 +123,7 @@ echo "Enabling power-profiles-daemon"
 sudo systemctl enable --now power-profiles-daemon
 
 echo "Installing Google Chrome from AUR"
-yay -S --noconfirm google-chrome
+yay -S --noconfirm --needed google-chrome
 
 echo "Installing jq"
 sudo pacman -S --noconfirm --needed jq
@@ -137,7 +138,15 @@ echo "Installing ripgrep and fd"
 sudo pacman -S --noconfirm --needed ripgrep fd
 
 echo "Installing nvm and node"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | NODE_VERSION=--lts bash
+if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | NODE_VERSION=--lts bash
+fi
+# shellcheck disable=SC1090
+[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"
+if command -v nvm &> /dev/null; then
+    nvm install --lts
+    nvm alias default 'lts/*'
+fi
 
 echo "Installing rust and rust-analyzer"
 sudo pacman -S --noconfirm --needed cmake fontconfig
@@ -145,7 +154,7 @@ if ! command -v rustup &> /dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
 fi
 # shellcheck disable=SC1091
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 rustup component add rust-analyzer
 cargo install cross --git https://github.com/cross-rs/cross
 
@@ -185,8 +194,11 @@ sudo pacman -S --noconfirm --needed editorconfig-core-c
 
 echo "Setting max_user_watches for hot reloading to work properly"
 echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
-echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf
-sudo sysctl -p
+if [ -f /etc/sysctl.conf ]; then
+    sudo sed -i '/^fs\.inotify\.max_user_watches=/d' /etc/sysctl.conf
+fi
+echo fs.inotify.max_user_watches=100000 | sudo tee /etc/sysctl.d/99-dotfiles-inotify.conf
+sudo sysctl --system
 
 echo "UFW setup"
 sudo pacman -S --noconfirm --needed ufw
@@ -197,14 +209,14 @@ sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw enable
+sudo ufw --force enable
 
 echo "Installing UbuntuMono Nerd Font"
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
-curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuMono.zip
-unzip UbuntuMono.zip
-rm UbuntuMono.zip
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuMono.zip -o UbuntuMono.zip
+unzip -o UbuntuMono.zip
+rm -f UbuntuMono.zip
 fc-cache -fv
 cd -
 
@@ -223,7 +235,7 @@ sudo systemctl enable --now bluetooth
 
 echo "Installing SDDM display manager"
 sudo pacman -S --noconfirm --needed sddm qt6-svg qt6-declarative
-yay -S --noconfirm catppuccin-sddm-theme-mocha
+yay -S --noconfirm --needed catppuccin-sddm-theme-mocha
 sudo mkdir -p /etc/sddm.conf.d
 cat << 'EOF' | sudo tee /etc/sddm.conf.d/10-wayland.conf
 [General]
@@ -241,7 +253,9 @@ echo "Installing printing (CUPS)"
 sudo pacman -S --noconfirm --needed cups cups-pdf avahi nss-mdns system-config-printer
 sudo systemctl enable --now cups
 sudo systemctl enable --now avahi-daemon
-sudo sed -i 's/hosts: mymachines/hosts: mymachines mdns_minimal [NOTFOUND=return]/' /etc/nsswitch.conf
+if ! grep -Eq '^hosts:.*(^|[[:space:]])mdns_minimal([[:space:]]|$)' /etc/nsswitch.conf; then
+    sudo sed -i '/^hosts:/ s/\bmymachines\b/mymachines mdns_minimal [NOTFOUND=return]/' /etc/nsswitch.conf
+fi
 
 echo "Installing display settings tool"
 sudo pacman -S --noconfirm --needed wdisplays
@@ -296,7 +310,7 @@ sudo systemctl enable --now paccache.timer
 
 echo "Installing GTK/Qt theming"
 sudo pacman -S --noconfirm --needed qt6ct kvantum papirus-icon-theme
-yay -S --noconfirm catppuccin-gtk-theme-mocha kvantum-theme-catppuccin-git catppuccin-cursors-mocha
+yay -S --noconfirm --needed catppuccin-gtk-theme-mocha kvantum-theme-catppuccin-git catppuccin-cursors-mocha
 
 echo "Installing ZSA keyboard udev rules"
 sudo groupadd -f plugdev
