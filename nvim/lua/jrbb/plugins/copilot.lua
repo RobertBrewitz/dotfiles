@@ -8,5 +8,7 @@ return {
     nnoremap("<leader>cs", ":Copilot status<cr>", { desc = "Copilot status" })
     nnoremap("<leader>cd", ":Copilot disable<cr>", { desc = "Copilot disable" })
     nnoremap("<leader>ce", ":Copilot enable<cr>", { desc = "Copilot enable" })
+
+    vim.g.copilot_enabled = 0
   end,
 }
