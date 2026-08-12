@@ -44,6 +44,31 @@ local function find_nvim_tree_window()
   return nil
 end
 
+local function scroll_nvim_tree_to_node()
+  local node = require("nvim-tree.api").tree.get_node_under_cursor()
+  if not node then
+    return
+  end
+
+  vim.wo.sidescrolloff = 0
+
+  local line = vim.api.nvim_get_current_line()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local content_start = line:find("%S") or 1
+  local indent_width = vim.fn.strdisplaywidth(line:sub(1, content_start - 1))
+  local folder_arrow_width = node.nodes and 2 or 0
+  local icon_column = indent_width + folder_arrow_width
+  local cursor_column = vim.fn.virtcol2col(0, cursor[1], icon_column + 1)
+
+  if cursor_column > 0 then
+    vim.api.nvim_win_set_cursor(0, { cursor[1], cursor_column - 1 })
+  end
+
+  local view = vim.fn.winsaveview()
+  view.leftcol = math.max(icon_column - 3, 0)
+  vim.fn.winrestview(view)
+end
+
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argc() == 0 and not is_nvim_tree_disabled() then
@@ -68,6 +93,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
       end
 
       vim.cmd("NvimTreeFindFile")
+      scroll_nvim_tree_to_node()
       vim.cmd("wincmd p")
     end
   end,
@@ -200,9 +226,9 @@ return {
           always_show_folders = false,
         },
         view = {
-          -- adaptive_size = true,
-          width = 44,
+          width = 24,
           side = "left",
+          signcolumn = "no",
         },
         filesystem_watchers = {
           enable = true,
@@ -216,10 +242,16 @@ return {
         },
         renderer = {
           group_empty = true,
+          indent_width = 1,
         },
         filters = {
           dotfiles = false,
           custom = { ".git" },
+        },
+        actions = {
+          change_dir = {
+            restrict_above_cwd = true,
+          },
         },
         on_attach = function(bufnr)
           local api = require("nvim-tree.api")
@@ -227,6 +259,11 @@ return {
           local function opts(desc)
             return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
           end
+
+          vim.api.nvim_create_autocmd("CursorMoved", {
+            buffer = bufnr,
+            callback = scroll_nvim_tree_to_node,
+          })
 
           local function open_tab_background()
             local current_tab = vim.api.nvim_get_current_tabpage()
