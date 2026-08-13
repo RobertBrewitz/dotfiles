@@ -137,6 +137,9 @@ sudo pacman -S --noconfirm --needed mold clang
 echo "Installing ripgrep and fd"
 sudo pacman -S --noconfirm --needed ripgrep fd
 
+echo "Install perf"
+sudo pacman -S --noconfirm --needed perf
+
 echo "Installing nvm and node"
 if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | NODE_VERSION=--lts bash
