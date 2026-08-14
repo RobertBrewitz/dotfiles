@@ -2,12 +2,14 @@
     "layer": "top",
     "position": "top",
     "height": 30,
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["ext/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["custom/recording", "custom/caffeine", "hyprland/language", "bluetooth", "network", "pulseaudio", "backlight", "battery", "power-profiles-daemon", "custom/power"],
 
-    "hyprland/workspaces": {
-        "format": "{name}"
+    "ext/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "sort-by-name": true
     },
     "hyprland/language": {
         "format": "󰌌 {}",
