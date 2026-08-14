@@ -170,17 +170,6 @@ go install golang.org/x/tools/gopls@latest
 echo "Installing tree-sitter-cli for neovim treesitter"
 cargo install tree-sitter-cli
 
-echo "Installing Voxtype (voice-to-text)"
-sudo pacman -S --noconfirm --needed wtype
-mkdir -p ~/Projects/vendor ~/.local/bin
-if [ ! -d ~/Projects/vendor/voxtype ]; then
-    git clone https://github.com/peteonrails/voxtype.git ~/Projects/vendor/voxtype
-fi
-cd ~/Projects/vendor/voxtype && cargo build --release
-cp target/release/voxtype ~/.local/bin/voxtype
-cd -
-voxtype setup --download
-
 echo "Installing git-completion"
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
 

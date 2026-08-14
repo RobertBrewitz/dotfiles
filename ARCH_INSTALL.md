@@ -394,7 +394,6 @@ After reboot, SDDM will start automatically. Select Hyprland and login.
 | Super + Shift + A       | Restart PipeWire                   |
 | Print                   | Fullscreen screenshot to clipboard |
 | Shift + Print           | Capture menu (screenshot/record)   |
-| Mouse 3 (hold)          | Voice-to-text (voxtype)            |
 | F7/F8/F9                | Power saver/balanced/performance   |
 
 ---

@@ -77,7 +77,6 @@ hl.on("hyprland.start", function()
     run_once("wl-paste --type image --watch cliphist store")
     run_once("~/.local/bin/battery-monitor")
     run_once("sway-audio-idle-inhibit")
-    run_once("systemctl --user start voxtype")
 end)
 
 -- Catppuccin Mocha with black backgrounds
@@ -219,10 +218,6 @@ bind(mod .. " + SHIFT + A", [[systemctl --user restart pipewire pipewire-pulse w
 -- Brightness
 bind("XF86MonBrightnessDown", "brightnessctl set 5%-")
 bind("XF86MonBrightnessUp", "brightnessctl set 5%+")
-
--- Voice-to-text (push-to-talk: hold mouse3 to record, release to transcribe)
-bind(mod .. " + U", "voxtype record start")
-bind(mod .. " + U", "voxtype record stop", { release = true })
 
 -- Media
 bind("XF86AudioPlay", "playerctl play-pause")

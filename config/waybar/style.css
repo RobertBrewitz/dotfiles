@@ -28,7 +28,7 @@ window#waybar {
     background: @surface0;
 }
 
-#clock, #battery, #network, #bluetooth, #pulseaudio, #power-profiles-daemon, #language, #custom-recording, #custom-voxtype, #custom-caffeine, #custom-power {
+#clock, #battery, #network, #bluetooth, #pulseaudio, #power-profiles-daemon, #language, #custom-recording, #custom-caffeine, #custom-power {
     padding: 0 8px;
     color: @text;
 }
@@ -84,18 +84,6 @@ window#waybar {
 
 #power-profiles-daemon.performance {
     color: @peach;
-}
-
-#custom-voxtype {
-    color: @text;
-}
-
-#custom-voxtype.recording {
-    color: @red;
-}
-
-#custom-voxtype.transcribing {
-    color: @yellow;
 }
 
 #custom-recording {
