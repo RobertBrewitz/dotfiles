@@ -6,3 +6,4 @@ nvim/plugin/*.lua
 npmrc
 tmp
 config/hypr/gpu.conf
+config/hypr/gpu.lua
