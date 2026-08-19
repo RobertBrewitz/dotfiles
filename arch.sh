@@ -58,12 +58,6 @@ echo "Symlinking dotfiles (early, so ~/.profile and friends exist for the rest o
 # shellcheck disable=SC1090
 [ -f "$HOME/.profile" ] && source "$HOME/.profile" || true
 
-echo "Installing tmux"
-sudo pacman -S --noconfirm --needed tmux
-
-echo "Installing Neovim"
-sudo pacman -S --noconfirm --needed neovim
-
 echo "Installing Hyprland and dependencies"
 sudo pacman -S --noconfirm --needed \
     hyprland \
@@ -117,7 +111,7 @@ if [ "$GRUB_CONFIG_UPDATED" = 1 ]; then
 fi
 
 echo "Installing basic fonts"
-sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-dejavu
+sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-dejavu fontconfig
 
 echo "Enabling power-profiles-daemon"
 sudo systemctl enable --now power-profiles-daemon
@@ -125,64 +119,11 @@ sudo systemctl enable --now power-profiles-daemon
 echo "Installing Google Chrome from AUR"
 yay -S --noconfirm --needed google-chrome
 
-echo "Installing jq"
-sudo pacman -S --noconfirm --needed jq
-
-echo "Install some work dependencies"
-sudo pacman -S --noconfirm --needed openssl systemd-libs alsa-lib
-
-echo "Installing mold and clang for rust compilation"
-sudo pacman -S --noconfirm --needed mold clang
-
-echo "Installing ripgrep and fd"
-sudo pacman -S --noconfirm --needed ripgrep fd
-
-echo "Install perf"
-sudo pacman -S --noconfirm --needed perf
-
-echo "Installing nvm and node"
-if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | NODE_VERSION=--lts bash
+if [ "${INSTALL_DEVTOOLS:-1}" != "0" ]; then
+    "$DOTFILES/arch_devtools.sh"
+else
+    echo "Skipping dev tools because INSTALL_DEVTOOLS=0"
 fi
-# shellcheck disable=SC1090
-[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"
-if command -v nvm &> /dev/null; then
-    nvm install --lts
-    nvm alias default 'lts/*'
-fi
-
-echo "Installing rust and rust-analyzer"
-sudo pacman -S --noconfirm --needed cmake fontconfig
-if ! command -v rustup &> /dev/null; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
-fi
-# shellcheck disable=SC1091
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-rustup component add rust-analyzer
-cargo install cross --git https://github.com/cross-rs/cross
-
-echo "Installing go and gopls"
-sudo pacman -S --noconfirm --needed go
-export GOPATH="${GOPATH:-$HOME/go}"
-export PATH="$GOPATH/bin:$PATH"
-go install golang.org/x/tools/gopls@latest
-
-echo "Installing tree-sitter-cli for neovim treesitter"
-cargo install tree-sitter-cli
-
-echo "Installing git-completion"
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
-
-echo "Installing the silver searcher (ag)"
-sudo pacman -S --noconfirm --needed the_silver_searcher
-
-echo "Adding ~/.profile to ~/.bashrc"
-if ! grep -qs 'source ~/.profile' "$HOME/.bashrc"; then
-    echo "[ -f ~/.profile ] && source ~/.profile" >> "$HOME/.bashrc"
-fi
-
-echo "Installing editorconfig core"
-sudo pacman -S --noconfirm --needed editorconfig-core-c
 
 echo "Setting max_user_watches for hot reloading to work properly"
 echo 100000 | sudo tee /proc/sys/fs/inotify/max_user_watches
@@ -204,13 +145,8 @@ sudo ufw default allow outgoing
 sudo ufw --force enable
 
 echo "Installing UbuntuMono Nerd Font"
-mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts
-curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuMono.zip -o UbuntuMono.zip
-unzip -o UbuntuMono.zip
-rm -f UbuntuMono.zip
+sudo pacman -S --noconfirm --needed ttf-ubuntu-mono-nerd
 fc-cache -fv
-cd -
 
 echo "Fix crackling audio in pipewire"
 if [ -f /usr/share/pipewire/pipewire-pulse.conf ] && grep -q '#pulse.min.quantum' /usr/share/pipewire/pipewire-pulse.conf; then

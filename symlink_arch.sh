@@ -4,6 +4,35 @@ set -e
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+backup_existing_target() {
+    local target="$1"
+    local reason="$2"
+
+    local backup="${target}.backup.$(date +%Y%m%d%H%M%S)"
+    local counter=1
+    while [ -e "$backup" ] || [ -L "$backup" ]; do
+        backup="${target}.backup.$(date +%Y%m%d%H%M%S).$counter"
+        counter=$((counter + 1))
+    done
+    echo "Warning: backing up existing $target to $backup before linking $reason."
+    mv "$target" "$backup"
+}
+
+link_dir() {
+    local source="$1"
+    local target="$2"
+
+    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+        return
+    fi
+
+    if [ -e "$target" ] || [ -L "$target" ]; then
+        backup_existing_target "$target" "directory"
+    fi
+
+    ln -sfnT "$source" "$target"
+}
+
 link_security_config() {
     local source="$1"
     local target="$2"
@@ -13,14 +42,7 @@ link_security_config() {
     fi
 
     if [ -e "$target" ] || [ -L "$target" ]; then
-        local backup="${target}.backup.$(date +%Y%m%d%H%M%S)"
-        local counter=1
-        while [ -e "$backup" ] || [ -L "$backup" ]; do
-            backup="${target}.backup.$(date +%Y%m%d%H%M%S).$counter"
-            counter=$((counter + 1))
-        done
-        echo "Warning: backing up existing $target to $backup before linking security config."
-        mv "$target" "$backup"
+        backup_existing_target "$target" "security config"
     fi
 
     ln -sf "$source" "$target"
@@ -104,16 +126,14 @@ if systemctl is-active --quiet systemd-logind.service; then
 fi
 
 # User directories
-ln -sfT "$DOTFILES/nvim" "$HOME/.config/nvim"
-
-# User directories
-ln -sfT "$DOTFILES/config/hypr" "$HOME/.config/hypr"
-ln -sfT "$DOTFILES/config/kitty" "$HOME/.config/kitty"
-ln -sfT "$DOTFILES/config/waybar" "$HOME/.config/waybar"
-ln -sfT "$DOTFILES/config/gtk-3.0" "$HOME/.config/gtk-3.0"
-ln -sfT "$DOTFILES/config/gtk-4.0" "$HOME/.config/gtk-4.0"
-ln -sfT "$DOTFILES/config/wofi" "$HOME/.config/wofi"
-ln -sfT "$DOTFILES/config/mako" "$HOME/.config/mako"
+link_dir "$DOTFILES/nvim" "$HOME/.config/nvim"
+link_dir "$DOTFILES/config/hypr" "$HOME/.config/hypr"
+link_dir "$DOTFILES/config/kitty" "$HOME/.config/kitty"
+link_dir "$DOTFILES/config/waybar" "$HOME/.config/waybar"
+link_dir "$DOTFILES/config/gtk-3.0" "$HOME/.config/gtk-3.0"
+link_dir "$DOTFILES/config/gtk-4.0" "$HOME/.config/gtk-4.0"
+link_dir "$DOTFILES/config/wofi" "$HOME/.config/wofi"
+link_dir "$DOTFILES/config/mako" "$HOME/.config/mako"
 mkdir -p "$HOME/.config/audacious"
 ln -sf "$DOTFILES/config/audacious/config" "$HOME/.config/audacious/config"
 
@@ -134,6 +154,9 @@ ln -sf "$DOTFILES/bin/powermenu" "$HOME/.local/bin/powermenu"
 ln -sf "$DOTFILES/gitconfig" "$HOME/.gitconfig"
 ln -sf "$DOTFILES/gitignore" "$HOME/.gitignore"
 ln -sf "$DOTFILES/profile" "$HOME/.profile"
+if ! grep -qs 'source ~/.profile' "$HOME/.bashrc"; then
+    echo "[ -f ~/.profile ] && source ~/.profile" >> "$HOME/.bashrc"
+fi
 ln -sf "$DOTFILES/tern-project" "$HOME/.tern-project"
 ln -sf "$DOTFILES/editorconfig" "$HOME/.editorconfig"
 link_security_config "$DOTFILES/security/npmrc.conf" "$HOME/.npmrc"
