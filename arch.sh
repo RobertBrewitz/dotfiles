@@ -231,7 +231,7 @@ yay -S --noconfirm --needed catppuccin-sddm-theme-mocha
 sudo mkdir -p /etc/sddm.conf.d
 cat << 'EOF' | sudo tee /etc/sddm.conf.d/10-wayland.conf
 [General]
-DisplayServer=wayland
+DisplayServer=x11
 
 [Theme]
 Current=catppuccin-mocha-blue
