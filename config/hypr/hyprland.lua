@@ -1,5 +1,4 @@
--- Hyprland Lua config. Hyprland 0.56+ prefers hyprland.lua over
--- hyprland.conf, avoiding the legacy/soon-to-be-obsolete Hyprlang config path.
+-- Hyprland Lua config. Hyprland 0.56+ loads hyprland.lua directly.
 
 local home = os.getenv("HOME") or ""
 local gpu_lua = home .. "/.config/hypr/gpu.lua"
@@ -7,19 +6,6 @@ local gpu_file = io.open(gpu_lua, "r")
 if gpu_file then
     gpu_file:close()
     dofile(gpu_lua)
-else
-    -- Fallback for machines that already have the old generated gpu.conf but
-    -- have not rerun symlink_arch.sh yet.
-    local gpu_conf = home .. "/.config/hypr/gpu.conf"
-    gpu_file = io.open(gpu_conf, "r")
-    if gpu_file then
-        local contents = gpu_file:read("*a")
-        gpu_file:close()
-        local devices = contents:match("env%s*=%s*AQ_DRM_DEVICES%s*,%s*([^\n]+)")
-        if devices then
-            hl.env("AQ_DRM_DEVICES", devices)
-        end
-    end
 end
 
 local mod = "SUPER"
