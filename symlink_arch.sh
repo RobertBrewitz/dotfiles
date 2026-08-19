@@ -48,6 +48,16 @@ link_security_config() {
     ln -sf "$source" "$target"
 }
 
+set_dark_mode_preference() {
+    command -v gsettings >/dev/null 2>&1 || return
+
+    gsettings set org.gnome.desktop.interface gtk-theme 'catppuccin-mocha-blue-standard+default' || true
+    gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark' || true
+    gsettings set org.gnome.desktop.interface cursor-theme 'catppuccin-mocha-dark-cursors' || true
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' || true
+    gsettings set org.gnome.desktop.interface gtk-application-prefer-dark-theme true 2>/dev/null || true
+}
+
 # Generate machine-specific Hyprland GPU selection for the Lua Hyprland config.
 generate_hypr_gpu_conf() {
     local gpu_lua="$DOTFILES/config/hypr/gpu.lua"
@@ -134,6 +144,9 @@ link_dir "$DOTFILES/config/gtk-3.0" "$HOME/.config/gtk-3.0"
 link_dir "$DOTFILES/config/gtk-4.0" "$HOME/.config/gtk-4.0"
 link_dir "$DOTFILES/config/wofi" "$HOME/.config/wofi"
 link_dir "$DOTFILES/config/mako" "$HOME/.config/mako"
+link_dir "$DOTFILES/config/xdg-desktop-portal" "$HOME/.config/xdg-desktop-portal"
+set_dark_mode_preference
+systemctl --user restart xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk 2>/dev/null || true
 mkdir -p "$HOME/.config/audacious"
 ln -sf "$DOTFILES/config/audacious/config" "$HOME/.config/audacious/config"
 

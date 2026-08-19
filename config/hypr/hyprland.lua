@@ -33,10 +33,11 @@ end
 
 -- Environment
 hl.env("XDG_SESSION_TYPE", "wayland")
+hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
+hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 -- Theme environment variables
-hl.env("GTK_THEME", "catppuccin-mocha-blue-standard+default")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("QT_STYLE_OVERRIDE", "kvantum")
 hl.env("XCURSOR_THEME", "catppuccin-mocha-dark-cursors")
@@ -53,6 +54,7 @@ bind("switch:off:Lid Switch", [[hyprctl keyword monitor "eDP-1, 1920x1200@60, 0x
 
 -- Autostart
 hl.on("hyprland.start", function()
+    run_once("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE XCURSOR_THEME XCURSOR_SIZE")
     run_once("/usr/lib/polkit-kde-authentication-agent-1")
     run_once("hypridle")
     run_once("awww-daemon")

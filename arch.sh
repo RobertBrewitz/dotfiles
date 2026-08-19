@@ -67,6 +67,7 @@ sudo pacman -S --noconfirm --needed \
     kitty \
     wofi \
     xdg-desktop-portal-hyprland \
+    xdg-desktop-portal-gtk \
     polkit-kde-agent \
     pipewire \
     wireplumber \
