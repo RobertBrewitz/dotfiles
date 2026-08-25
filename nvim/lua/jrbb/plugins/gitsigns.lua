@@ -123,6 +123,13 @@ return {
         end,
         desc = "Git stage buffer",
       },
+      {
+        "<leader>hq",
+        function()
+          require("gitsigns").setqflist("all")
+        end,
+        desc = "Git hunks to quickfix",
+      },
     },
   },
 }
