@@ -1,4 +1,5 @@
 local Remap = require("jrbb.keymap")
+local Quickfix = require("jrbb.quickfix")
 local nnoremap = Remap.nnoremap
 local inoremap = Remap.inoremap
 local vmap = Remap.vmap
@@ -17,8 +18,8 @@ inoremap(",", ",<c-g>u")
 inoremap(".", ".<c-g>u")
 inoremap("!", "!<c-g>u")
 inoremap("?", "?<c-g>u")
-nnoremap("<leader>k", ":cnext <cr>", { silent = true, desc = "cnext" })
-nnoremap("<leader>j", ":cprev <cr>", { silent = true, desc = "cprev" })
+nnoremap("<leader>k", Quickfix.next, { silent = true, desc = "Next quickfix/location item" })
+nnoremap("<leader>j", Quickfix.previous, { silent = true, desc = "Previous quickfix/location item" })
 nnoremap("-", "g_", { silent = true })
 
 -- Clipboard

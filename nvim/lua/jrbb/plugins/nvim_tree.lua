@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 
       local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 
-      if ft == "NvimTree" or ft == "screenkey" or ft == "notify" then
+      if ft == "NvimTree" or ft == "qf" or ft == "screenkey" or ft == "notify" then
         return
       end
 

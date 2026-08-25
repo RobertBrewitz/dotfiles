@@ -1,5 +1,16 @@
+local Quickfix = require("jrbb.quickfix")
+
 local git_diff_origin_tab = nil
 local git_diff_tab = nil
+
+local function hunks_to_quickfix()
+  if not Quickfix.set_target(vim.api.nvim_get_current_win(), "quickfix") then
+    vim.notify("No existing editor window is available", vim.log.levels.WARN)
+    return
+  end
+
+  require("gitsigns").setqflist("all")
+end
 
 local function disable_nvim_tree()
   if type(_G.DisableNvimTree) == "function" then
@@ -125,9 +136,7 @@ return {
       },
       {
         "<leader>hq",
-        function()
-          require("gitsigns").setqflist("all")
-        end,
+        hunks_to_quickfix,
         desc = "Git hunks to quickfix",
       },
     },
