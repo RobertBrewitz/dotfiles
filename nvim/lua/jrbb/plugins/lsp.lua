@@ -339,7 +339,7 @@ return {
 
           local client = vim.lsp.get_client_by_id(ev.data.client_id)
           if client ~= nil and client:supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+            vim.lsp.inlay_hint.enable(false, { bufnr = ev.buf })
           end
 
           nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, { buffer = ev.buf, desc = "Add workspace folder" })
@@ -348,7 +348,6 @@ return {
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, { buffer = ev.buf, desc = "List workspace folders" })
           nmap("<leader>ga", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code action" })
-          nmap("<leader>d", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover" })
           nmap("<leader>rn", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
           nmap("<leader>gf", function()
             vim.lsp.buf.format({ async = true })
