@@ -23,6 +23,7 @@ return {
         ensure_installed = {
           "eslint_d",
           "prettier",
+          { "wgsl-analyzer", version = "nightly" },
         },
       }
     end,
@@ -38,6 +39,9 @@ return {
           "ts_ls",
           "lua_ls",
           "eslint",
+        },
+        automatic_enable = {
+          exclude = { "wgsl_analyzer" },
         },
       }
     end,

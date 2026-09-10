@@ -32,12 +32,13 @@ return {
       })
       vim.lsp.enable("gopls")
 
-      -- NOTE: WGSL wgsl_analyzer does not provide inlay hints, garbage
-      -- vim.lsp.enable("wgsl_analyzer", {
-      --   filetypes = { "wgsl", "wesl" },
-      --   capabilities = opts.capabilities,
-      -- })
-      --
+      vim.lsp.config("wgsl_analyzer", {
+        capabilities = opts.capabilities,
+        filetypes = { "wgsl", "wesl" },
+        root_markers = { "wesl.toml", "wesl-project.json", ".wesl-project.json", "Cargo.toml", ".git" },
+      })
+      vim.lsp.enable("wgsl_analyzer")
+
       -- vim.lsp.handlers["wgsl-analyzer/requestConfiguration"] = function(err, result, ctx, config)
       --   return {
       --     success = true,
@@ -62,10 +63,6 @@ return {
       --     },
       --   }
       -- end
-
-      -- NOTE: Using glasgow wgsl LSP server instead of wgsl_analyzer because it provides inlay hints and better features
-      vim.lsp.config("glasgow", { capabilities = opts.capabilities })
-      vim.lsp.enable("glasgow")
 
       vim.lsp.config("ts_ls", {
         capabilities = opts.capabilities,
@@ -134,9 +131,8 @@ return {
 
           for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
             client_names[client.name] = true
+            client:stop(true)
           end
-
-          vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = bufnr }), true)
 
           vim.schedule(function()
             for client_name in pairs(client_names) do
@@ -326,7 +322,9 @@ return {
       -- Force-stop all LSP clients on exit to prevent orphaned processes
       vim.api.nvim_create_autocmd("VimLeavePre", {
         callback = function()
-          vim.lsp.stop_client(vim.lsp.get_clients(), true)
+          for _, client in ipairs(vim.lsp.get_clients()) do
+            client:stop(true)
+          end
         end,
       })
 
@@ -334,8 +332,6 @@ return {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-          vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.wgsl", command = "setfiletype wgsl" })
-          vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.wesl", command = "setfiletype wesl" })
 
           local client = vim.lsp.get_client_by_id(ev.data.client_id)
           if client ~= nil and client:supports_method("textDocument/inlayHint") then

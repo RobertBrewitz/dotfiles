@@ -2,7 +2,15 @@ return {
   "nvim-treesitter/nvim-treesitter",
   run = ":TSUpdate",
   config = function()
-    vim.filetype.add({ extension = { wgsl = "wgsl" } })
+    vim.filetype.add({ extension = { wgsl = "wgsl", wesl = "wesl" } })
+    vim.treesitter.language.register("wgsl", "wesl")
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("WgslTreesitter", { clear = true }),
+      pattern = { "wgsl", "wesl" },
+      callback = function(event)
+        vim.treesitter.start(event.buf, "wgsl")
+      end,
+    })
     require("nvim-treesitter").setup({
       indent = {
         enable = false,
