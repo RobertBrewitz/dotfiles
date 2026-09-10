@@ -190,7 +190,7 @@ echo "Installing display settings tool"
 sudo pacman -S --noconfirm --needed wdisplays
 
 echo "Installing Thunar file manager"
-sudo pacman -S --noconfirm --needed thunar thunar-volman thunar-archive-plugin xarchiver gvfs tumbler ffmpegthumbnailer
+sudo pacman -S --noconfirm --needed thunar thunar-volman thunar-archive-plugin xarchiver gvfs gvfs-smb tumbler ffmpegthumbnailer
 
 echo "Installing Waybar and dependencies"
 sudo pacman -S --noconfirm --needed waybar otf-font-awesome pavucontrol
