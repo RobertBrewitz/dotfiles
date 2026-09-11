@@ -56,6 +56,14 @@ rustup target add aarch64-unknown-linux-gnu
 cargo install cross --git https://github.com/cross-rs/cross
 cargo install wasm-server-runner wasm-bindgen-cli
 
+echo "Installing samply and enabling non-root profiling"
+if ! command -v samply &> /dev/null; then
+    RUSTFLAGS="-Awarnings" cargo install -q --locked samply
+fi
+# This relaxes profiling restrictions for all local users.
+echo 'kernel.perf_event_paranoid = 1' | sudo tee /etc/sysctl.d/99-samply.conf
+sudo sysctl --load=/etc/sysctl.d/99-samply.conf
+
 echo "Installing go and gopls"
 export GOPATH="${GOPATH:-$HOME/go}"
 export PATH="$GOPATH/bin:$PATH"
