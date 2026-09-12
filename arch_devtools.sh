@@ -25,6 +25,7 @@ sudo pacman -S --noconfirm --needed \
     ripgrep \
     fd \
     perf \
+    renderdoc \
     go \
     the_silver_searcher \
     editorconfig-core-c

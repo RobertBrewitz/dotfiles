@@ -86,8 +86,8 @@ echo "Installing graphics drivers and diagnostics"
 sudo pacman -S --noconfirm --needed mesa vulkan-icd-loader vulkan-tools mesa-utils libva-utils
 
 if has_intel_gpu; then
-    echo "Installing Intel Vulkan/VA-API drivers"
-    sudo pacman -S --noconfirm --needed vulkan-intel intel-media-driver
+    echo "Installing Intel Vulkan/VA-API drivers and GPU monitoring tools"
+    sudo pacman -S --noconfirm --needed vulkan-intel intel-media-driver intel-gpu-tools
 
     # Intel eDP Panel Self Refresh can cause idle redraw stalls where Chrome
     # appears frozen after a few seconds, then snaps to the latest scroll.
@@ -100,7 +100,7 @@ if has_amd_gpu; then
 fi
 
 if has_nvidia_gpu; then
-    echo "Installing NVIDIA drivers"
+    echo "Installing NVIDIA drivers and GPU monitoring tools"
     sudo pacman -S --noconfirm --needed nvidia-open nvidia-utils libva-nvidia-driver
     ensure_grub_cmdline_param "nvidia_drm.modeset=1"
 else
@@ -232,6 +232,9 @@ sudo pacman -S --noconfirm --needed filezilla rsync
 
 echo "Disabling faillock (pam_faillock)"
 sudo sed -i 's/^deny = .*/deny = 0/' /etc/security/faillock.conf
+
+echo "Installing system monitoring tools"
+sudo pacman -S --noconfirm --needed btop nvtop
 
 echo "Installing system maintenance tools"
 sudo pacman -S --noconfirm --needed pacman-contrib reflector
