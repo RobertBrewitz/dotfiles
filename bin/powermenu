@@ -2,6 +2,13 @@
 
 set -e
 
+# Ask before acting; "No" is listed first so a stray Enter cancels.
+confirm() {
+    answer=$(printf '%s\n' "No" "Yes" \
+        | wofi --dmenu --prompt "$1?" --width 260 --height 180 --cache-file /dev/null) || return 1
+    [[ "$answer" == "Yes" ]]
+}
+
 choice=$(printf '%s\n' \
     "󰌾  Lock" \
     "󰗽  Logout" \
@@ -12,7 +19,7 @@ choice=$(printf '%s\n' \
 
 case "$choice" in
     *Lock)     hyprlock ;;
-    *Logout)   hyprctl dispatch 'hl.dsp.exit()' ;;
+    *Logout)   confirm "Logout" && hyprctl dispatch 'hl.dsp.exit()' ;;
     *Suspend)  systemctl suspend ;;
     *Reboot)   systemctl reboot ;;
     *Shutdown) systemctl poweroff ;;
