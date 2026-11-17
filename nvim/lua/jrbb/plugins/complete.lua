@@ -61,7 +61,7 @@ return {
 
                 if type(text) == "string" then
                   local head = text:match("^(.-)%s*{") or text
-                  local basename = head:match("([%w_]+)$")
+                  local basename = head:match("^%s*[%w_:]+%s*$") and head:match("([%w_]+)%s*$")
                   if basename ~= nil and text:find("::", 1, true) ~= nil and text:find("{", 1, true) ~= nil then
                     qualified_struct_names[basename] = true
                     item._jrbb_hide_from_menu = true
@@ -81,7 +81,7 @@ return {
 
                 if type(text) == "string" then
                   local head = text:match("^(.-)%s*{") or text
-                  local basename = head:match("([%w_]+)$")
+                  local basename = head:match("^%s*[%w_:]+%s*$") and head:match("([%w_]+)%s*$")
 
                   if basename ~= nil and qualified_struct_names[basename] == true and item.label == basename then
                     item._jrbb_expand_to_struct_literal = true
