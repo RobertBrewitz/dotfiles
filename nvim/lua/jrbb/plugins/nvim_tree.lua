@@ -246,7 +246,7 @@ return {
         },
         filters = {
           dotfiles = false,
-          custom = { ".git" },
+          custom = { "^\\.git$" },
         },
         actions = {
           change_dir = {
